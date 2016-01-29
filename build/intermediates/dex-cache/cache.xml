@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.client.mqttv3-1.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="02e433eb0fda11fe7170cf8214ba2f4d165c29b6">
+        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.client.mqttv3-1.0.2-77d9348d97bc82d755ebce1879be28da219aab4c.jar" />
+    </item>
+    <item
+        jar="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.android.service-1.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3b8420e57139cc627a55be0c17b6687e92d7460f">
+        <dex dex="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.android.service-1.0.2-c9890c93afa9cf39cf42a2f1947f0f436aaa1562.jar" />
+    </item>
+    <item
+        jar="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.android.service-1.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3b8420e57139cc627a55be0c17b6687e92d7460f">
+        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.android.service-1.0.2-343ee50394a20497da99165592375a3360a090ec.jar" />
+    </item>
+    <item
+        jar="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.client.mqttv3-1.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="02e433eb0fda11fe7170cf8214ba2f4d165c29b6">
+        <dex dex="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.client.mqttv3-1.0.2-893b948af4be8e62ebe74c683a3986e6e985ff06.jar" />
+    </item>
+    <item
+        jar="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\gson-2.3.1-4f58333abd7c94b2d209f644f66c6d8ce7014047.jar" />
+    </item>
+    <item
+        jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\support-v4-19.1.0-7541db917baa506c0dd564574dda219c7099e134.jar" />
+    </item>
+    <item
+        jar="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\gson-2.3.1-1437da72766976f192fb3213d007e7013d653987.jar" />
+    </item>
+
+</items>
