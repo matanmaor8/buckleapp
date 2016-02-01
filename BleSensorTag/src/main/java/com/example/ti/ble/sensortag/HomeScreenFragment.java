@@ -48,7 +48,7 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
               // startActivity(new Intent(v.getContext(),SensorsPosition.class));
               // startActivity(new Intent(v.getContext(),HtpSensor.class));
 
-
+/**********************************************************************************************/
                 break;
 
         }
