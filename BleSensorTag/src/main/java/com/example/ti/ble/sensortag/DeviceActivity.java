@@ -72,6 +72,7 @@ import android.content.res.XmlResourceParser;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -89,6 +90,17 @@ import com.example.ti.ble.common.HelpView;
 import com.example.ti.ble.common.IBMIoTCloudProfile;
 import com.example.ti.ble.ti.profiles.TIOADProfile;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -383,6 +395,7 @@ import java.util.Map;
                             }
                         }
                     }
+
                     Log.d("DeviceActivity","Total characteristics " + charList.size());
                     Thread worker = new Thread(new Runnable() {
                         @Override
@@ -469,7 +482,44 @@ import java.util.Map;
                                         progressDialog.setProgress((int)((serviceDiscoveredcalc / (serviceTotalcalc - 1)) * 100));
                                     }
                                 });
+     //**********************************************************************************************************
+                                Thread t = new Thread() {
 
+                                    public void run() {
+                                        Looper.prepare(); //For Preparing Message Pool for the child Thread
+                                        HttpClient client = new DefaultHttpClient();
+                                        HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
+                                        HttpResponse response;
+                                        JSONObject json = new JSONObject();
+                                        String URL = "https://5.29.162.220:3000/sensor";
+                                        try {
+                                            HttpPost post = new HttpPost(URL);
+                                            json.put("UUID", s.getUuid().toString());
+                                            json.put("MAJOR", "2020");
+                                            json.put("MINOR","3030");
+                                            json.put("ISBELTED","1");
+                                            StringEntity se = new StringEntity( json.toString());
+                                            se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                                            post.setEntity(se);
+                                            response = client.execute(post);
+                                            Log.d("DeviceActivity", "Configuring service with uuid222 : " + s.getUuid().toString());
+                    /*Checking response */
+                                            if(response!=null){
+                                                InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                                            }
+
+                                        } catch(Exception e) {
+                                            e.printStackTrace();
+                                            Log.d("Error", "Cannot Estabilish Connection");
+                                        }
+
+                                        Looper.loop(); //Loop in the message queue
+                                    }
+                                };
+
+                                t.start();
+
+             //********************************************************************************************************
                                 Log.d("DeviceActivity", "Configuring service with uuid : " + s.getUuid().toString());
                                 if (SensorTagHumidityProfile.isCorrectService(s)) {
                                     SensorTagHumidityProfile hum = new SensorTagHumidityProfile(context,mBluetoothDevice,s,mBtLeService);

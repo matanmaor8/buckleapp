@@ -31,21 +31,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DeviceActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DeviceActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/DeviceActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="434" column="65" selection-start-line="434" selection-start-column="65" selection-end-line="434" selection-end-column="65" />
-              <folding />
+            <state vertical-scroll-proportion="0.5280236">
+              <caret line="515" column="66" selection-start-line="515" selection-start-column="66" selection-end-line="515" selection-end-column="66" />
+              <folding>
+                <element signature="e#14218#31467#0" expanded="true" />
+                <element signature="e#15414#17352#0" expanded="true" />
+                <element signature="e#16164#16664#0" expanded="true" />
+                <element signature="e#16663#16664#0" expanded="true" />
+                <element signature="e#16757#17143#0" expanded="true" />
+                <element signature="e#17142#17143#0" expanded="true" />
+                <element signature="e#17351#17352#0" expanded="true" />
+                <element signature="e#17556#18088#0" expanded="true" />
+                <element signature="e#18087#18088#0" expanded="true" />
+                <element signature="e#18308#18642#0" expanded="true" />
+                <element signature="e#18641#18642#0" expanded="true" />
+                <element signature="e#19466#19787#0" expanded="true" />
+                <element signature="e#19786#19787#0" expanded="true" />
+                <element signature="e#19947#22179#0" expanded="true" />
+                <element signature="e#22178#22179#0" expanded="true" />
+                <element signature="e#30036#30436#0" expanded="true" />
+                <element signature="e#30435#30436#0" expanded="true" />
+                <element signature="e#30566#31001#0" expanded="true" />
+                <element signature="e#31000#31001#0" expanded="true" />
+                <element signature="e#31122#31417#0" expanded="true" />
+                <element signature="e#31416#31417#0" expanded="true" />
+                <element signature="e#31466#31467#0" expanded="true" />
+                <element signature="e#36861#36862#0" expanded="true" />
+                <element signature="e#36915#36916#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeScreenFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomeScreenFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/HomeScreenFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.60382515">
-              <caret line="50" column="96" selection-start-line="50" selection-start-column="96" selection-end-line="50" selection-end-column="96" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1455,6 +1480,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/HomeScreenFragment.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/DeviceActivity.java" />
       </list>
     </option>
   </component>
@@ -1765,7 +1791,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879046" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879046" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -1795,19 +1821,44 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/DeviceActivity.java">
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/HomeScreenFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="434" column="65" selection-start-line="434" selection-start-column="65" selection-end-line="434" selection-end-column="65" />
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/HomeScreenFragment.java">
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/DeviceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60382515">
-          <caret line="50" column="96" selection-start-line="50" selection-start-column="96" selection-end-line="50" selection-end-column="96" />
-          <folding />
+        <state vertical-scroll-proportion="0.5280236">
+          <caret line="515" column="66" selection-start-line="515" selection-start-column="66" selection-end-line="515" selection-end-column="66" />
+          <folding>
+            <element signature="e#14218#31467#0" expanded="true" />
+            <element signature="e#15414#17352#0" expanded="true" />
+            <element signature="e#16164#16664#0" expanded="true" />
+            <element signature="e#16663#16664#0" expanded="true" />
+            <element signature="e#16757#17143#0" expanded="true" />
+            <element signature="e#17142#17143#0" expanded="true" />
+            <element signature="e#17351#17352#0" expanded="true" />
+            <element signature="e#17556#18088#0" expanded="true" />
+            <element signature="e#18087#18088#0" expanded="true" />
+            <element signature="e#18308#18642#0" expanded="true" />
+            <element signature="e#18641#18642#0" expanded="true" />
+            <element signature="e#19466#19787#0" expanded="true" />
+            <element signature="e#19786#19787#0" expanded="true" />
+            <element signature="e#19947#22179#0" expanded="true" />
+            <element signature="e#22178#22179#0" expanded="true" />
+            <element signature="e#30036#30436#0" expanded="true" />
+            <element signature="e#30435#30436#0" expanded="true" />
+            <element signature="e#30566#31001#0" expanded="true" />
+            <element signature="e#31000#31001#0" expanded="true" />
+            <element signature="e#31122#31417#0" expanded="true" />
+            <element signature="e#31416#31417#0" expanded="true" />
+            <element signature="e#31466#31467#0" expanded="true" />
+            <element signature="e#36861#36862#0" expanded="true" />
+            <element signature="e#36915#36916#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
