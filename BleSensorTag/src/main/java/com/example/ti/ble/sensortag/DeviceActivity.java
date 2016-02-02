@@ -92,6 +92,7 @@ import com.example.ti.ble.ti.profiles.TIOADProfile;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -520,6 +521,51 @@ import java.util.Map;
                                 t.start();
 
              //********************************************************************************************************
+								Thread t2 = new Thread() {
+
+									public void run() {
+										Looper.prepare(); //For Preparing Message Pool for the child Thread
+										HttpClient client = new DefaultHttpClient();
+										InputStream inputStream = null;
+										String result = "";
+										HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
+										HttpResponse response;
+										JSONObject json = new JSONObject();
+										String URL = "https://5.29.162.220:3000/sensor";
+										try {
+											HttpGet get = new HttpGet(URL);
+											json.put("UUID", s.getUuid().toString());
+											json.put("MAJOR", "2020");
+											json.put("MINOR","3030");
+											json.put("ISBELTED","1");
+											StringEntity se = new StringEntity( json.toString());
+											se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+								//			post.setEntity(se);
+											response = client.execute(get);
+											inputStream = response.getEntity().getContent();
+											// convert inputstream to string
+											if(inputStream != null)
+												result = inputStream.toString();
+											else
+												result = "Did not work!";
+
+											Log.d("DeviceActivity", "get result : " + result);
+                    /*Checking response */
+											if(response!=null){
+												InputStream in = response.getEntity().getContent(); //Get the data in the entity
+											}
+
+										} catch(Exception e) {
+											e.printStackTrace();
+											Log.d("Error", "Cannot Estabilish Connection");
+										}
+
+										Looper.loop(); //Loop in the message queue
+									}
+								};
+
+								t2.start();
+			//************************************************************************************************************
                                 Log.d("DeviceActivity", "Configuring service with uuid : " + s.getUuid().toString());
                                 if (SensorTagHumidityProfile.isCorrectService(s)) {
                                     SensorTagHumidityProfile hum = new SensorTagHumidityProfile(context,mBluetoothDevice,s,mBtLeService);
