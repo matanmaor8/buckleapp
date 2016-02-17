@@ -566,6 +566,9 @@ import java.util.Map;
 
 								t2.start();
 			//************************************************************************************************************
+
+
+			//*************************************************************************************************
                                 Log.d("DeviceActivity", "Configuring service with uuid : " + s.getUuid().toString());
                                 if (SensorTagHumidityProfile.isCorrectService(s)) {
                                     SensorTagHumidityProfile hum = new SensorTagHumidityProfile(context,mBluetoothDevice,s,mBtLeService);

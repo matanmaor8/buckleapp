@@ -309,7 +309,7 @@ public class ScanView extends Fragment {
   //    BluetoothGattService s;
       String s=String.valueOf(device.getUuids());
 
-      String descr = name + "\n" + device.getAddress() + "\nRssi: " + rssi + " dBm" + "\n uuid:"+s;
+      String descr = name + "\n" +"\nRssi: " + rssi + " dBm" + "\nmajor:"+mActivity.Major+ "\nminor:"+mActivity.Minor+ "\n\nUUID:"+mActivity.UUID1;
       ((TextView) vg.findViewById(R.id.descr)).setText(descr);
       Log.d("ScanView","uuid:"+s.toString());
       ImageView iv = (ImageView)vg.findViewById(R.id.devImage);

@@ -69,6 +69,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -122,7 +123,9 @@ public class MainActivity extends ViewPagerActivity {
 	private BluetoothLeService mBluetoothLeService = null;
 	private IntentFilter mFilter;
 	private String[] mDeviceFilter = null;
-
+	public String Minor;
+	public String Major;
+	public String UUID1;
 	// Housekeeping
 	private static final int NO_DEVICE = -1;
 	private boolean mInitialised = false;
@@ -575,7 +578,7 @@ public class MainActivity extends ViewPagerActivity {
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 
 		public void onLeScan(final BluetoothDevice device, final int rssi,
-							 byte[] scanRecord) {
+							 final byte[] scanRecord) {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					// Filter devices
@@ -590,6 +593,24 @@ public class MainActivity extends ViewPagerActivity {
 							deviceInfo.updateRssi(rssi);
 							mScanView.notifyDataSetChanged();
 						}
+						Log.d("MainActivity", "Entra en onLeScan");
+						Major="";
+						Minor="";
+						UUID1="";
+
+						for (int i = 0; i<scanRecord.length; i++){
+							if(i>8 && i<25)
+								UUID1 += String.format("%02x", scanRecord[i]);
+							else if(i>24 && i<27)
+								Major += String.format("%02x", scanRecord[i]);
+							else if(i>26 && i<29)
+								Minor += String.format("%02x", scanRecord[i]);
+
+
+
+						}
+
+						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + Major + " MINOR: " + Minor + " and UUID: " + UUID1);
 					}
 				}
 
