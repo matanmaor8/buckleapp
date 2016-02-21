@@ -90,7 +90,7 @@ import java.util.List;
 
 // import android.util.Log;
 
-public class MainActivity extends ViewPagerActivity {
+public class MainActivity extends ViewPagerActivity  {
 	// Log
 	// private static final String TAG = "HomeScreen";
 
@@ -126,6 +126,9 @@ public class MainActivity extends ViewPagerActivity {
 	public String Minor;
 	public String Major;
 	public String UUID1;
+	public int major = 0;
+	public int minor =0;
+	public String uuid="";
 	// Housekeeping
 	private static final int NO_DEVICE = -1;
 	private boolean mInitialised = false;
@@ -417,8 +420,8 @@ public class MainActivity extends ViewPagerActivity {
 		//CustomToast.middleBottom(this, "Turning BT adapter off and on again may fix Android BLE stack problems");
 	}
 
-	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi) {
-		BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi);
+	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1) {
+		BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1);
 
 		return deviceInfo;
 	}
@@ -579,43 +582,93 @@ public class MainActivity extends ViewPagerActivity {
 
 		public void onLeScan(final BluetoothDevice device, final int rssi,
 							 final byte[] scanRecord) {
+			Major="";
+			Minor="";
+			UUID1="";
+
+			int startByte = 0;
+			boolean patternFound = true;
+	/*		while (startByte <= 15) {
+				if (((int) scanRecord[startByte + 2] & 0xff) == 0x02 && //Identifies an iBeacon
+						((int) scanRecord[startByte + 3] & 0xff) == 0x15) { //Identifies correct data length
+					patternFound = true;
+					Log.d("MainActivity", "flag111111111" + startByte);
+					break;
+				}
+				startByte++;
+				Log.d("MainActivity", "count" + startByte+ ":::"+ (scanRecord[startByte + 2] & 0xff));
+			}
+		*/	if (patternFound) {
+
+			}
+			final String finalUuid = uuid;
 			runOnUiThread(new Runnable() {
 				public void run() {
 					// Filter devices
 					if (checkDeviceFilter(device.getName())) {
-						if (!deviceInfoExists(device.getAddress())) {
-							// New device
-							BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi);
-							addDevice(deviceInfo);
-						} else {
-							// Already in list, update RSSI info
-							BleDeviceInfo deviceInfo = findDeviceInfo(device);
-							deviceInfo.updateRssi(rssi);
-							mScanView.notifyDataSetChanged();
-						}
-						Log.d("MainActivity", "Entra en onLeScan");
-						Major="";
-						Minor="";
-						UUID1="";
+						Log.d("MainActivity", "Entra en onLeScan55555555555555555555555555555555555555");
+						byte[] uuidBytes = new byte[16];
+						System.arraycopy(scanRecord, 9, uuidBytes, 0, 16);
+						String hexString = bytesToHex(uuidBytes);
 
-						for (int i = 0; i<scanRecord.length; i++){
-							if(i>8 && i<25)
-								UUID1 += String.format("%02x", scanRecord[i]);
-							else if(i>24 && i<27)
-								Major += String.format("%02x", scanRecord[i]);
-							else if(i>26 && i<29)
-								Minor += String.format("%02x", scanRecord[i]);
+						//Here is your UUID
+						uuid = hexString.substring(0, 8) + "-" +
+								hexString.substring(8, 12) + "-" +
+								hexString.substring(12, 16) + "-" +
+								hexString.substring(16, 20) + "-" +
+								hexString.substring(20, 32);
+
+						//Here is your Major value
+						major = (scanRecord[25] & 0xff) * 0x100 + (scanRecord[26] & 0xff);
+
+						//Here is your Minor value
+						minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
+						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " and UUID: " + uuid);
+
+	/*
+							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);
+        String minor = String.format("%02x", scanRecord[27]) + String.format("%02x", scanRecord[28]);
+							for (int i = 0; i<scanRecord.length; i++){
+								if(i>8 && i<25)
+									UUID1 += String.format("%02x", scanRecord[i]);
+								else if(i>24 && i<27)
+									Major += String.format("%02x", scanRecord[i]);
+								else if(i>26 && i<29)
+									Minor += String.format("%02x", scanRecord[i]);
 
 
 
-						}
+							}*/
 
-						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + Major + " MINOR: " + Minor + " and UUID: " + UUID1);
+
+							if (!deviceInfoExists(device.getAddress())) {
+								// New device
+								BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid);
+								addDevice(deviceInfo);
+							} else {
+								// Already in list, update RSSI info
+								BleDeviceInfo deviceInfo = findDeviceInfo(device);
+								deviceInfo.updateRssi(rssi);
+								mScanView.notifyDataSetChanged();
+							}
+
+
 					}
 				}
 
 			});
 		}
+		final protected char[] hexArray = "0123456789ABCDEF".toCharArray();
+		public String bytesToHex(byte[] bytes) {
+			char[] hexChars = new char[bytes.length * 2];
+			for ( int j = 0; j < bytes.length; j++ ) {
+				int v = bytes[j] & 0xFF;
+				hexChars[j * 2] = hexArray[v >>> 4];
+				hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+			}
+			return new String(hexChars);
+		}
+
 	};
 
 }

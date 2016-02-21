@@ -300,7 +300,9 @@ public class ScanView extends Fragment {
       BleDeviceInfo deviceInfo = mDevices.get(position);
       BluetoothDevice device = deviceInfo.getBluetoothDevice();
       int rssi = deviceInfo.getRssi();
-
+      int major= deviceInfo.getmajor();
+      int minor=deviceInfo.getminor();
+      String UUID1= deviceInfo.getUUID1();
       String name;
       name = device.getName();
       if (name == null) {
@@ -309,7 +311,7 @@ public class ScanView extends Fragment {
   //    BluetoothGattService s;
       String s=String.valueOf(device.getUuids());
 
-      String descr = name + "\n" +"\nRssi: " + rssi + " dBm" + "\nmajor:"+mActivity.Major+ "\nminor:"+mActivity.Minor+ "\n\nUUID:"+mActivity.UUID1;
+      String descr = name + "\n" +"\nRssi: " + rssi + " dBm" + "\nmajor:"+major+ "\nminor:"+minor+ "\n\nUUID:"+UUID1;
       ((TextView) vg.findViewById(R.id.descr)).setText(descr);
       Log.d("ScanView","uuid:"+s.toString());
       ImageView iv = (ImageView)vg.findViewById(R.id.devImage);

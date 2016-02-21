@@ -60,12 +60,16 @@ public class BleDeviceInfo {
   // Data
   private BluetoothDevice mBtDevice;
   private int mRssi;
+  private String mUUID1;
+  private int mmajor;
+  private int mminor;
 
-
-  public BleDeviceInfo(BluetoothDevice device, int rssi) {
+  public BleDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1) {
     mBtDevice = device;
     mRssi = rssi;
-
+    mUUID1=UUID1;
+    mmajor=major;
+    mminor=minor;
   }
 
   public BluetoothDevice getBluetoothDevice() {
@@ -74,6 +78,15 @@ public class BleDeviceInfo {
 
   public int getRssi() {
     return mRssi;
+  }
+  public int getmajor() {
+    return mmajor;
+  }
+  public int getminor() {
+    return mminor;
+  }
+  public String getUUID1() {
+    return mUUID1;
   }
 
   public void updateRssi(int rssiValue) {
