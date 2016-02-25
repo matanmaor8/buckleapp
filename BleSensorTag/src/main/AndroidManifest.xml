@@ -5,7 +5,7 @@
     android:versionCode="5"
     android:versionName="2.20 Beta" >
 
-    <uses-sdk
+    <uses-sdkz
         android:minSdkVersion="18"
         android:targetSdkVersion="21" />
 
