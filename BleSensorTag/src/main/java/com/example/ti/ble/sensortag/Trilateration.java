@@ -78,7 +78,7 @@ public class Trilateration {
 
         return MyLong;
     }
-
+///99
     static double getLatitude(double Lat1, double Long1, double rssi1,
                               double Lat2, double Long2, double rssi2,
                               double Lat3, double Long3, double rssi3) {
