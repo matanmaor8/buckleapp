@@ -2,74 +2,81 @@
 <items version="2" >
 
     <item
-        jar="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.android.service-1.0.2.jar"
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\classes-360859951739590e24d8c3a79144373d0ae82fd9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.0\jars\libs\internal_impl-23.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\internal_impl-23.0.0-a077bbcc4717e18c833cd0557126b0c74b3702ff.jar" />
+    </item>
+    <item
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="04de44f90606c77f3b28cf44861f306290505aac">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\classes-975837b62dd78a140bce04d8336bf1e7e22dd31d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\classes-6c3b167c81355abb7673d5bb424d11d7ba5cfae3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\exploded-aar\com.estimote\sdk\0.9.4\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3f2bd7d626b065e0960be2404e0af133e7b179b">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\classes-3713e80c5b29d741682dd5e41d265cbd579300bc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\libs\org.eclipse.paho.android.service-1.0.2.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="3b8420e57139cc627a55be0c17b6687e92d7460f">
-        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.android.service-1.0.2-343ee50394a20497da99165592375a3360a090ec.jar" />
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.android.service-1.0.2-ed7a406f0bf514ef9225be0d5bec12b3a3d18a61.jar" />
     </item>
     <item
-        jar="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\gson-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\gson-2.3.1-1437da72766976f192fb3213d007e7013d653987.jar" />
-    </item>
-    <item
-        jar="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\gson-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\gson-2.3.1-4f58333abd7c94b2d209f644f66c6d8ce7014047.jar" />
-    </item>
-    <item
-        jar="C:\8\trunk\BleSensorTag\libs\org.eclipse.paho.client.mqttv3-1.0.2.jar"
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\libs\org.eclipse.paho.client.mqttv3-1.0.2.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="02e433eb0fda11fe7170cf8214ba2f4d165c29b6">
-        <dex dex="C:\8\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.client.mqttv3-1.0.2-d4b41253f29f4200780a839aa56ef0783df00e5c.jar" />
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.client.mqttv3-1.0.2-e43e0991a959f73911d3262031d671b59ae2c71d.jar" />
     </item>
     <item
-        jar="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.android.service-1.0.2.jar"
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="3b8420e57139cc627a55be0c17b6687e92d7460f">
-        <dex dex="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.android.service-1.0.2-c9890c93afa9cf39cf42a2f1947f0f436aaa1562.jar" />
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\classes-8586cef37fcf4dadfdc933a57e1e0398b24289d3.jar" />
     </item>
     <item
-        jar="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.client.mqttv3-1.0.2.jar"
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\exploded-aar\org.altbeacon\android-beacon-library\2.7.1\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="02e433eb0fda11fe7170cf8214ba2f4d165c29b6">
-        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.client.mqttv3-1.0.2-77d9348d97bc82d755ebce1879be28da219aab4c.jar" />
+        sha1="cf8e282e7c1cdf175467ed2b40a358a271cda953">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\classes-f6fa68ee383dc4af36e02932471dafa1d3b68e62.jar" />
     </item>
     <item
-        jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jar="C:\Users\Matan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.0\support-annotations-23.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="C:\Sensortag201\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\support-v4-19.1.0-7541db917baa506c0dd564574dda219c7099e134.jar" />
+        sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\support-annotations-23.0.0-64691ec53000870af4617ddec9b08ec644f6af33.jar" />
     </item>
     <item
-        jar="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\libs\org.eclipse.paho.client.mqttv3-1.0.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="02e433eb0fda11fe7170cf8214ba2f4d165c29b6">
-        <dex dex="C:\7\sensortag-20-android-sensortag-20-android\sensortag20\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.client.mqttv3-1.0.2-893b948af4be8e62ebe74c683a3986e6e985ff06.jar" />
-    </item>
-    <item
-        jar="C:\8\trunk\BleSensorTag\libs\gson-2.3.1.jar"
+        jar="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\libs\gson-2.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\8\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\gson-2.3.1-8f1a13c9289e935ec3f83f2b1a30f6179501bfda.jar" />
-    </item>
-    <item
-        jar="C:\8\trunk\BleSensorTag\libs\org.eclipse.paho.android.service-1.0.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3b8420e57139cc627a55be0c17b6687e92d7460f">
-        <dex dex="C:\8\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\org.eclipse.paho.android.service-1.0.2-f788b6092a001b12af3df8fa9aaafe02d534913d.jar" />
+        <dex dex="C:\Users\Matan\Desktop\buckleapp\trunk\BleSensorTag\build\intermediates\pre-dexed\debug\gson-2.3.1-b34da9d5fad7fa293ac58a5e403f3906bb8a39a1.jar" />
     </item>
 
 </items>
