@@ -109,6 +109,7 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_sensors">This sensors number is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
@@ -116,4 +117,5 @@
         completions."
     </string>
     <string name="title_activity_location">Location</string>
+    <string name="title_activity_registration">Registration</string>
 </resources>

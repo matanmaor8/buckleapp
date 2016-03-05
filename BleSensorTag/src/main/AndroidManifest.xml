@@ -32,7 +32,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
 
     <application
@@ -98,6 +97,14 @@
         <activity
             android:name=".location"
             android:label="@string/title_activity_location" >
+        </activity>
+        <activity android:name=".Registration" >
+        </activity>
+        <activity
+            android:name=".RegistrationActivity"
+            android:label="@string/title_activity_registration" >
+        </activity>
+        <activity android:name=".CalibrationActivity" >
         </activity>
     </application>
 

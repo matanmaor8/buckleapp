@@ -128,6 +128,7 @@ public class MainActivity extends ViewPagerActivity  {
 	public String UUID1;
 	public int major = 0;
 	public int minor =0;
+	public int txPower =-55;
 	public String uuid="";
 	// Housekeeping
 	private static final int NO_DEVICE = -1;
@@ -623,7 +624,9 @@ public class MainActivity extends ViewPagerActivity  {
 
 						//Here is your Minor value
 						minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
-						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " and UUID: " + uuid);
+
+						txPower= scanRecord[29];
+						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
 
 	/*
 							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);

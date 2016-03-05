@@ -38,7 +38,7 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         {
             case R.id.register:
       //          startActivity(new Intent(v.getContext(), RegistrationActivity.class));
-                startActivity(new Intent(v.getContext(),location.class));
+                startActivity(new Intent(v.getContext(),RegistrationActivity.class));
                 break;
             case R.id.SignIn:
      //          startActivity(new Intent(v.getContext(), Connection.class));
