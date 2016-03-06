@@ -276,9 +276,23 @@ public class CalibrationActivity extends ViewPagerActivity {
     }
 
     private void stopScan() {
+        double dist1,dist2,dist3;
+        double distance[] = new double[3];
         mScanning = false;
         mScanView.updateGui(false);
         scanLeDevice(false);
+        location loc= new location();
+        double lat =  (loc.getLatg());
+        double lng =  (loc.getLang());
+        Trilateration  tri;
+        for (int i = 0; i < mDeviceInfoList.size(); i++) {
+            distance[i]= mDeviceInfoList.get(i).getdistance();
+      //      dist2=mDeviceInfoList.get(1).getdistance();
+      //      dist3=mDeviceInfoList.get(2).getdistance();
+     //       Trilateration.MyTrilateration(lng,lat,distance[i]);
+  //*******************************************************************************************************************************
+            Log.d("CalibrationActivity","999999999999999999999999999999999");
+        }
     }
 
     private void startDeviceActivity() {
@@ -363,8 +377,8 @@ public class CalibrationActivity extends ViewPagerActivity {
         //CustomToast.middleBottom(this, "Turning BT adapter off and on again may fix Android BLE stack problems");
     }
 
-    private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1) {
-        BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1);
+    private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower, double dist) {
+        BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower,dist);
 
         return deviceInfo;
     }
@@ -623,7 +637,7 @@ public class CalibrationActivity extends ViewPagerActivity {
 
                         if (!deviceInfoExists(device.getAddress())) {
                             // New device
-                            BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid);
+                            BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower,dist);
                             addDevice(deviceInfo);
                         } else {
                             // Already in list, update RSSI info

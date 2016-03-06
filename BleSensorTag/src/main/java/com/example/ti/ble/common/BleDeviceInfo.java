@@ -63,13 +63,17 @@ public class BleDeviceInfo {
   private String mUUID1;
   private int mmajor;
   private int mminor;
+  private int mtxPower;
+  private double mdist;
 
-  public BleDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1) {
+  public BleDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1,int txPower,double dist) {
     mBtDevice = device;
     mRssi = rssi;
     mUUID1=UUID1;
     mmajor=major;
     mminor=minor;
+    mtxPower= txPower;
+    mdist=dist;
   }
 
   public BluetoothDevice getBluetoothDevice() {
@@ -88,6 +92,13 @@ public class BleDeviceInfo {
   public String getUUID1() {
     return mUUID1;
   }
+  public int gettxPower() {
+    return mtxPower;
+  }
+  public double getdistance() {
+    return mdist;
+  }
+
 
   public void updateRssi(int rssiValue) {
     mRssi = rssiValue;

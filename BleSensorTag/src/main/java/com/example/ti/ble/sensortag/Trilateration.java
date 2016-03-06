@@ -117,7 +117,7 @@ public class Trilateration {
         return myLocation;
     }
 
-    static double[] MyTrilateration(double Lat1, double Long1, double rssi1,
+    public static double[] MyTrilateration(double Lat1, double Long1, double rssi1,
                                     double Lat2, double Long2, double rssi2,
                                     double Lat3, double Long3, double rssi3) {
 

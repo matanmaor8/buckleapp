@@ -130,6 +130,7 @@ public class MainActivity extends ViewPagerActivity  {
 	public int minor =0;
 	public int txPower =-55;
 	public String uuid="";
+	public double dist;
 	// Housekeeping
 	private static final int NO_DEVICE = -1;
 	private boolean mInitialised = false;
@@ -421,8 +422,8 @@ public class MainActivity extends ViewPagerActivity  {
 		//CustomToast.middleBottom(this, "Turning BT adapter off and on again may fix Android BLE stack problems");
 	}
 
-	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1) {
-		BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1);
+	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower, double dist) {
+		BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower,dist);
 
 		return deviceInfo;
 	}
@@ -577,6 +578,25 @@ public class MainActivity extends ViewPagerActivity  {
 	};
 
 
+	protected static double calculateAccuracy(int txPower, double rssi) {
+		if (rssi == 0) {
+			return -1.0; // if we cannot determine accuracy, return -1.
+		}
+
+		Log.d("TAG", "calculating accuracy based on rssi of "+rssi);
+
+
+		double ratio = rssi*1.0/txPower;
+		if (ratio < 1.0) {
+			return Math.pow(ratio,10);
+		}
+		else {
+			double accuracy =  (0.89976)*Math.pow(ratio,7.7095) + 0.111;
+			Log.d("TAG", " avg rssi: "+rssi+" accuracy: "+accuracy);
+			return accuracy;
+		}
+	}
+
 	// Device scan callback.
 	// NB! Nexus 4 and Nexus 7 (2012) only provide one scan result per scan
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
@@ -627,7 +647,7 @@ public class MainActivity extends ViewPagerActivity  {
 
 						txPower= scanRecord[29];
 						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
-
+						dist=calculateAccuracy(txPower,rssi);
 	/*
 							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);
         String minor = String.format("%02x", scanRecord[27]) + String.format("%02x", scanRecord[28]);
@@ -646,7 +666,7 @@ public class MainActivity extends ViewPagerActivity  {
 
 							if (!deviceInfoExists(device.getAddress())) {
 								// New device
-								BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid);
+								BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower,dist);
 								addDevice(deviceInfo);
 							} else {
 								// Already in list, update RSSI info
