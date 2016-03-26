@@ -74,6 +74,8 @@ public class CalibrationActivity extends ViewPagerActivity {
     public int txPower =-55;
     public String uuid="";
     public double dist;
+    public int SumRssi=0;
+    public int counterRssi=0;
     // Housekeeping
     private static final int NO_DEVICE = -1;
     private boolean mInitialised = false;
@@ -278,6 +280,7 @@ public class CalibrationActivity extends ViewPagerActivity {
     private void stopScan() {
         double dist1,dist2,dist3;
         double distance[] = new double[3];
+        double rssi[] = new double[3];
         mScanning = false;
         mScanView.updateGui(false);
         scanLeDevice(false);
@@ -285,14 +288,23 @@ public class CalibrationActivity extends ViewPagerActivity {
         double lat =  (loc.getLatg());
         double lng =  (loc.getLang());
         Trilateration  tri;
-        for (int i = 0; i < mDeviceInfoList.size(); i++) {
-            distance[i]= mDeviceInfoList.get(i).getdistance();
+        SumRssi=SumRssi/counterRssi;
+        dist=calculateAccuracy(-70,SumRssi);
+        Log.d("MainActivity", " distance: "+dist +" RSSI"+SumRssi);
+
+        //      for (int i = 0; i < mDeviceInfoList.size(); i++) {
+            distance[0]= mDeviceInfoList.get(0).getdistance();
+            distance[1]= mDeviceInfoList.get(1).getdistance();
+            distance[2]= mDeviceInfoList.get(2).getdistance();
+            rssi[0]= mDeviceInfoList.get(0).getRssi();
+            rssi[1]= mDeviceInfoList.get(1).getRssi();
+            rssi[2]= mDeviceInfoList.get(2).getRssi();
       //      dist2=mDeviceInfoList.get(1).getdistance();
       //      dist3=mDeviceInfoList.get(2).getdistance();
-     //       Trilateration.MyTrilateration(lng,lat,distance[i]);
+            Trilateration.MyTrilateration(lng,lat,rssi[0],distance[0],lng,lat,rssi[1],distance[1],lng,lat,rssi[2],distance[2]);
   //*******************************************************************************************************************************
             Log.d("CalibrationActivity","999999999999999999999999999999999");
-        }
+    //    }
     }
 
     private void startDeviceActivity() {
@@ -550,6 +562,58 @@ public class CalibrationActivity extends ViewPagerActivity {
             return accuracy;
         }
     }
+
+    static double calcDistance(double rssi) {
+        double base = 10;
+        double exponent = -(rssi + 51.504)/16.532;
+        //double distance = Math.pow(base, exponent);
+        //104.09004338 + 13.26842562x + 0.57250833x^2 + 0.00986120x^3 + 0.00006099x^4
+
+        // SI NORTH THIRD FLOOR (room 3250)
+//		  double distance = 104.09004338 + 13.26842562 * rssi + 0.57250833* Math.pow(rssi,2)
+//		        + 0.00986120*Math.pow(rssi, 3) + 0.00006099 * Math.pow(rssi,4);
+
+        // SI NORTH FIRST FLOOR
+        // 0 degree
+        //double distance = 3324.4981666 + 234.0366524 * rssi + 6.0593624* Math.pow(rssi,2)
+        //  + 0.0683264*Math.pow(rssi, 3) + 0.0002843 * Math.pow(rssi,4);
+
+        double distance = 730.24198315 + 52.33325511*rssi + 1.35152407*Math.pow(rssi, 2)
+                + 0.01481265*Math.pow(rssi, 3) + 0.00005900*Math.pow(rssi, 4) + 0.00541703*180;
+
+
+        //return (distance>0)?distance:rssi;
+        return distance;
+    }
+
+    static double calFeetToMeter(double rssi) {
+        return rssi*0.3048;
+    }
+
+    static double calDistToDeg(double dist) {
+        double result;
+        double DistToDeg;
+
+        final int lat = 42;
+        final double EarthRadius = 6367449;
+        final double a = 6378137;
+        final double b = 6356752.3;
+        final double ang = lat*(Math.PI/180);
+
+        // This function will calculate the longitude distance based on the latitude
+        // More information is
+        // http://en.wikipedia.org/wiki/Geographic_coordinate_system#Expressing_latitude_and_longitude_as_linear_units
+
+//		 result = Math.cos(ang)*Math.sqrt((Math.pow(a,4)*(Math.pow(Math.cos(ang),2))
+//				 + (Math.pow(b,4)*(Math.pow(Math.sin(ang),2))))
+//				 / (Math.pow((a*Math.cos(ang)),2)+Math.pow((b*Math.sin(ang)),2)))
+//				 * Math.PI/180;
+
+        DistToDeg = 82602.89223259855;  // unit (meter), based on 42degree.
+        result = dist/DistToDeg;		 // convert distance to lat,long degree.
+        return result;
+
+    }
 /*
     protected static int calculateProximity(double accuracy) {
         if (accuracy < 0) {
@@ -616,9 +680,14 @@ public class CalibrationActivity extends ViewPagerActivity {
                         //Here is your Minor value
                         minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
 
-                        txPower= scanRecord[29];
-                        Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
-                        dist=calculateAccuracy(txPower,rssi);
+                        txPower= (int)scanRecord[29];
+                        SumRssi+=rssi;
+                        counterRssi+=1;
+          //              Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
+          //              dist=calculateAccuracy(-49,rssi);
+          //              dist=calDistToDeg(calFeetToMeter(calcDistance(rssi)));
+
+                        Log.d("MainActivity", " MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid +" distance: "+dist);
 	/*
 							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);
         String minor = String.format("%02x", scanRecord[27]) + String.format("%02x", scanRecord[28]);

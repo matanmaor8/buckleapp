@@ -117,9 +117,9 @@ public class Trilateration {
         return myLocation;
     }
 
-    public static double[] MyTrilateration(double Lat1, double Long1, double rssi1,
-                                    double Lat2, double Long2, double rssi2,
-                                    double Lat3, double Long3, double rssi3) {
+    public static double[] MyTrilateration(double Lat1, double Long1, double rssi1,double distance1,
+                                    double Lat2, double Long2, double rssi2,double distance2,
+                                    double Lat3, double Long3, double rssi3,double distance3) {
 
         //ArrayList<Double> tmpWAP1, tmpWAP2, tmpWAP3;
         double[] tmpWAP1 = new double[3];
@@ -137,10 +137,14 @@ public class Trilateration {
 //		 dist2 = calDistToDeg(6);	//calDistToDeg(calcDistance(rssi2));
 //		 dist3 = calDistToDeg(7);	//calDistToDeg(calcDistance(rssi3));
 
-        dist1 = calDistToDeg(calFeetToMeter(calcDistance(rssi1)));
-        dist2 = calDistToDeg(calFeetToMeter(calcDistance(rssi2)));
-        dist3 = calDistToDeg(calFeetToMeter(calcDistance(rssi3)));
-
+            dist1 = calDistToDeg(distance1);
+            dist2 = calDistToDeg(distance2);
+            dist3 = calDistToDeg(distance3);
+//*******************************************************************************************************************************
+    //    dist1 = calDistToDeg(calFeetToMeter(calcDistance(rssi1)));
+    //    dist2 = calDistToDeg(calFeetToMeter(calcDistance(rssi2)));
+    //    dist3 = calDistToDeg(calFeetToMeter(calcDistance(rssi3)));
+//**********************************************************************************************************************************
         //test
 //		 dist1 = calDistToDeg(calFeetToMeter(53));
 //		 dist2 = calDistToDeg(calFeetToMeter(24));

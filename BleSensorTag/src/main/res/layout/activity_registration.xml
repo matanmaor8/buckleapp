@@ -47,7 +47,10 @@
                 android:hint="sensors"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="3"
+                android:enabled="false"
+                android:editable="false" />
 
         </LinearLayout>
     </ScrollView>
