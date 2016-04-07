@@ -118,4 +118,5 @@
     </string>
     <string name="title_activity_location">Location</string>
     <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_beacon_status">BeaconStatus</string>
 </resources>
