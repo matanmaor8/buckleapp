@@ -299,7 +299,7 @@ public class ScanView extends Fragment {
 //      counter++;
       BleDeviceInfo deviceInfo = mDevices.get(position);
       BluetoothDevice device = deviceInfo.getBluetoothDevice();
-      int rssi = deviceInfo.getRssi();
+      int rssi = (int) deviceInfo.getRssi();
       int major= deviceInfo.getmajor();
       int minor=deviceInfo.getminor();
       String UUID1= deviceInfo.getUUID1();

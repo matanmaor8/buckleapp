@@ -32,7 +32,9 @@ import com.example.ti.util.CustomToast;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CalibrationActivity extends ViewPagerActivity {
     // Log
@@ -76,6 +78,9 @@ public class CalibrationActivity extends ViewPagerActivity {
     public double dist;
     public int SumRssi=0;
     public int counterRssi=0;
+    public RangedIBeacon rangedIBeacon;
+    private Map<BleDeviceInfo,RangedIBeacon> rangedIBeacons = new HashMap<BleDeviceInfo,RangedIBeacon>();
+    public BleDeviceInfo[] DeviceArray =new BleDeviceInfo[3];
     // Housekeeping
     private static final int NO_DEVICE = -1;
     private boolean mInitialised = false;
@@ -288,19 +293,22 @@ public class CalibrationActivity extends ViewPagerActivity {
         double lat =  (loc.getLatg());
         double lng =  (loc.getLang());
         Trilateration  tri;
-        SumRssi=SumRssi/counterRssi;
-        dist=calculateAccuracy(-70,SumRssi);
-        Log.d("MainActivity", " distance: "+dist +" RSSI"+SumRssi);
+
+  //      dist=calculateAccuracy(-70,SumRssi);
+
 
         //      for (int i = 0; i < mDeviceInfoList.size(); i++) {
-            distance[0]= mDeviceInfoList.get(0).getdistance();
-            distance[1]= mDeviceInfoList.get(1).getdistance();
-            distance[2]= mDeviceInfoList.get(2).getdistance();
-            rssi[0]= mDeviceInfoList.get(0).getRssi();
-            rssi[1]= mDeviceInfoList.get(1).getRssi();
-            rssi[2]= mDeviceInfoList.get(2).getRssi();
+            distance[0]= mDeviceInfoList.get(0).getAccuracy();
+   //         distance[1]= mDeviceInfoList.get(1).getAccuracy();
+   //         distance[2]= mDeviceInfoList.get(2).getAccuracy();
+            rssi[0]= rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi();//addRangeMeasurement((int) deviceInfo.getRssi());
+    //        rssi[0]= mDeviceInfoList.get(0).getAvaragedRssi();
+    //        rssi[1]= mDeviceInfoList.get(1).getRssi();
+     //       rssi[2]= mDeviceInfoList.get(2).getRssi();
       //      dist2=mDeviceInfoList.get(1).getdistance();
       //      dist3=mDeviceInfoList.get(2).getdistance();
+
+        Log.d("MainActivity", " distance: "+distance[0] +" RSSI"+rssi[0]);
             Trilateration.MyTrilateration(lng,lat,rssi[0],distance[0],lng,lat,rssi[1],distance[1],lng,lat,rssi[2],distance[2]);
   //*******************************************************************************************************************************
             Log.d("CalibrationActivity","999999999999999999999999999999999");
@@ -634,7 +642,7 @@ public class CalibrationActivity extends ViewPagerActivity {
     }*/
     // Device scan callback.
     // NB! Nexus 4 and Nexus 7 (2012) only provide one scan result per scan
-    private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 
         public void onLeScan(final BluetoothDevice device, final int rssi,
                              final byte[] scanRecord) {
@@ -644,8 +652,8 @@ public class CalibrationActivity extends ViewPagerActivity {
 
             int startByte = 0;
             boolean patternFound = true;
-	/*		while (startByte <= 15) {
-				if (((int) scanRecord[startByte + 2] & 0xff) == 0x02 && //Identifies an iBeacon
+    /*		while (startByte <= 15) {
+                if (((int) scanRecord[startByte + 2] & 0xff) == 0x02 && //Identifies an iBeacon
 						((int) scanRecord[startByte + 3] & 0xff) == 0x15) { //Identifies correct data length
 					patternFound = true;
 					Log.d("MainActivity", "flag111111111" + startByte);
@@ -661,6 +669,7 @@ public class CalibrationActivity extends ViewPagerActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     // Filter devices
+                    int i=0;
                     if (checkDeviceFilter(device.getName())) {
                         Log.d("MainActivity", "Entra en onLeScan55555555555555555555555555555555555555");
                         byte[] uuidBytes = new byte[16];
@@ -688,7 +697,7 @@ public class CalibrationActivity extends ViewPagerActivity {
           //              dist=calDistToDeg(calFeetToMeter(calcDistance(rssi)));
 
                         Log.d("MainActivity", " MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid +" distance: "+dist);
-	/*
+    /*
 							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);
         String minor = String.format("%02x", scanRecord[27]) + String.format("%02x", scanRecord[28]);
 							for (int i = 0; i<scanRecord.length; i++){
@@ -708,9 +717,13 @@ public class CalibrationActivity extends ViewPagerActivity {
                             // New device
                             BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower,dist);
                             addDevice(deviceInfo);
+                            rangedIBeacons.put(deviceInfo, new RangedIBeacon(deviceInfo));
                         } else {
                             // Already in list, update RSSI info
                             BleDeviceInfo deviceInfo = findDeviceInfo(device);
+                            DeviceArray[i++]=deviceInfo;
+                            rangedIBeacons.get(deviceInfo).addRangeMeasurement((int) deviceInfo.getRssi());
+                            Log.d("MainActivity", "555 running avarage rssi: "+rangedIBeacons.get(deviceInfo).getAvaragedRssi() );
                             deviceInfo.updateRssi(rssi);
                             mScanView.notifyDataSetChanged();
                         }

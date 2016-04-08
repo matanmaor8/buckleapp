@@ -57,14 +57,48 @@ package com.example.ti.ble.common;
 import android.bluetooth.BluetoothDevice;
 
 public class BleDeviceInfo {
+  /**
+   * Less than half a meter away
+   */
+  public static final int PROXIMITY_IMMEDIATE = 1;
+  /**
+   * More than half a meter away, but less than four meters away
+   */
+  public static final int PROXIMITY_NEAR = 2;
+  /**
+   * More than four meters away
+   */
+  public static final int PROXIMITY_FAR = 3;
+  /**
+   * No distance estimate was possible due to a bad RSSI value or measured TX power
+   */
+  public static final int PROXIMITY_UNKNOWN = 0;
+
+  final private static char[] hexArray = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+  private static final String TAG = "IBeacon";
   // Data
   private BluetoothDevice mBtDevice;
-  private int mRssi;
-  private String mUUID1;
-  private int mmajor;
-  private int mminor;
-  private int mtxPower;
-  private double mdist;
+  protected int mRssi;
+  protected String mUUID1;
+  protected int mmajor;
+  protected int mminor;
+  protected int mtxPower;
+  protected double mdist;
+  protected Double runningAverageRssi;
+  /**
+   * An integer with four possible values representing a general idea of how far the iBeacon is away
+   * @see #PROXIMITY_IMMEDIATE
+   * @see #PROXIMITY_NEAR
+   * @see #PROXIMITY_FAR
+   * @see #PROXIMITY_UNKNOWN
+   */
+  protected Integer proximity;
+  /**
+   * A double that is an estimate of how far the iBeacon is away in meters.  This name is confusing, but is copied from
+   * the iOS7 SDK terminology.   Note that this number fluctuates quite a bit with RSSI, so despite the name, it is not
+   * super accurate.   It is recommended to instead use the proximity field, or your own bucketization of this value.
+   */
+  protected Double accuracy;
 
   public BleDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1,int txPower,double dist) {
     mBtDevice = device;
@@ -74,14 +108,26 @@ public class BleDeviceInfo {
     mminor=minor;
     mtxPower= txPower;
     mdist=dist;
+    runningAverageRssi = null;
   }
+
+  public BleDeviceInfo() {
+
+  }
+
 
   public BluetoothDevice getBluetoothDevice() {
     return mBtDevice;
   }
 
-  public int getRssi() {
-    return mRssi;
+  public double getRssi() {
+    return  mRssi;
+  }
+  public void setAvaragedRssi(double mRunningAverageRssi) {
+      runningAverageRssi=mRunningAverageRssi;
+  }
+  public double getAvaragedRssi() {
+    return  runningAverageRssi;
   }
   public int getmajor() {
     return mmajor;
@@ -104,6 +150,59 @@ public class BleDeviceInfo {
     mRssi = rssiValue;
   }
 
+  public double getAccuracy() {
+    if (accuracy == null) {
+      accuracy = calculateAccuracy(mtxPower, runningAverageRssi != null ? runningAverageRssi : mRssi );
+    }
+    return accuracy;
+  }
 
+  protected static double calculateAccuracy(int txPower, double rssi) {
+    if (rssi == 0) {
+      return -1.0; // if we cannot determine accuracy, return -1.
+    }
+
+   // Log.d(TAG, "calculating accuracy based on rssi of " + rssi);
+
+
+    double ratio = rssi*1.0/txPower;
+    if (ratio < 1.0) {
+      return Math.pow(ratio,10);
+    }
+    else {
+      double accuracy =  (0.89976)*Math.pow(ratio,7.7095) + 0.111;
+     // Log.d(TAG, " avg rssi: "+rssi+" accuracy: "+accuracy);
+      return accuracy;
+    }
+  }
+
+  protected static int calculateProximity(double accuracy) {
+    if (accuracy < 0) {
+      return PROXIMITY_UNKNOWN;
+      // is this correct?  does proximity only show unknown when accuracy is negative?  I have seen cases where it returns unknown when
+      // accuracy is -1;
+    }
+    if (accuracy < 0.5 ) {
+      return PROXIMITY_IMMEDIATE;
+    }
+    // forums say 3.0 is the near/far threshold, but it looks to be based on experience that this is 4.0
+    if (accuracy <= 4.0) {
+      return PROXIMITY_NEAR;
+    }
+    // if it is > 4.0 meters, call it far
+    return PROXIMITY_FAR;
+
+  }
+
+  private static String bytesToHex(byte[] bytes) {
+    char[] hexChars = new char[bytes.length * 2];
+    int v;
+    for ( int j = 0; j < bytes.length; j++ ) {
+      v = bytes[j] & 0xFF;
+      hexChars[j * 2] = hexArray[v >>> 4];
+      hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+    }
+    return new String(hexChars);
+  }
 
 }
