@@ -310,14 +310,15 @@ public class CalibrationActivity extends ViewPagerActivity {
 
         Log.d("MainActivity", " distance: "+distance[0] +" RSSI"+rssi[0]);
             Trilateration.MyTrilateration(lng,lat,rssi[0],distance[0],lng,lat,rssi[1],distance[1],lng,lat,rssi[2],distance[2]);
+ //       startBeaconStatusActivity();
   //*******************************************************************************************************************************
             Log.d("CalibrationActivity","999999999999999999999999999999999");
     //    }
     }
     private void startBeaconStatusActivity() {
-        mDeviceIntent = new Intent(this, BeaconStatus.class);
+        Intent myIntent =  new Intent(this, BeaconStatus.class);
     //    mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
-        startActivityForResult(mDeviceIntent, REQ_DEVICE_ACT);
+        startActivityForResult(myIntent, 0);
     }
 
     //*******************************************************************************************************************************
