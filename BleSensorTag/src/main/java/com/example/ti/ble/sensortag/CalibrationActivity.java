@@ -314,7 +314,13 @@ public class CalibrationActivity extends ViewPagerActivity {
             Log.d("CalibrationActivity","999999999999999999999999999999999");
     //    }
     }
+    private void startBeaconStatusActivity() {
+        mDeviceIntent = new Intent(this, BeaconStatus.class);
+    //    mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
+        startActivityForResult(mDeviceIntent, REQ_DEVICE_ACT);
+    }
 
+    //*******************************************************************************************************************************
     private void startDeviceActivity() {
         mDeviceIntent = new Intent(this, DeviceActivity.class);
         mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
@@ -529,6 +535,7 @@ public class CalibrationActivity extends ViewPagerActivity {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     setBusy(false);
                     startDeviceActivity();
+  //                  startBeaconStatusActivity();
                     //***************************************************************************************************************
                 } else
                     setError("Connect failed. Status: " + status);
