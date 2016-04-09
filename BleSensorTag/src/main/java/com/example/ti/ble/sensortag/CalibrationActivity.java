@@ -529,6 +529,7 @@ public class CalibrationActivity extends ViewPagerActivity {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     setBusy(false);
                     startDeviceActivity();
+                    //***************************************************************************************************************
                 } else
                     setError("Connect failed. Status: " + status);
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
@@ -690,8 +691,8 @@ public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.Le
                         minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
 
                         txPower= (int)scanRecord[29];
-                        SumRssi+=rssi;
-                        counterRssi+=1;
+          //              SumRssi+=rssi;
+          //              counterRssi+=1;
           //              Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
           //              dist=calculateAccuracy(-49,rssi);
           //              dist=calDistToDeg(calFeetToMeter(calcDistance(rssi)));

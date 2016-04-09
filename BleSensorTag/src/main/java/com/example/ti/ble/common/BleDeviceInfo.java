@@ -152,9 +152,38 @@ public class BleDeviceInfo {
 
   public double getAccuracy() {
     if (accuracy == null) {
-      accuracy = calculateAccuracy(mtxPower, runningAverageRssi != null ? runningAverageRssi : mRssi );
+   //   accuracy = calculateAccuracy(mtxPower, runningAverageRssi != null ? runningAverageRssi : mRssi );
+   //   accuracy= calcDistance(runningAverageRssi != null ? runningAverageRssi : mRssi );
+      accuracy= calFeetToMeter(calcDistance(runningAverageRssi != null ? runningAverageRssi : mRssi ));
     }
     return accuracy;
+  }
+
+  static double calcDistance(double rssi) {
+    double base = 10;
+    double exponent = -(rssi + 51.504)/16.532;
+    //double distance = Math.pow(base, exponent);
+    //104.09004338 + 13.26842562x + 0.57250833x^2 + 0.00986120x^3 + 0.00006099x^4
+
+    // SI NORTH THIRD FLOOR (room 3250)
+//		  double distance = 104.09004338 + 13.26842562 * rssi + 0.57250833* Math.pow(rssi,2)
+//		        + 0.00986120*Math.pow(rssi, 3) + 0.00006099 * Math.pow(rssi,4);
+
+    // SI NORTH FIRST FLOOR
+    // 0 degree
+    //double distance = 3324.4981666 + 234.0366524 * rssi + 6.0593624* Math.pow(rssi,2)
+    //  + 0.0683264*Math.pow(rssi, 3) + 0.0002843 * Math.pow(rssi,4);
+
+    double distance = 730.24198315 + 52.33325511*rssi + 1.35152407*Math.pow(rssi, 2)
+            + 0.01481265*Math.pow(rssi, 3) + 0.00005900*Math.pow(rssi, 4) + 0.00541703*180;
+
+
+    //return (distance>0)?distance:rssi;
+    return distance;
+  }
+
+  static double calFeetToMeter(double rssi) {
+    return rssi*0.3048;
   }
 
   protected static double calculateAccuracy(int txPower, double rssi) {
