@@ -422,8 +422,8 @@ public class MainActivity extends ViewPagerActivity  {
 		//CustomToast.middleBottom(this, "Turning BT adapter off and on again may fix Android BLE stack problems");
 	}
 
-	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower, double dist) {
-		BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower,dist);
+	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower) {
+		BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower);
 
 		return deviceInfo;
 	}
@@ -647,26 +647,10 @@ public class MainActivity extends ViewPagerActivity  {
 
 						txPower= scanRecord[29];
 						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
-						dist=calculateAccuracy(txPower,rssi);
-	/*
-							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);
-        String minor = String.format("%02x", scanRecord[27]) + String.format("%02x", scanRecord[28]);
-							for (int i = 0; i<scanRecord.length; i++){
-								if(i>8 && i<25)
-									UUID1 += String.format("%02x", scanRecord[i]);
-								else if(i>24 && i<27)
-									Major += String.format("%02x", scanRecord[i]);
-								else if(i>26 && i<29)
-									Minor += String.format("%02x", scanRecord[i]);
-
-
-
-							}*/
-
 
 							if (!deviceInfoExists(device.getAddress())) {
 								// New device
-								BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower,dist);
+								BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower);
 								addDevice(deviceInfo);
 							} else {
 								// Already in list, update RSSI info

@@ -100,14 +100,13 @@ public class BleDeviceInfo {
    */
   protected Double accuracy;
 
-  public BleDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1,int txPower,double dist) {
+  public BleDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1,int txPower) {
     mBtDevice = device;
     mRssi = rssi;
     mUUID1=UUID1;
     mmajor=major;
     mminor=minor;
     mtxPower= txPower;
-    mdist=dist;
     runningAverageRssi = null;
   }
 

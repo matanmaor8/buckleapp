@@ -61,7 +61,7 @@ public class CalibrationActivity extends ViewPagerActivity {
     private boolean mScanning = false;
     private int mNumDevs = 0;
     private int mConnIndex = NO_DEVICE;
-    private List<BleDeviceInfo> mDeviceInfoList;
+    public List<BleDeviceInfo> mDeviceInfoList;
     private static BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBtAdapter = null;
     private BluetoothDevice mBluetoothDevice = null;
@@ -310,7 +310,7 @@ public class CalibrationActivity extends ViewPagerActivity {
 
         Log.d("MainActivity", " distance: "+distance[0] +" RSSI"+rssi[0]);
             Trilateration.MyTrilateration(lng,lat,rssi[0],distance[0],lng,lat,rssi[1],distance[1],lng,lat,rssi[2],distance[2]);
- //       startBeaconStatusActivity();
+  //      startBeaconStatusActivity();
   //*******************************************************************************************************************************
             Log.d("CalibrationActivity","999999999999999999999999999999999");
     //    }
@@ -405,7 +405,7 @@ public class CalibrationActivity extends ViewPagerActivity {
     }
 
     private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower, double dist) {
-        BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower,dist);
+        BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower);
 
         return deviceInfo;
     }
@@ -536,7 +536,7 @@ public class CalibrationActivity extends ViewPagerActivity {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     setBusy(false);
                     startDeviceActivity();
-  //                  startBeaconStatusActivity();
+    //                startBeaconStatusActivity();
                     //***************************************************************************************************************
                 } else
                     setError("Connect failed. Status: " + status);
@@ -561,95 +561,8 @@ public class CalibrationActivity extends ViewPagerActivity {
         }
     };
 
-    protected static double calculateAccuracy(int txPower, double rssi) {
-        if (rssi == 0) {
-            return -1.0; // if we cannot determine accuracy, return -1.
-        }
 
-        Log.d("TAG", "calculating accuracy based on rssi of "+rssi);
-
-
-        double ratio = rssi*1.0/txPower;
-        if (ratio < 1.0) {
-            return Math.pow(ratio,10);
-        }
-        else {
-            double accuracy =  (0.89976)*Math.pow(ratio,7.7095) + 0.111;
-            Log.d("TAG", " avg rssi: "+rssi+" accuracy: "+accuracy);
-            return accuracy;
-        }
-    }
-
-    static double calcDistance(double rssi) {
-        double base = 10;
-        double exponent = -(rssi + 51.504)/16.532;
-        //double distance = Math.pow(base, exponent);
-        //104.09004338 + 13.26842562x + 0.57250833x^2 + 0.00986120x^3 + 0.00006099x^4
-
-        // SI NORTH THIRD FLOOR (room 3250)
-//		  double distance = 104.09004338 + 13.26842562 * rssi + 0.57250833* Math.pow(rssi,2)
-//		        + 0.00986120*Math.pow(rssi, 3) + 0.00006099 * Math.pow(rssi,4);
-
-        // SI NORTH FIRST FLOOR
-        // 0 degree
-        //double distance = 3324.4981666 + 234.0366524 * rssi + 6.0593624* Math.pow(rssi,2)
-        //  + 0.0683264*Math.pow(rssi, 3) + 0.0002843 * Math.pow(rssi,4);
-
-        double distance = 730.24198315 + 52.33325511*rssi + 1.35152407*Math.pow(rssi, 2)
-                + 0.01481265*Math.pow(rssi, 3) + 0.00005900*Math.pow(rssi, 4) + 0.00541703*180;
-
-
-        //return (distance>0)?distance:rssi;
-        return distance;
-    }
-
-    static double calFeetToMeter(double rssi) {
-        return rssi*0.3048;
-    }
-
-    static double calDistToDeg(double dist) {
-        double result;
-        double DistToDeg;
-
-        final int lat = 42;
-        final double EarthRadius = 6367449;
-        final double a = 6378137;
-        final double b = 6356752.3;
-        final double ang = lat*(Math.PI/180);
-
-        // This function will calculate the longitude distance based on the latitude
-        // More information is
-        // http://en.wikipedia.org/wiki/Geographic_coordinate_system#Expressing_latitude_and_longitude_as_linear_units
-
-//		 result = Math.cos(ang)*Math.sqrt((Math.pow(a,4)*(Math.pow(Math.cos(ang),2))
-//				 + (Math.pow(b,4)*(Math.pow(Math.sin(ang),2))))
-//				 / (Math.pow((a*Math.cos(ang)),2)+Math.pow((b*Math.sin(ang)),2)))
-//				 * Math.PI/180;
-
-        DistToDeg = 82602.89223259855;  // unit (meter), based on 42degree.
-        result = dist/DistToDeg;		 // convert distance to lat,long degree.
-        return result;
-
-    }
-/*
-    protected static int calculateProximity(double accuracy) {
-        if (accuracy < 0) {
-            return PROXIMITY_UNKNOWN;
-            // is this correct?  does proximity only show unknown when accuracy is negative?  I have seen cases where it returns unknown when
-            // accuracy is -1;
-        }
-        if (accuracy < 0.5 ) {
-            return IBeacon.PROXIMITY_IMMEDIATE;
-        }
-        // forums say 3.0 is the near/far threshold, but it looks to be based on experience that this is 4.0
-        if (accuracy <= 4.0) {
-            return IBeacon.PROXIMITY_NEAR;
-        }
-        // if it is > 4.0 meters, call it far
-        return IBeacon.PROXIMITY_FAR;
-
-    }*/
-    // Device scan callback.
+// Device scan callback.
     // NB! Nexus 4 and Nexus 7 (2012) only provide one scan result per scan
 public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 
@@ -660,20 +573,6 @@ public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.Le
             UUID1="";
 
             int startByte = 0;
-            boolean patternFound = true;
-    /*		while (startByte <= 15) {
-                if (((int) scanRecord[startByte + 2] & 0xff) == 0x02 && //Identifies an iBeacon
-						((int) scanRecord[startByte + 3] & 0xff) == 0x15) { //Identifies correct data length
-					patternFound = true;
-					Log.d("MainActivity", "flag111111111" + startByte);
-					break;
-				}
-				startByte++;
-				Log.d("MainActivity", "count" + startByte+ ":::"+ (scanRecord[startByte + 2] & 0xff));
-			}
-		*/	if (patternFound) {
-
-            }
             final String finalUuid = uuid;
             runOnUiThread(new Runnable() {
                 public void run() {
