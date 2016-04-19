@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -61,7 +62,7 @@ public class CalibrationActivity extends ViewPagerActivity {
     private boolean mScanning = false;
     private int mNumDevs = 0;
     private int mConnIndex = NO_DEVICE;
-    public List<BleDeviceInfo> mDeviceInfoList;
+    private List<BleDeviceInfo> mDeviceInfoList;
     private static BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBtAdapter = null;
     private BluetoothDevice mBluetoothDevice = null;
@@ -309,16 +310,22 @@ public class CalibrationActivity extends ViewPagerActivity {
       //      dist3=mDeviceInfoList.get(2).getdistance();
 
         Log.d("MainActivity", " distance: "+distance[0] +" RSSI"+rssi[0]);
-            Trilateration.MyTrilateration(lng,lat,rssi[0],distance[0],lng,lat,rssi[1],distance[1],lng,lat,rssi[2],distance[2]);
-  //      startBeaconStatusActivity();
+            Trilateration.MyTrilateration(lng, lat, rssi[0], distance[0], lng, lat, rssi[1], distance[1], lng, lat, rssi[2], distance[2]);
+        startBeaconStatusActivity();
   //*******************************************************************************************************************************
             Log.d("CalibrationActivity","999999999999999999999999999999999");
     //    }
     }
     private void startBeaconStatusActivity() {
-        Intent myIntent =  new Intent(this, BeaconStatus.class);
-    //    mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
-        startActivityForResult(myIntent, 0);
+//        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
+  ///      appContext.mDeviceInfoList= mDeviceInfoList;
+        Intent i =  new Intent(this, BeaconStatus.class);
+        i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
+  /*      Bundle b= new Bundle();
+        b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
+        i.putExtras(b);
+        i.setClass(CalibrationActivity.this, BeaconStatus.class);
+  */      startActivity(i);
     }
 
     //*******************************************************************************************************************************
@@ -331,7 +338,7 @@ public class CalibrationActivity extends ViewPagerActivity {
     private void stopDeviceActivity() {
         finishActivity(REQ_DEVICE_ACT);
     }
-
+//****************************************************************************************************************************
     public void onDeviceClick(final int pos) {
 
         if (mScanning)
@@ -350,7 +357,7 @@ public class CalibrationActivity extends ViewPagerActivity {
             }
         }
     }
-
+//*******************************************************************************************************************************
     public void onScanTimeout() {
         runOnUiThread(new Runnable() {
             public void run() {

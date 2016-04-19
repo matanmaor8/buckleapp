@@ -150,7 +150,7 @@ public class CalibrationScanView extends Fragment {
 
         }
     }
-
+//*******************************************************************************************************************************
     // Listener for device list
     private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
@@ -161,7 +161,7 @@ public class CalibrationScanView extends Fragment {
             mActivity.onDeviceClick(pos);
         }
     };
-
+//*******************************************************************************************************************************
     // Listener for progress timer expiration
     private CustomTimerCallback mPgScanCallback = new CustomTimerCallback() {
         public void onTimeout() {

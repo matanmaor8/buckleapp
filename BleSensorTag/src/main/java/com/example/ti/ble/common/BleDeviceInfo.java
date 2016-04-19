@@ -55,8 +55,10 @@
 package com.example.ti.ble.common;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class BleDeviceInfo {
+public class BleDeviceInfo implements Parcelable {
   /**
    * Less than half a meter away
    */
@@ -84,7 +86,7 @@ public class BleDeviceInfo {
   protected int mminor;
   protected int mtxPower;
   protected double mdist;
-  protected Double runningAverageRssi;
+  protected double runningAverageRssi;
   /**
    * An integer with four possible values representing a general idea of how far the iBeacon is away
    * @see #PROXIMITY_IMMEDIATE
@@ -107,13 +109,35 @@ public class BleDeviceInfo {
     mmajor=major;
     mminor=minor;
     mtxPower= txPower;
-    runningAverageRssi = null;
+    runningAverageRssi = 0;
   }
 
   public BleDeviceInfo() {
 
   }
 
+
+  protected BleDeviceInfo(Parcel in) {
+    mBtDevice = in.readParcelable(BluetoothDevice.class.getClassLoader());
+    mRssi = in.readInt();
+    mUUID1 = in.readString();
+    mmajor = in.readInt();
+    mminor = in.readInt();
+    mtxPower = in.readInt();
+    mdist = in.readDouble();
+  }
+
+  public static final Creator<BleDeviceInfo> CREATOR = new Creator<BleDeviceInfo>() {
+    @Override
+    public BleDeviceInfo createFromParcel(Parcel in) {
+      return new BleDeviceInfo(in);
+    }
+
+    @Override
+    public BleDeviceInfo[] newArray(int size) {
+      return new BleDeviceInfo[size];
+    }
+  };
 
   public BluetoothDevice getBluetoothDevice() {
     return mBtDevice;
@@ -153,7 +177,7 @@ public class BleDeviceInfo {
     if (accuracy == null) {
    //   accuracy = calculateAccuracy(mtxPower, runningAverageRssi != null ? runningAverageRssi : mRssi );
    //   accuracy= calcDistance(runningAverageRssi != null ? runningAverageRssi : mRssi );
-      accuracy= calFeetToMeter(calcDistance(runningAverageRssi != null ? runningAverageRssi : mRssi ));
+      accuracy= calFeetToMeter(calcDistance(runningAverageRssi !=0 ? runningAverageRssi : mRssi ));
     }
     return accuracy;
   }
@@ -233,4 +257,34 @@ public class BleDeviceInfo {
     return new String(hexChars);
   }
 
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+
+  //  dest.writeInt(mtxPower);
+    dest.writeInt(mmajor);
+    dest.writeInt(mminor);
+    dest.writeString(mUUID1);
+    dest.writeDouble(runningAverageRssi);
+  }
+  private void readFromParcel(Parcel in) {
+    this.runningAverageRssi = in.readDouble();
+    this.mmajor = in.readInt();
+    this.mminor = in.readInt();
+    this.mUUID1=in.readString();
+
+    final Parcelable.Creator<BleDeviceInfo> CREATOR = new Parcelable.Creator<BleDeviceInfo>() {
+      public BleDeviceInfo createFromParcel(Parcel in) {
+        return new BleDeviceInfo(in);
+      }
+
+      public BleDeviceInfo[] newArray(int size) {
+        return new BleDeviceInfo[size];
+      }
+    };
+  }
 }
