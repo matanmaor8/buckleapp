@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class CalibrationScanView extends Fragment {
     // private static final String TAG = "ScanView";
-    private final int SCAN_TIMEOUT = 10; // Seconds
+    private final int SCAN_TIMEOUT = 20; // Seconds
     private final int CONNECT_TIMEOUT = 20; // Seconds
     private CalibrationActivity mActivity = null;
 

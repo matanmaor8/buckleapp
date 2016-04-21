@@ -46,7 +46,7 @@ public class BeaconStatus extends Activity {
   //      mDevices=appContext.getDeviceInfoList();
  //       List<BleDeviceInfo> deviceList = Cactivity.getDeviceInfoList();
  //       mDevices=Cactivity.mDeviceInfoList;
-        if(mDevices.get(0).getAvaragedRssi()>= -60.0) {
+        if(mDevices.get(0).getAvaragedRssi()>= -90.0) {
             Log.d("CalibrationActivity", "999999999999999999999999999999999  avarage RSSI:" +mDevices.get(0).getAvaragedRssi());
             Log.d("CalibrationActivity", "999999999999999999999999999999999  major:" +mDevices.get(0).getmajor());
             Log.d("CalibrationActivity", "999999999999999999999999999999999  minor:" +mDevices.get(0).getminor());

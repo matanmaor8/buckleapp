@@ -185,9 +185,9 @@ public class BleDeviceInfo implements Parcelable {
 
   public double getAccuracy() {
     if (accuracy == null) {
-   //   accuracy = calculateAccuracy(mtxPower, runningAverageRssi != null ? runningAverageRssi : mRssi );
+      accuracy = calculateAccuracy(-55, runningAverageRssi != 0 ? runningAverageRssi : mRssi );
    //   accuracy= calcDistance(runningAverageRssi != null ? runningAverageRssi : mRssi );
-      accuracy= calFeetToMeter(calcDistance(runningAverageRssi !=0 ? runningAverageRssi : mRssi ));
+   //   accuracy= calFeetToMeter(calcDistance(runningAverageRssi !=0 ? runningAverageRssi : mRssi ));
     }
     return accuracy;
   }
