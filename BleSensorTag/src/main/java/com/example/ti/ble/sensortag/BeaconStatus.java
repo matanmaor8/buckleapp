@@ -30,7 +30,7 @@ public class BeaconStatus extends Activity {
         ch2= (CheckBox)findViewById(R.id.checkBox2);
         ch3= (CheckBox)findViewById(R.id.checkBox3);
        Intent i = getIntent();
-        mDevices=i.getParcelableArrayListExtra("list");
+        mDevices=(List)i.getParcelableArrayListExtra("list");
    //     ArrayList<BleDeviceInfo> Devices =  getIntent().getParcelableArrayListExtra("list");
    //     mDevices=new List<list>();
  //       Bundle b = this.getIntent().getExtras();
@@ -46,8 +46,14 @@ public class BeaconStatus extends Activity {
   //      mDevices=appContext.getDeviceInfoList();
  //       List<BleDeviceInfo> deviceList = Cactivity.getDeviceInfoList();
  //       mDevices=Cactivity.mDeviceInfoList;
-        if(mDevices.get(0).getAvaragedRssi()> -60) {
-            Log.d("CalibrationActivity", "999999999999999999999999999999999");
+        if(mDevices.get(0).getAvaragedRssi()> -60.0) {
+            Log.d("CalibrationActivity", "999999999999999999999999999999999  avarage RSSI:" +mDevices.get(0).getAvaragedRssi());
+            Log.d("CalibrationActivity", "999999999999999999999999999999999  major:" +mDevices.get(0).getmajor());
+            Log.d("CalibrationActivity", "999999999999999999999999999999999  minor:" +mDevices.get(0).getminor());
+            Log.d("CalibrationActivity", "999999999999999999999999999999999  uuid:" +mDevices.get(0).getUUID1());
+            Log.d("CalibrationActivity", "999999999999999999999999999999999  accuracy:" +mDevices.get(0).getAccuracy());
+            Log.d("CalibrationActivity", "999999999999999999999999999999999  RSSI:" +mDevices.get(0).getRssi());
+            Log.d("CalibrationActivity", "999999999999999999999999999999999  Bluetooth device:" +mDevices.get(0).getBluetoothDevice());
             ch1.setChecked(true);
             ch2.setChecked(true);
             ch3.setChecked(false);

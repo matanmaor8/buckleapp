@@ -297,7 +297,7 @@ public class CalibrationActivity extends ViewPagerActivity {
 
   //      dist=calculateAccuracy(-70,SumRssi);
 
-
+        mDeviceInfoList.get(0).setAvaragedRssi(rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi());
         //      for (int i = 0; i < mDeviceInfoList.size(); i++) {
             distance[0]= mDeviceInfoList.get(0).getAccuracy();
    //         distance[1]= mDeviceInfoList.get(1).getAccuracy();
@@ -309,7 +309,7 @@ public class CalibrationActivity extends ViewPagerActivity {
       //      dist2=mDeviceInfoList.get(1).getdistance();
       //      dist3=mDeviceInfoList.get(2).getdistance();
 
-        Log.d("MainActivity", " distance: "+distance[0] +" RSSI"+rssi[0]);
+        Log.d("MainActivity", " distance: "+distance[0] +" RSSI"+rssi[0]+"  deviceRSSI:"+mDeviceInfoList.get(0).getAvaragedRssi());
             Trilateration.MyTrilateration(lng, lat, rssi[0], distance[0], lng, lat, rssi[1], distance[1], lng, lat, rssi[2], distance[2]);
         startBeaconStatusActivity();
   //*******************************************************************************************************************************
@@ -638,6 +638,7 @@ public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.Le
                             BleDeviceInfo deviceInfo = findDeviceInfo(device);
                             DeviceArray[i++]=deviceInfo;
                             rangedIBeacons.get(deviceInfo).addRangeMeasurement((int) deviceInfo.getRssi());
+
                             Log.d("MainActivity", "555 running avarage rssi: "+rangedIBeacons.get(deviceInfo).getAvaragedRssi() );
                             deviceInfo.updateRssi(rssi);
                             mScanView.notifyDataSetChanged();

@@ -125,12 +125,19 @@ public class BleDeviceInfo implements Parcelable {
     mminor = in.readInt();
     mtxPower = in.readInt();
     mdist = in.readDouble();
+    runningAverageRssi=in.readDouble();
   }
 
   public static final Creator<BleDeviceInfo> CREATOR = new Creator<BleDeviceInfo>() {
     @Override
     public BleDeviceInfo createFromParcel(Parcel in) {
-      return new BleDeviceInfo(in);
+      BleDeviceInfo Bdevice = new BleDeviceInfo();
+      Bdevice.mmajor=in.readInt();
+      Bdevice.mminor=in.readInt();
+      Bdevice.mUUID1=in.readString();
+      Bdevice.runningAverageRssi = in.readDouble();
+      return Bdevice;
+   //   return new BleDeviceInfo(in);
     }
 
     @Override
@@ -265,26 +272,19 @@ public class BleDeviceInfo implements Parcelable {
   @Override
   public void writeToParcel(Parcel dest, int flags) {
 
-  //  dest.writeInt(mtxPower);
     dest.writeInt(mmajor);
     dest.writeInt(mminor);
     dest.writeString(mUUID1);
     dest.writeDouble(runningAverageRssi);
+
   }
   private void readFromParcel(Parcel in) {
-    this.runningAverageRssi = in.readDouble();
-    this.mmajor = in.readInt();
-    this.mminor = in.readInt();
-    this.mUUID1=in.readString();
 
-    final Parcelable.Creator<BleDeviceInfo> CREATOR = new Parcelable.Creator<BleDeviceInfo>() {
-      public BleDeviceInfo createFromParcel(Parcel in) {
-        return new BleDeviceInfo(in);
-      }
-
-      public BleDeviceInfo[] newArray(int size) {
-        return new BleDeviceInfo[size];
-      }
-    };
+       this.mmajor = in.readInt();
+       this.mminor = in.readInt();
+       this.mUUID1=in.readString();
+       this.runningAverageRssi = in.readDouble();
   }
+
+
 }
