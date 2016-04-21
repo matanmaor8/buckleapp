@@ -136,6 +136,9 @@ public class BleDeviceInfo implements Parcelable {
       Bdevice.mminor=in.readInt();
       Bdevice.mUUID1=in.readString();
       Bdevice.runningAverageRssi = in.readDouble();
+      Bdevice.mBtDevice= in.readParcelable(BluetoothDevice.class.getClassLoader());
+      Bdevice.mRssi = in.readInt();
+      Bdevice.mtxPower=in.readInt();
       return Bdevice;
    //   return new BleDeviceInfo(in);
     }
@@ -276,7 +279,9 @@ public class BleDeviceInfo implements Parcelable {
     dest.writeInt(mminor);
     dest.writeString(mUUID1);
     dest.writeDouble(runningAverageRssi);
-
+    dest.writeParcelable(mBtDevice, flags);
+    dest.writeInt(mRssi);
+    dest.writeInt(mtxPower);
   }
   private void readFromParcel(Parcel in) {
 
@@ -284,6 +289,9 @@ public class BleDeviceInfo implements Parcelable {
        this.mminor = in.readInt();
        this.mUUID1=in.readString();
        this.runningAverageRssi = in.readDouble();
+       this.mBtDevice=in.readParcelable(BluetoothDevice.class.getClassLoader());
+       this.mRssi=in.readInt();
+       this.mtxPower=in.readInt();
   }
 
 
