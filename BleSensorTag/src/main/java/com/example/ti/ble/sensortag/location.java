@@ -17,6 +17,7 @@ public class location extends Activity implements LocationListener {
     private LocationManager locationManager;
     private String provider;
 
+
     /** Called when the activity is first created. */
 
     @Override

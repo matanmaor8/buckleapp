@@ -296,6 +296,8 @@ public class CalibrationActivity extends ViewPagerActivity {
         Trilateration  tri;
 
   //      dist=calculateAccuracy(-70,SumRssi);
+        Log.d("CalibrationActivity", "66666666666666666666666666666666  latitude:" +lat);
+        Log.d("CalibrationActivity", "66666666666666666666666666666666  longitude:" +lng);
 
         mDeviceInfoList.get(0).setAvaragedRssi(rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi());
         //      for (int i = 0; i < mDeviceInfoList.size(); i++) {
