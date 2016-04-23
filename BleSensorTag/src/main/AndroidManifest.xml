@@ -111,6 +111,8 @@
             android:name=".BeaconStatus"
             android:label="@string/title_activity_beacon_status" >
         </activity>
+        <activity android:name=".BeaconStatus2" >
+        </activity>
     </application>
 
 </manifest>

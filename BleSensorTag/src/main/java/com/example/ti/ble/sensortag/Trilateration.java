@@ -1,4 +1,7 @@
 package com.example.ti.ble.sensortag;
+
+import android.util.Log;
+
 /**
  * Created by Matan on 28/02/2016.
  */
@@ -137,13 +140,13 @@ public class Trilateration {
 //		 dist2 = calDistToDeg(6);	//calDistToDeg(calcDistance(rssi2));
 //		 dist3 = calDistToDeg(7);	//calDistToDeg(calcDistance(rssi3));
 
-            dist1 = calDistToDeg(distance1);
-            dist2 = calDistToDeg(distance2);
-            dist3 = calDistToDeg(distance3);
+//            dist1 = calDistToDeg(distance1);
+//            dist2 = calDistToDeg(distance2);
+//            dist3 = calDistToDeg(distance3);
 //*******************************************************************************************************************************
-    //    dist1 = calDistToDeg(calFeetToMeter(calcDistance(rssi1)));
-    //    dist2 = calDistToDeg(calFeetToMeter(calcDistance(rssi2)));
-    //    dist3 = calDistToDeg(calFeetToMeter(calcDistance(rssi3)));
+        dist1 = calDistToDeg(calFeetToMeter(calcDistance(rssi1)));
+        dist2 = calDistToDeg(calFeetToMeter(calcDistance(rssi2)));
+        dist3 = calDistToDeg(calFeetToMeter(calcDistance(rssi3)));
 //**********************************************************************************************************************************
         //test
 //		 dist1 = calDistToDeg(calFeetToMeter(53));
@@ -192,7 +195,7 @@ public class Trilateration {
 
         MyLocation[0] = MyLocation[0] + Lat1;
         MyLocation[1] = MyLocation[1] + Long1;
-
+        Log.d("CalibrationActivity", "8888888 My Location :" + MyLocation[0] + "   " + MyLocation[1]);
         return MyLocation;
     }
 }

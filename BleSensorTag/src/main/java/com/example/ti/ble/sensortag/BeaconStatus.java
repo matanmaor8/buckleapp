@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
 import com.example.ti.ble.common.BleDeviceInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BeaconStatus extends Activity {
@@ -26,6 +28,8 @@ public class BeaconStatus extends Activity {
     private double[][] wifiLocation;
     //	private double myLatitude, myLongitude;
     private double[] myLocation = new double[2];
+    public double [][]Locations;
+    public String [][]StrLocations;
     double distance[] = new double[3];
     double rssi[] = new double[3];
     location loc = new location();
@@ -78,10 +82,12 @@ public class BeaconStatus extends Activity {
         }
         //      locationListener = new MyLocationListener();
         wifiLocation = new double[3][4];
-
+        Locations=new double[3][2];
+        StrLocations=new String[3][2];
     }
 
     public void onStart(View view) {
+        int i=0;
 /*
         for(int i = 0; i < wifiList.size(); i++) {
             ScanResult scan = wifiList.get(i);
@@ -119,12 +125,34 @@ public class BeaconStatus extends Activity {
         Log.d("CalibrationActivity", "333333333333333333333333333333333  accuracy:" + wifiLocation[0][3]);
 
         myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3]);
+        Locations[0][0]=myLocation[0];
+        Locations[0][1]=myLocation[1];
         Log.d("CalibrationActivity", "9999999999 My Location :" + myLocation[0] + "   " + myLocation[1]);
-        //  if (mScanning) {
-        //     stopScan();
-        //  } else {
-        //      startScan();
-        //  }
+        ch1.setChecked(false);
+        ch2.setChecked(false);
+        ch3.setChecked(true);
+        while(i<1000000000)
+            i++;
+        for (int n = 0; n < 3; n++)
+            for (int m = 0; m < 2; m++)
+                StrLocations[n][m] = String.valueOf(Locations[n][m]);
+        startBeaconStatusActivity();
+
+    }
+
+    private void startBeaconStatusActivity() {
+//        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
+        ///      appContext.mDeviceInfoList= mDeviceInfoList;
+        Intent i =  new Intent(this, BeaconStatus2.class);
+        i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable("Array",  StrLocations);
+        i.putExtras(mBundle);
+  /*      Bundle b= new Bundle();
+        b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
+        i.putExtras(b);
+        i.setClass(CalibrationActivity.this, BeaconStatus.class);
+  */      startActivity(i);
     }
 /*
     private final LocationListener locationListener = new LocationListener() {
