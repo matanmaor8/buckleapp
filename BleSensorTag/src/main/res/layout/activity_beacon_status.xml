@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/imageView2"
-        android:src="@drawable/backseat"
+        android:src="@drawable/backseatright"
         android:background="#3c8dcf"
         style="@android:style/Animation.Activity"
         android:layout_alignParentTop="true" />
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Beacon&apos;s Status"
+        android:text="Sit please in the marked seat and press &quot;Start&quot; when you are ready"
         android:id="@+id/textView3"
         android:textColor="#f40707"
         android:layout_alignParentTop="true"
@@ -51,5 +51,15 @@
         android:layout_alignTop="@+id/checkBox2"
         android:layout_toEndOf="@+id/checkBox2"
         android:layout_marginStart="57dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="68dp"
+        android:onClick="onStart" />
 
 </RelativeLayout>
