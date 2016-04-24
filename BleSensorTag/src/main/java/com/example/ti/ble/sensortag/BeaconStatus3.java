@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.ti.ble.common.BleDeviceInfo;
 
@@ -23,6 +25,8 @@ public class BeaconStatus3 extends Activity {
     BleDeviceInfo deviceInfo;
     BluetoothDevice device;
     private CheckBox ch1, ch2, ch3;
+    private Button btn;
+    private TextView txt;
     CalibrationActivity Cactivity;
 
     private double[][] wifiLocation;
@@ -48,6 +52,8 @@ public class BeaconStatus3 extends Activity {
         ch1 = (CheckBox) findViewById(R.id.checkBox);
         ch2 = (CheckBox) findViewById(R.id.checkBox2);
         ch3 = (CheckBox) findViewById(R.id.checkBox3);
+        btn = (Button) findViewById(R.id.button2);
+        txt=  (TextView) findViewById(R.id.textView4);
         Locations=new double[3][2];
         StrLocations=new String[3][2];
         Intent i = getIntent();
@@ -116,6 +122,7 @@ public class BeaconStatus3 extends Activity {
         StrLocations=new String[3][2];
 
     }
+    @SuppressWarnings("ResourceType")
     public void onStart(View view) {
         int i=0;
 /*
@@ -161,25 +168,31 @@ public class BeaconStatus3 extends Activity {
         ch1.setChecked(true);
         ch2.setChecked(true);
         ch3.setChecked(true);
-        while(i<10000000)
-        {
-            i++;
-        }
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
                 StrLocations[n][m] = String.valueOf(Locations[n][m]);
-        //    startBeaconStatusActivity();
+ 
+        btn.setVisibility(1);
+        txt.setVisibility(1);
+
 
     }
+
+    public void onConfirm(View view) {
+
+        startBeaconStatusActivity();
+
+    }
+
 
     private void startBeaconStatusActivity() {
 //        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
         ///      appContext.mDeviceInfoList= mDeviceInfoList;
-        Intent i =  new Intent(this, BeaconStatus2.class);
+        Intent i =  new Intent(this, LoginActivity.class);
         i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
-        //       Bundle mBundle = new Bundle();
-        //       mBundle.putSerializable("key_array_array",  Locations);
-//        i.putExtras(mBundle);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable("Array",  StrLocations);
+        i.putExtras(mBundle);
   /*      Bundle b= new Bundle();
         b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
         i.putExtras(b);
