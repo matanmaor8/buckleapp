@@ -101,7 +101,7 @@ public class BeaconStatus3 extends Activity {
         //       List<BleDeviceInfo> deviceList = Cactivity.getDeviceInfoList();
         //       mDevices=Cactivity.mDeviceInfoList;
         if (mDevices.get(0).getAvaragedRssi() >= -90.0) {
-            Log.d("CalibrationActivity", "202020202020020202020202020202020  Locations:" + Locations[0][0] +"  "+Locations[0][1]);
+            Log.d("CalibrationActivity", "202020202020020202020202020202020  Locations:" + Locations[1][0] +"  "+Locations[1][1]);
             Log.d("CalibrationActivity", "202020202020020202020202020202020  avarage RSSI:" + mDevices.get(0).getAvaragedRssi());
             Log.d("CalibrationActivity", "202020202020020202020202020202020  major:" + mDevices.get(0).getmajor());
             Log.d("CalibrationActivity", "202020202020020202020202020202020  minor:" + mDevices.get(0).getminor());
@@ -162,16 +162,16 @@ public class BeaconStatus3 extends Activity {
         Log.d("CalibrationActivity", "333333333333333333333333333333333  accuracy:" + wifiLocation[0][3]);
 
         myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3]);
-        Locations[1][0]=myLocation[0];
-        Locations[1][1]=myLocation[1];
-        Log.d("CalibrationActivity", "9999999999 My Location :" + myLocation[0] + "   " + myLocation[1]);
+        Locations[2][0]=myLocation[0];
+        Locations[2][1]=myLocation[1];
+        Log.d("CalibrationActivity", "7777777777 My Location :" + myLocation[0] + "   " + myLocation[1]);
         ch1.setChecked(true);
         ch2.setChecked(true);
         ch3.setChecked(true);
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
                 StrLocations[n][m] = String.valueOf(Locations[n][m]);
- 
+
         btn.setVisibility(1);
         txt.setVisibility(1);
 

@@ -157,7 +157,7 @@ public class BeaconStatus2 extends Activity {
         myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3]);
         Locations[1][0]=myLocation[0];
         Locations[1][1]=myLocation[1];
-        Log.d("CalibrationActivity", "9999999999 My Location :" + myLocation[0] + "   " + myLocation[1]);
+        Log.d("CalibrationActivity", "8888888888 My Location :" + myLocation[0] + "   " + myLocation[1]);
         ch1.setChecked(false);
         ch2.setChecked(true);
         ch3.setChecked(true);
