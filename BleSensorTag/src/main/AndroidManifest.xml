@@ -113,6 +113,8 @@
         </activity>
         <activity android:name=".BeaconStatus2" >
         </activity>
+        <activity android:name=".BeaconStatus3" >
+        </activity>
     </application>
 
 </manifest>

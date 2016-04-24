@@ -131,8 +131,11 @@ public class BeaconStatus extends Activity {
         ch1.setChecked(false);
         ch2.setChecked(false);
         ch3.setChecked(true);
-        while(i<1000000000)
+        while(i<10000000)
+        {
             i++;
+        }
+
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
                 StrLocations[n][m] = String.valueOf(Locations[n][m]);

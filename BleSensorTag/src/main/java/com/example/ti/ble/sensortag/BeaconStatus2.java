@@ -112,6 +112,8 @@ public class BeaconStatus2 extends Activity {
         }
         //      locationListener = new MyLocationListener();
         wifiLocation = new double[3][4];
+        Locations=new double[3][2];
+        StrLocations=new String[3][2];
 
     }
     public void onStart(View view) {
@@ -159,20 +161,25 @@ public class BeaconStatus2 extends Activity {
         ch1.setChecked(false);
         ch2.setChecked(true);
         ch3.setChecked(true);
-        while(i<1000000000)
+        while(i<10000000)
+        {
             i++;
-    //    startBeaconStatusActivity();
+        }
+        for (int n = 0; n < 3; n++)
+            for (int m = 0; m < 2; m++)
+                StrLocations[n][m] = String.valueOf(Locations[n][m]);
+        startBeaconStatusActivity();
 
     }
 
     private void startBeaconStatusActivity() {
 //        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
         ///      appContext.mDeviceInfoList= mDeviceInfoList;
-        Intent i =  new Intent(this, BeaconStatus2.class);
+        Intent i =  new Intent(this, BeaconStatus3.class);
         i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
- //       Bundle mBundle = new Bundle();
- //       mBundle.putSerializable("key_array_array",  Locations);
-//        i.putExtras(mBundle);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable("Array",  StrLocations);
+        i.putExtras(mBundle);
   /*      Bundle b= new Bundle();
         b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
         i.putExtras(b);
