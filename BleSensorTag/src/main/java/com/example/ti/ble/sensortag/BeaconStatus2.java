@@ -53,13 +53,25 @@ public class BeaconStatus2 extends Activity {
         Intent i = getIntent();
         mDevices = (List) i.getParcelableArrayListExtra("list");
         Bundle b = getIntent().getExtras();
-   /*     StrLocations = (String[][]) b.getSerializable("Array");
+      //****************************************************************************************
+        String[][] arrayReceived=null;
+        Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
+        if(objectArray!=null){
+            arrayReceived = new String[objectArray.length][];
+            for(int j=0;j<objectArray.length;j++){
+                arrayReceived[j]=(String[]) objectArray[j];
+            }
+        }
+
+      //******************************************************************************************
+
+     //   StrLocations = (String[][]) b.getSerializable("Array");
         for(int n = 0; n < 3; n++)
             for(int m = 0; m < 2; m++)
         {
-            Locations[n][m] = Double.parseDouble(StrLocations[n][m]);
+            Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
         }
-        *//////////////////////////////////////////***************************************************************
+        //////////////////////////////////////////***************************************************************
 
  //       Locations = (double[][])b.getSerializable("Array");
   /*      Object[][] objectArray = (Object[][]) getIntent().getExtras().getSerializable("key_array_array");
@@ -158,9 +170,9 @@ public class BeaconStatus2 extends Activity {
         ///      appContext.mDeviceInfoList= mDeviceInfoList;
         Intent i =  new Intent(this, BeaconStatus2.class);
         i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
-        Bundle mBundle = new Bundle();
-        mBundle.putSerializable("key_array_array",  Locations);
-        i.putExtras(mBundle);
+ //       Bundle mBundle = new Bundle();
+ //       mBundle.putSerializable("key_array_array",  Locations);
+//        i.putExtras(mBundle);
   /*      Bundle b= new Bundle();
         b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
         i.putExtras(b);
