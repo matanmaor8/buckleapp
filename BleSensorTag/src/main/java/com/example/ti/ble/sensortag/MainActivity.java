@@ -1,57 +1,3 @@
-/**************************************************************************************************
- Filename:       HomeScreen.java
- Revised:        $Date: Wed Apr 22 13:01:34 2015 +0200$
- Revision:       $Revision: 599e5650a33a4a142d060c959561f9e9b0d88146$
-
- Copyright (c) 2013 - 2014 Texas Instruments Incorporated
-
- All rights reserved not granted herein.
- Limited License.
-
- Texas Instruments Incorporated grants a world-wide, royalty-free,
- non-exclusive license under copyrights and patents it now or hereafter
- owns or controls to make, have made, use, import, offer to sell and sell ("Utilize")
- this software subject to the terms herein.  With respect to the foregoing patent
- license, such license is granted  solely to the extent that any such patent is necessary
- to Utilize the software alone.  The patent license shall not apply to any combinations which
- include this software, other than combinations with devices manufactured by or for TI ('TI Devices').
- No hardware patent is licensed hereunder.
-
- Redistributions must preserve existing copyright notices and reproduce this license (including the
- above copyright notice and the disclaimer and (if applicable) source code license limitations below)
- in the documentation and/or other materials provided with the distribution
-
- Redistribution and use in binary form, without modification, are permitted provided that the following
- conditions are met:
-
- * No reverse engineering, decompilation, or disassembly of this software is permitted with respect to any
- software provided in binary form.
- * any redistribution and use are licensed by TI for use only with TI Devices.
- * Nothing shall obligate TI to provide you with source code for the software licensed and provided to you in object code.
-
- If software source code is provided to you, modification and redistribution of the source code are permitted
- provided that the following conditions are met:
-
- * any redistribution and use of the source code, including any resulting derivative works, are licensed by
- TI for use only with TI Devices.
- * any redistribution and use of any object code compiled from the source code and any resulting derivative
- works, are licensed by TI for use only with TI Devices.
-
- Neither the name of Texas Instruments Incorporated nor the names of its suppliers may be used to endorse or
- promote products derived from this software without specific prior written permission.
-
- DISCLAIMER.
-
- THIS SOFTWARE IS PROVIDED BY TI AND TI'S LICENSORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
- BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- IN NO EVENT SHALL TI AND TI'S LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
- OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- POSSIBILITY OF SUCH DAMAGE.
-
-
- **************************************************************************************************/
 package com.example.ti.ble.sensortag;
 
 import android.app.Activity;
@@ -68,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -86,11 +33,11 @@ import com.example.ti.util.CustomToast;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-// import android.util.Log;
-
-public class MainActivity extends ViewPagerActivity  {
+public class MainActivity extends ViewPagerActivity {
 	// Log
 	// private static final String TAG = "HomeScreen";
 
@@ -105,7 +52,6 @@ public class MainActivity extends ViewPagerActivity  {
 	private static final int REQ_DEVICE_ACT = 1;
 
 	// GUI
-	private static MainActivity mThis = null;
 	private ScanView mScanView;
 	private Intent mDeviceIntent;
 	private static final int STATUS_DURATION = 5;
@@ -116,7 +62,7 @@ public class MainActivity extends ViewPagerActivity  {
 	private boolean mScanning = false;
 	private int mNumDevs = 0;
 	private int mConnIndex = NO_DEVICE;
-	private List<BleDeviceInfo> mDeviceInfoList;
+	private List<BleDeviceInfo> xDeviceInfoList;
 	private static BluetoothManager mBluetoothManager;
 	private BluetoothAdapter mBtAdapter = null;
 	private BluetoothDevice mBluetoothDevice = null;
@@ -131,29 +77,33 @@ public class MainActivity extends ViewPagerActivity  {
 	public int txPower =-55;
 	public String uuid="";
 	public double dist;
+	public int SumRssi=0;
+	public int counterRssi=0;
+	public RangedIBeacon rangedIBeacon;
+	private Map<BleDeviceInfo,RangedIBeacon> rangedIBeacons = new HashMap<BleDeviceInfo,RangedIBeacon>();
+	public BleDeviceInfo[] DeviceArray =new BleDeviceInfo[3];
+	public double [][]Locations;
+	public String [][]StrLocations;
 	// Housekeeping
 	private static final int NO_DEVICE = -1;
 	private boolean mInitialised = false;
 	SharedPreferences prefs = null;
-
+	private static MainActivity mThis = null;
 	public MainActivity() {
 		mThis = this;
 		mResourceFragmentPager = R.layout.fragment_pager;
 		mResourceIdPager = R.id.pager;
 	}
-
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		// Start the application
+	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 
-
 		// Initialize device list container and device filter
-		mDeviceInfoList = new ArrayList<BleDeviceInfo>();
+		xDeviceInfoList = new ArrayList<BleDeviceInfo>();
 		Resources res = getResources();
 		mDeviceFilter = res.getStringArray(R.array.device_filter);
 
@@ -165,10 +115,36 @@ public class MainActivity extends ViewPagerActivity  {
 		hw.setParameters("help_scan.html", R.layout.fragment_help, R.id.webpage);
 		mSectionsPagerAdapter.addSection(hw, "Help");
 
+		Locations=new double[3][2];
+		Intent i = getIntent();
+		Bundle b = getIntent().getExtras();
+		//****************************************************************************************
+		String[][] arrayReceived=null;
+		Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
+		if(objectArray!=null){
+			arrayReceived = new String[objectArray.length][];
+			for(int j=0;j<objectArray.length;j++){
+				arrayReceived[j]=(String[]) objectArray[j];
+			}
+		}
+
+		//******************************************************************************************
+
+		//   StrLocations = (String[][]) b.getSerializable("Array");
+		for(int n = 0; n < 3; n++)
+			for(int m = 0; m < 2; m++)
+			{
+				Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
+			}
+		//////////////////////////////////////////***************************************************************
+
 		// Register the BroadcastReceiver
 		mFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
 		mFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
 		mFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
+
+		Locations=new double[3][2];
+		StrLocations=new String[3][2];
 	}
 
 
@@ -321,7 +297,7 @@ public class MainActivity extends ViewPagerActivity  {
 		// Start device discovery
 		if (mBleSupported) {
 			mNumDevs = 0;
-			mDeviceInfoList.clear();
+			xDeviceInfoList.clear();
 			mScanView.notifyDataSetChanged();
 			scanLeDevice(true);
 			mScanView.updateGui(mScanning);
@@ -336,11 +312,59 @@ public class MainActivity extends ViewPagerActivity  {
 	}
 
 	private void stopScan() {
+		double dist1,dist2,dist3;
+		double distance[] = new double[3];
+		double rssi[] = new double[3];
 		mScanning = false;
 		mScanView.updateGui(false);
 		scanLeDevice(false);
+		location loc= new location();
+		double lat =  (loc.getLatg());
+		double lng =  (loc.getLang());
+		Trilateration  tri;
+
+		//      dist=calculateAccuracy(-70,SumRssi);
+		Log.d("CalibrationActivity", "66666666666666666666666666666666  latitude:" +lat);
+		Log.d("CalibrationActivity", "66666666666666666666666666666666  longitude:" + lng);
+
+		xDeviceInfoList.get(0).setAvaragedRssi(rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi());
+		//      for (int i = 0; i < xDeviceInfoList.size(); i++) {
+		distance[0]= xDeviceInfoList.get(0).getAccuracy();
+		//         distance[1]= xDeviceInfoList.get(1).getAccuracy();
+		//         distance[2]= xDeviceInfoList.get(2).getAccuracy();
+		rssi[0]= rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi();//addRangeMeasurement((int) deviceInfo.getRssi());
+		//        rssi[0]= xDeviceInfoList.get(0).getAvaragedRssi();
+		//        rssi[1]= xDeviceInfoList.get(1).getRssi();
+		//       rssi[2]= xDeviceInfoList.get(2).getRssi();
+		//      dist2=xDeviceInfoList.get(1).getdistance();
+		//      dist3=xDeviceInfoList.get(2).getdistance();
+
+		Log.d("MainActivity", " distance: " + distance[0] + " RSSI" + rssi[0] + "  deviceRSSI:" + xDeviceInfoList.get(0).getAvaragedRssi());
+//		Trilateration.MyTrilateration(lng, lat, rssi[0], distance[0], lng, lat, rssi[1], distance[1], lng, lat, rssi[2], distance[2]);
+		for (int n = 0; n < 3; n++)
+			for (int m = 0; m < 2; m++)
+				StrLocations[n][m] = String.valueOf(Locations[n][m]);
+		startBeaconStatusActivity();
+		//*******************************************************************************************************************************
+		Log.d("CalibrationActivity","999999999999999999999999999999999");
+		//    }
+	}
+	private void startBeaconStatusActivity() {
+//        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
+		///      appContext.xDeviceInfoList= xDeviceInfoList;
+		Intent i =  new Intent(this, CheckBeaconStatus.class);
+		i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) xDeviceInfoList);
+  		Bundle mBundle = new Bundle();
+		mBundle.putSerializable("Array",  StrLocations);
+		i.putExtras(mBundle);
+  /*      Bundle b= new Bundle();
+        b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
+        i.putExtras(b);
+        i.setClass(CalibrationActivity.this, BeaconStatus.class);
+  */      startActivity(i);
 	}
 
+	//*******************************************************************************************************************************
 	private void startDeviceActivity() {
 		mDeviceIntent = new Intent(this, DeviceActivity.class);
 		mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
@@ -350,14 +374,14 @@ public class MainActivity extends ViewPagerActivity  {
 	private void stopDeviceActivity() {
 		finishActivity(REQ_DEVICE_ACT);
 	}
-
+	//****************************************************************************************************************************
 	public void onDeviceClick(final int pos) {
 
 		if (mScanning)
 			stopScan();
 
 		setBusy(true);
-		mBluetoothDevice = mDeviceInfoList.get(pos).getBluetoothDevice();
+		mBluetoothDevice = xDeviceInfoList.get(pos).getBluetoothDevice();
 		if (mConnIndex == NO_DEVICE) {
 			mScanView.setStatus("Connecting");
 			mConnIndex = pos;
@@ -369,7 +393,7 @@ public class MainActivity extends ViewPagerActivity  {
 			}
 		}
 	}
-
+	//*******************************************************************************************************************************
 	public void onScanTimeout() {
 		runOnUiThread(new Runnable() {
 			public void run() {
@@ -408,8 +432,9 @@ public class MainActivity extends ViewPagerActivity  {
 				}
 			}
 		} else {
-			mDeviceInfoList.clear();
+			xDeviceInfoList.clear();
 			mScanView.notifyDataSetChanged();
+			Log.d("CalibrationActivity","2222222222222222222222222222222222222");
 		}
 	}
 
@@ -422,7 +447,7 @@ public class MainActivity extends ViewPagerActivity  {
 		//CustomToast.middleBottom(this, "Turning BT adapter off and on again may fix Android BLE stack problems");
 	}
 
-	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower) {
+	private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower, double dist) {
 		BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower);
 
 		return deviceInfo;
@@ -446,7 +471,7 @@ public class MainActivity extends ViewPagerActivity  {
 
 	private void addDevice(BleDeviceInfo device) {
 		mNumDevs++;
-		mDeviceInfoList.add(device);
+		xDeviceInfoList.add(device);
 		mScanView.notifyDataSetChanged();
 		if (mNumDevs > 1)
 			mScanView.setStatus(mNumDevs + " devices");
@@ -455,8 +480,8 @@ public class MainActivity extends ViewPagerActivity  {
 	}
 
 	private boolean deviceInfoExists(String address) {
-		for (int i = 0; i < mDeviceInfoList.size(); i++) {
-			if (mDeviceInfoList.get(i).getBluetoothDevice().getAddress()
+		for (int i = 0; i < xDeviceInfoList.size(); i++) {
+			if (xDeviceInfoList.get(i).getBluetoothDevice().getAddress()
 					.equals(address)) {
 				return true;
 			}
@@ -465,10 +490,10 @@ public class MainActivity extends ViewPagerActivity  {
 	}
 
 	private BleDeviceInfo findDeviceInfo(BluetoothDevice device) {
-		for (int i = 0; i < mDeviceInfoList.size(); i++) {
-			if (mDeviceInfoList.get(i).getBluetoothDevice().getAddress()
+		for (int i = 0; i < xDeviceInfoList.size(); i++) {
+			if (xDeviceInfoList.get(i).getBluetoothDevice().getAddress()
 					.equals(device.getAddress())) {
-				return mDeviceInfoList.get(i);
+				return xDeviceInfoList.get(i);
 			}
 		}
 		return null;
@@ -485,7 +510,7 @@ public class MainActivity extends ViewPagerActivity  {
 	}
 
 	List<BleDeviceInfo> getDeviceInfoList() {
-		return mDeviceInfoList;
+		return xDeviceInfoList;
 	}
 
 
@@ -554,6 +579,8 @@ public class MainActivity extends ViewPagerActivity  {
 				if (status == BluetoothGatt.GATT_SUCCESS) {
 					setBusy(false);
 					startDeviceActivity();
+					//                startBeaconStatusActivity();
+					//***************************************************************************************************************
 				} else
 					setError("Connect failed. Status: " + status);
 			} else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
@@ -578,28 +605,9 @@ public class MainActivity extends ViewPagerActivity  {
 	};
 
 
-	protected static double calculateAccuracy(int txPower, double rssi) {
-		if (rssi == 0) {
-			return -1.0; // if we cannot determine accuracy, return -1.
-		}
-
-		Log.d("TAG", "calculating accuracy based on rssi of "+rssi);
-
-
-		double ratio = rssi*1.0/txPower;
-		if (ratio < 1.0) {
-			return Math.pow(ratio,10);
-		}
-		else {
-			double accuracy =  (0.89976)*Math.pow(ratio,7.7095) + 0.111;
-			Log.d("TAG", " avg rssi: "+rssi+" accuracy: "+accuracy);
-			return accuracy;
-		}
-	}
-
 	// Device scan callback.
 	// NB! Nexus 4 and Nexus 7 (2012) only provide one scan result per scan
-	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+	public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 
 		public void onLeScan(final BluetoothDevice device, final int rssi,
 							 final byte[] scanRecord) {
@@ -608,24 +616,11 @@ public class MainActivity extends ViewPagerActivity  {
 			UUID1="";
 
 			int startByte = 0;
-			boolean patternFound = true;
-	/*		while (startByte <= 15) {
-				if (((int) scanRecord[startByte + 2] & 0xff) == 0x02 && //Identifies an iBeacon
-						((int) scanRecord[startByte + 3] & 0xff) == 0x15) { //Identifies correct data length
-					patternFound = true;
-					Log.d("MainActivity", "flag111111111" + startByte);
-					break;
-				}
-				startByte++;
-				Log.d("MainActivity", "count" + startByte+ ":::"+ (scanRecord[startByte + 2] & 0xff));
-			}
-		*/	if (patternFound) {
-
-			}
 			final String finalUuid = uuid;
 			runOnUiThread(new Runnable() {
 				public void run() {
 					// Filter devices
+					int i=0;
 					if (checkDeviceFilter(device.getName())) {
 						Log.d("MainActivity", "Entra en onLeScan55555555555555555555555555555555555555");
 						byte[] uuidBytes = new byte[16];
@@ -645,19 +640,45 @@ public class MainActivity extends ViewPagerActivity  {
 						//Here is your Minor value
 						minor = (scanRecord[27] & 0xff) * 0x100 + (scanRecord[28] & 0xff);
 
-						txPower= scanRecord[29];
-						Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
+						txPower= (int)scanRecord[29];
+						//              SumRssi+=rssi;
+						//              counterRssi+=1;
+						//              Log.d("MainActivity", "Got a didExitRegion call with MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
+						//              dist=calculateAccuracy(-49,rssi);
+						//              dist=calDistToDeg(calFeetToMeter(calcDistance(rssi)));
 
-							if (!deviceInfoExists(device.getAddress())) {
-								// New device
-								BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower);
-								addDevice(deviceInfo);
-							} else {
-								// Already in list, update RSSI info
-								BleDeviceInfo deviceInfo = findDeviceInfo(device);
-								deviceInfo.updateRssi(rssi);
-								mScanView.notifyDataSetChanged();
-							}
+						Log.d("MainActivity", " MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid +" distance: "+dist);
+    /*
+							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);
+        String minor = String.format("%02x", scanRecord[27]) + String.format("%02x", scanRecord[28]);
+							for (int i = 0; i<scanRecord.length; i++){
+								if(i>8 && i<25)
+									UUID1 += String.format("%02x", scanRecord[i]);
+								else if(i>24 && i<27)
+									Major += String.format("%02x", scanRecord[i]);
+								else if(i>26 && i<29)
+									Minor += String.format("%02x", scanRecord[i]);
+
+
+
+							}*/
+
+
+						if (!deviceInfoExists(device.getAddress())) {
+							// New device
+							BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower,dist);
+							addDevice(deviceInfo);
+							rangedIBeacons.put(deviceInfo, new RangedIBeacon(deviceInfo));
+						} else {
+							// Already in list, update RSSI info
+							BleDeviceInfo deviceInfo = findDeviceInfo(device);
+							DeviceArray[i++]=deviceInfo;
+							rangedIBeacons.get(deviceInfo).addRangeMeasurement((int) deviceInfo.getRssi());
+
+							Log.d("MainActivity", "555 running avarage rssi: "+rangedIBeacons.get(deviceInfo).getAvaragedRssi() );
+							deviceInfo.updateRssi(rssi);
+							mScanView.notifyDataSetChanged();
+						}
 
 
 					}

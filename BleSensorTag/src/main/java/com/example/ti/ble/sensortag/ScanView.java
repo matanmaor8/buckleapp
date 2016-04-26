@@ -85,7 +85,7 @@ public class ScanView extends Fragment {
   private final int SCAN_TIMEOUT = 10; // Seconds
   private final int CONNECT_TIMEOUT = 20; // Seconds
   private MainActivity mActivity = null;
-
+  private Button btn;
   private DeviceListAdapter mDeviceAdapter = null;
   private TextView mEmptyMsg;
   private TextView mStatus;
@@ -116,7 +116,8 @@ public class ScanView extends Fragment {
     mDeviceListView = (ListView) view.findViewById(R.id.device_list);
     mDeviceListView.setClickable(true);
     mDeviceListView.setOnItemClickListener(mDeviceClickListener);
-    mEmptyMsg = (TextView)view.findViewById(R.id.no_device);    
+    mEmptyMsg = (TextView)view.findViewById(R.id.no_device);
+    btn = (Button) view.findViewById(R.id.btnConnect);
     mBusy = false;
     
     // Alert parent activity
@@ -156,6 +157,7 @@ public class ScanView extends Fragment {
 		mDeviceListView.setAdapter(mDeviceAdapter);
 		mDeviceAdapter.notifyDataSetChanged();
 		if (deviceList.size() > 0) {
+      ///      btn.setVisibility(View.INVISIBLE);
 			mEmptyMsg.setVisibility(View.GONE);
 		} else {
 			mEmptyMsg.setVisibility(View.VISIBLE);			
@@ -199,7 +201,7 @@ public class ScanView extends Fragment {
       mDeviceAdapter.notifyDataSetChanged();
     }
   }
-
+//********************************************************************************************************************************//
   // Listener for device list
   private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
     public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
@@ -210,7 +212,7 @@ public class ScanView extends Fragment {
       mActivity.onDeviceClick(pos);
     }
   };
-
+/********************************************************************************************************************************/
   // Listener for progress timer expiration
   private CustomTimerCallback mPgScanCallback = new CustomTimerCallback() {
     public void onTimeout() {
@@ -287,6 +289,7 @@ public class ScanView extends Fragment {
 
     public View getView(int position, View convertView, ViewGroup parent) {
       ViewGroup vg;
+
 
       if (convertView != null) {
         vg = (ViewGroup) convertView;

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.ti.ble.common.BleDeviceInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BeaconStatus3 extends Activity {
@@ -79,12 +77,12 @@ public class BeaconStatus3 extends Activity {
             }
         //////////////////////////////////////////***************************************************************
 
-        //       Locations = (double[][])b.getSerializable("Array");
+        //       xLocations = (double[][])b.getSerializable("Array");
   /*      Object[][] objectArray = (Object[][]) getIntent().getExtras().getSerializable("key_array_array");
         for(n=0;n<3;n++)
             for(m=0;m<2;m++)
-                Locations[n][m]= (double) objectArray[n][m];
- */  //     Locations= (double[][]) i.getExtras().getSerializable("key_array_array");
+                xLocations[n][m]= (double) objectArray[n][m];
+ */  //     xLocations= (double[][]) i.getExtras().getSerializable("key_array_array");
         //     ArrayList<BleDeviceInfo> Devices =  getIntent().getParcelableArrayListExtra("list");
         //     mDevices=new List<list>();
         //       Bundle b = this.getIntent().getExtras();
@@ -101,7 +99,7 @@ public class BeaconStatus3 extends Activity {
         //       List<BleDeviceInfo> deviceList = Cactivity.getDeviceInfoList();
         //       mDevices=Cactivity.mDeviceInfoList;
         if (mDevices.get(0).getAvaragedRssi() >= -90.0) {
-            Log.d("CalibrationActivity", "202020202020020202020202020202020  Locations:" + Locations[1][0] +"  "+Locations[1][1]);
+            Log.d("CalibrationActivity", "202020202020020202020202020202020  xLocations:" + Locations[1][0] +"  "+Locations[1][1]);
             Log.d("CalibrationActivity", "202020202020020202020202020202020  avarage RSSI:" + mDevices.get(0).getAvaragedRssi());
             Log.d("CalibrationActivity", "202020202020020202020202020202020  major:" + mDevices.get(0).getmajor());
             Log.d("CalibrationActivity", "202020202020020202020202020202020  minor:" + mDevices.get(0).getminor());
@@ -188,8 +186,7 @@ public class BeaconStatus3 extends Activity {
     private void startBeaconStatusActivity() {
 //        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
         ///      appContext.mDeviceInfoList= mDeviceInfoList;
-        Intent i =  new Intent(this, LoginActivity.class);
-        i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
+        Intent i =  new Intent(this, MainActivity.class);
         Bundle mBundle = new Bundle();
         mBundle.putSerializable("Array",  StrLocations);
         i.putExtras(mBundle);

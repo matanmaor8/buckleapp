@@ -73,12 +73,12 @@ public class BeaconStatus2 extends Activity {
         }
         //////////////////////////////////////////***************************************************************
 
- //       Locations = (double[][])b.getSerializable("Array");
+ //       xLocations = (double[][])b.getSerializable("Array");
   /*      Object[][] objectArray = (Object[][]) getIntent().getExtras().getSerializable("key_array_array");
         for(n=0;n<3;n++)
             for(m=0;m<2;m++)
-                Locations[n][m]= (double) objectArray[n][m];
- */  //     Locations= (double[][]) i.getExtras().getSerializable("key_array_array");
+                xLocations[n][m]= (double) objectArray[n][m];
+ */  //     xLocations= (double[][]) i.getExtras().getSerializable("key_array_array");
         //     ArrayList<BleDeviceInfo> Devices =  getIntent().getParcelableArrayListExtra("list");
         //     mDevices=new List<list>();
         //       Bundle b = this.getIntent().getExtras();
@@ -95,7 +95,7 @@ public class BeaconStatus2 extends Activity {
         //       List<BleDeviceInfo> deviceList = Cactivity.getDeviceInfoList();
         //       mDevices=Cactivity.mDeviceInfoList;
         if (mDevices.get(0).getAvaragedRssi() >= -90.0) {
-            Log.d("CalibrationActivity", "101010101010101010101010101011010  Locations:" + Locations[0][0] +"  "+Locations[0][1]);
+            Log.d("CalibrationActivity", "101010101010101010101010101011010  xLocations:" + Locations[0][0] +"  "+Locations[0][1]);
             Log.d("CalibrationActivity", "101010101010101010101010101011010  avarage RSSI:" + mDevices.get(0).getAvaragedRssi());
             Log.d("CalibrationActivity", "101010101010101010101010101011010  major:" + mDevices.get(0).getmajor());
             Log.d("CalibrationActivity", "101010101010101010101010101011010  minor:" + mDevices.get(0).getminor());

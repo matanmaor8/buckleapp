@@ -9,7 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b24c0fb8-e46a-4856-8a00-566d6439be6d" name="Default" comment="" />
+    <list default="true" readonly="true" id="b24c0fb8-e46a-4856-8a00-566d6439be6d" name="Default" comment="" />
     <ignored path="trunk.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="128" column="19" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
+              <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -50,14 +50,14 @@
       </file>
       <file leaf-file-name="activity_beacon_status.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.448276">
+              <caret line="66" column="0" selection-start-line="2" selection-start-column="4" selection-end-line="66" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -65,57 +65,7 @@
         <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus2.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="158" column="16" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CalibrationActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CalibrationActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="637" column="32" selection-start-line="637" selection-start-column="32" selection-end-line="637" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_beacon_status3.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status3.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.172414">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <element signature="e#262#297#0" expanded="true" />
-                <element signature="e#323#358#0" expanded="true" />
-                <element signature="e#382#415#0" expanded="true" />
-                <element signature="e#442#475#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BeaconStatus3.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus3.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.3825138">
-              <caret line="103" column="124" selection-start-line="103" selection-start-column="124" selection-end-line="103" selection-end-column="124" />
-              <folding>
-                <element signature="e#5837#5870#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+              <caret line="74" column="0" selection-start-line="54" selection-start-column="7" selection-end-line="74" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -125,7 +75,102 @@
         <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="338" column="26" selection-start-line="338" selection-start-column="26" selection-end-line="338" selection-end-column="26" />
+              <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+              <folding>
+                <element signature="e#2736#2765#0" expanded="true" />
+                <element signature="e#12639#12703#0" expanded="true" />
+                <element signature="e#12702#12703#0" expanded="true" />
+                <element signature="e#16073#16087#0" expanded="true" />
+                <element signature="e#16215#16233#0" expanded="true" />
+                <element signature="e#17126#17146#0" expanded="true" />
+                <element signature="e#18904#21517#0" expanded="true" />
+                <element signature="e#21516#21517#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_check_beacon_status.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_check_beacon_status.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.448276">
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <folding>
+                <element signature="e#262#297#0" expanded="true" />
+                <element signature="e#323#358#0" expanded="true" />
+                <element signature="e#382#415#0" expanded="true" />
+                <element signature="e#442#475#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckBeaconStatus.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CheckBeaconStatus.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3114754">
+              <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CalibrationScanView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CalibrationScanView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_scan.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/fragment_scan.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-22.551723">
+              <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScanView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/ScanView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
+              <folding>
+                <element signature="e#8938#8939#0" expanded="true" />
+                <element signature="e#8977#8978#0" expanded="true" />
+                <element signature="e#9010#9011#0" expanded="true" />
+                <element signature="e#9053#9054#0" expanded="true" />
+                <element signature="e#9324#9325#0" expanded="true" />
+                <element signature="e#9367#9368#0" expanded="true" />
+                <element signature="e#9564#9651#0" expanded="true" />
+                <element signature="e#9650#9651#0" expanded="true" />
+                <element signature="e#10418#10419#0" expanded="true" />
+                <element signature="e#10454#10455#0" expanded="true" />
+                <element signature="e#10497#10498#0" expanded="true" />
+                <element signature="e#10540#10541#0" expanded="true" />
+                <element signature="e#10583#10584#0" expanded="true" />
+                <element signature="e#10612#10613#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BeaconStatus3.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus3.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="173" column="29" selection-start-line="173" selection-start-column="29" selection-end-line="173" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -1605,9 +1650,26 @@
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status2.xml" />
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status3.xml" />
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus2.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/ScanView.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/res/layout/element_device.xml" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_check_beacon_status.xml" />
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus3.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CalibrationActivity.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/MainActivity.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CheckBeaconStatus.java" />
       </list>
     </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
   </component>
   <component name="NamedScopeManager">
     <order />
@@ -1660,6 +1722,10 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1690,6 +1756,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trunk" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BleSensorTag" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1774,10 +1858,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1787,6 +1867,7 @@
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="027dd3eb8f8f575e" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="AVD_for_4_7_WXGA" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -1983,6 +2064,7 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\צח\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -1995,15 +2077,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879046" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2013,19 +2095,27 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2549168" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -2035,46 +2125,34 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status.xml">
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="128" column="19" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/HomeScreenFragment.java">
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status3.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.172414">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <caret line="158" column="16" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
           <folding>
-            <element signature="e#262#297#0" expanded="true" />
-            <element signature="e#323#358#0" expanded="true" />
-            <element signature="e#382#415#0" expanded="true" />
-            <element signature="e#442#475#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.46721312">
-          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2082,33 +2160,42 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="637" column="32" selection-start-line="637" selection-start-column="32" selection-end-line="637" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2883#2912#0" expanded="false" />
+            <element signature="e#12282#12283#0" expanded="false" />
+            <element signature="e#12328#12329#0" expanded="false" />
+            <element signature="e#13196#13296#0" expanded="false" />
+            <element signature="e#13295#13296#0" expanded="false" />
+            <element signature="e#13365#13487#0" expanded="false" />
+            <element signature="e#13486#13487#0" expanded="false" />
+            <element signature="e#14501#14502#0" expanded="false" />
+            <element signature="e#14537#14538#0" expanded="false" />
+            <element signature="e#16746#16747#0" expanded="false" />
+            <element signature="e#16784#16785#0" expanded="false" />
+            <element signature="e#18220#20694#0" expanded="false" />
+            <element signature="e#20693#20694#0" expanded="false" />
+            <element signature="e#21195#24518#0" expanded="false" />
+            <element signature="e#24517#24518#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.413793">
-          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status3.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="128" column="19" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/Trilateration.java">
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48907104">
-          <caret line="196" column="15" selection-start-line="196" selection-start-column="15" selection-end-line="196" selection-end-column="15" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2125,6 +2212,223 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="338" column="26" selection-start-line="338" selection-start-column="26" selection-end-line="338" selection-end-column="26" />
+          <folding>
+            <element signature="e#2736#2765#0" expanded="true" />
+            <element signature="e#12639#12703#0" expanded="true" />
+            <element signature="e#12702#12703#0" expanded="true" />
+            <element signature="e#16073#16087#0" expanded="true" />
+            <element signature="e#16215#16233#0" expanded="true" />
+            <element signature="e#17126#17146#0" expanded="true" />
+            <element signature="e#18904#21517#0" expanded="true" />
+            <element signature="e#21516#21517#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/HomeScreenFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status3.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status2.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.413793">
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/Trilateration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48907104">
+          <caret line="196" column="15" selection-start-line="196" selection-start-column="15" selection-end-line="196" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/fragment_help.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/fragment_pager.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/frame_progress.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/element_characteristic.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8486647">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/element_file.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6502732">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Android/sdk/sources/android-21/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6661" column="16" selection-start-line="6661" selection-start-column="16" selection-end-line="6661" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="81" selection-start-line="83" selection-start-column="81" selection-end-line="83" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/element_device.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="33" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/ScanView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
+          <folding>
+            <element signature="e#8938#8939#0" expanded="true" />
+            <element signature="e#8977#8978#0" expanded="true" />
+            <element signature="e#9010#9011#0" expanded="true" />
+            <element signature="e#9053#9054#0" expanded="true" />
+            <element signature="e#9324#9325#0" expanded="true" />
+            <element signature="e#9367#9368#0" expanded="true" />
+            <element signature="e#9564#9651#0" expanded="true" />
+            <element signature="e#9650#9651#0" expanded="true" />
+            <element signature="e#10418#10419#0" expanded="true" />
+            <element signature="e#10454#10455#0" expanded="true" />
+            <element signature="e#10497#10498#0" expanded="true" />
+            <element signature="e#10540#10541#0" expanded="true" />
+            <element signature="e#10583#10584#0" expanded="true" />
+            <element signature="e#10612#10613#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_beacon_status.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.448276">
+          <caret line="66" column="0" selection-start-line="2" selection-start-column="4" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/activity_check_beacon_status.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.448276">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding>
+            <element signature="e#262#297#0" expanded="true" />
+            <element signature="e#323#358#0" expanded="true" />
+            <element signature="e#382#415#0" expanded="true" />
+            <element signature="e#442#475#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="31" selection-start-line="50" selection-start-column="31" selection-end-line="50" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CalibrationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.16120219">
+          <caret line="115" column="8" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
+          <folding>
+            <element signature="e#17479#17493#0" expanded="true" />
+            <element signature="e#17663#17681#0" expanded="true" />
+            <element signature="e#18838#18858#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/res/layout/fragment_scan.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.551723">
+          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -2132,18 +2436,49 @@
     <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="158" column="16" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
+          <caret line="74" column="0" selection-start-line="54" selection-start-column="7" selection-end-line="74" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CalibrationScanView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3825138">
-          <caret line="103" column="124" selection-start-line="103" selection-start-column="124" selection-end-line="103" selection-end-column="124" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="173" column="29" selection-start-line="173" selection-start-column="29" selection-end-line="173" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
           <folding>
-            <element signature="e#5837#5870#0" expanded="true" />
+            <element signature="e#2736#2765#0" expanded="true" />
+            <element signature="e#12639#12703#0" expanded="true" />
+            <element signature="e#12702#12703#0" expanded="true" />
+            <element signature="e#16073#16087#0" expanded="true" />
+            <element signature="e#16215#16233#0" expanded="true" />
+            <element signature="e#17126#17146#0" expanded="true" />
+            <element signature="e#18904#21517#0" expanded="true" />
+            <element signature="e#21516#21517#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CheckBeaconStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3114754">
+          <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

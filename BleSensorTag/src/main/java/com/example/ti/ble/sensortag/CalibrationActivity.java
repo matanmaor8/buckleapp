@@ -113,6 +113,8 @@ public class CalibrationActivity extends ViewPagerActivity {
         hw.setParameters("help_scan.html", R.layout.fragment_help, R.id.webpage);
         mSectionsPagerAdapter.addSection(hw, "Help");
 
+
+
         // Register the BroadcastReceiver
         mFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         mFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
@@ -312,7 +314,7 @@ public class CalibrationActivity extends ViewPagerActivity {
       //      dist3=mDeviceInfoList.get(2).getdistance();
 
         Log.d("MainActivity", " distance: "+distance[0] +" RSSI"+rssi[0]+"  deviceRSSI:"+mDeviceInfoList.get(0).getAvaragedRssi());
-            Trilateration.MyTrilateration(lng, lat, rssi[0], distance[0], lng, lat, rssi[1], distance[1], lng, lat, rssi[2], distance[2]);
+ //           Trilateration.MyTrilateration(lng, lat, rssi[0], distance[0], lng, lat, rssi[1], distance[1], lng, lat, rssi[2], distance[2]);
         startBeaconStatusActivity();
   //*******************************************************************************************************************************
             Log.d("CalibrationActivity","999999999999999999999999999999999");

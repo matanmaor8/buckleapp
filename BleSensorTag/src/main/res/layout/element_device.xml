@@ -38,6 +38,7 @@
         android:clickable="false"
         android:focusable="false"
         android:gravity="center"
-        android:text="@string/connect" />
+        android:text="@string/connect"
+        android:visibility="gone" />
 
 </LinearLayout>
