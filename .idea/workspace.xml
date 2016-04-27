@@ -71,13 +71,15 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.89675516">
-              <caret line="401" column="49" selection-start-line="401" selection-start-column="49" selection-end-line="401" selection-end-column="49" />
+            <state vertical-scroll-proportion="5.743363">
+              <caret line="396" column="20" selection-start-line="396" selection-start-column="20" selection-end-line="396" selection-end-column="20" />
               <folding>
                 <element signature="e#2736#2765#0" expanded="true" />
-                <element signature="e#16482#16496#0" expanded="true" />
-                <element signature="e#16624#16642#0" expanded="true" />
-                <element signature="e#17535#17555#0" expanded="true" />
+                <element signature="e#12267#12268#0" expanded="true" />
+                <element signature="e#12304#12305#0" expanded="true" />
+                <element signature="e#16830#16844#0" expanded="true" />
+                <element signature="e#16972#16990#0" expanded="true" />
+                <element signature="e#17883#17903#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1638,8 +1640,8 @@
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CalibrationScanView.java" />
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/BeaconStatus3.java" />
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/MainActivity.java" />
         <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/CheckBeaconStatus.java" />
+        <option value="$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2156,9 +2158,11 @@
           <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
           <folding>
             <element signature="e#2736#2765#0" expanded="true" />
-            <element signature="e#16482#16496#0" expanded="true" />
-            <element signature="e#16624#16642#0" expanded="true" />
-            <element signature="e#17535#17555#0" expanded="true" />
+            <element signature="e#12267#12268#0" expanded="true" />
+            <element signature="e#12304#12305#0" expanded="true" />
+            <element signature="e#16830#16844#0" expanded="true" />
+            <element signature="e#16972#16990#0" expanded="true" />
+            <element signature="e#17883#17903#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2283,9 +2287,11 @@
           <caret line="338" column="26" selection-start-line="338" selection-start-column="26" selection-end-line="338" selection-end-column="26" />
           <folding>
             <element signature="e#2736#2765#0" expanded="true" />
-            <element signature="e#16482#16496#0" expanded="true" />
-            <element signature="e#16624#16642#0" expanded="true" />
-            <element signature="e#17535#17555#0" expanded="true" />
+            <element signature="e#12267#12268#0" expanded="true" />
+            <element signature="e#12304#12305#0" expanded="true" />
+            <element signature="e#16830#16844#0" expanded="true" />
+            <element signature="e#16972#16990#0" expanded="true" />
+            <element signature="e#17883#17903#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2553,13 +2559,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BleSensorTag/src/main/java/com/example/ti/ble/sensortag/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89675516">
-          <caret line="401" column="49" selection-start-line="401" selection-start-column="49" selection-end-line="401" selection-end-column="49" />
+        <state vertical-scroll-proportion="5.743363">
+          <caret line="396" column="20" selection-start-line="396" selection-start-column="20" selection-end-line="396" selection-end-column="20" />
           <folding>
             <element signature="e#2736#2765#0" expanded="true" />
-            <element signature="e#16482#16496#0" expanded="true" />
-            <element signature="e#16624#16642#0" expanded="true" />
-            <element signature="e#17535#17555#0" expanded="true" />
+            <element signature="e#12267#12268#0" expanded="true" />
+            <element signature="e#12304#12305#0" expanded="true" />
+            <element signature="e#16830#16844#0" expanded="true" />
+            <element signature="e#16972#16990#0" expanded="true" />
+            <element signature="e#17883#17903#0" expanded="true" />
           </folding>
         </state>
       </provider>

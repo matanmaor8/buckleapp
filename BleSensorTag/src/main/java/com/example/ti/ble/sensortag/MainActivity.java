@@ -393,10 +393,11 @@ public class MainActivity extends ViewPagerActivity {
 			stopScan();
 
 		setBusy(true);
-		mBluetoothDevice = xDeviceInfoList.get(pos).getBluetoothDevice();
+
+		mBluetoothDevice = xDeviceInfoList.get(getMinValue()).getBluetoothDevice();
 		if (mConnIndex == NO_DEVICE) {
 			mScanView.setStatus("Connecting");
-			mConnIndex = pos;
+			mConnIndex = getMinValue();
 			onConnect();
 		} else {
 			mScanView.setStatus("Disconnecting");
@@ -404,6 +405,19 @@ public class MainActivity extends ViewPagerActivity {
 				mBluetoothLeService.disconnect(mBluetoothDevice.getAddress());
 			}
 		}
+	}
+
+	// getting the miniumum value
+	public int getMinValue(){
+		int index=0;
+		double minValue = xDeviceInfoList.get(0).getAccuracy();
+		for(int i=0;i<xDeviceInfoList.size();i++){
+			if(xDeviceInfoList.get(i).getAccuracy() < minValue){
+				minValue = xDeviceInfoList.get(i).getAccuracy();
+				index=i;
+			}
+		}
+		return index;
 	}
 	//*******************************************************************************************************************************
 	public void onScanTimeout() {
