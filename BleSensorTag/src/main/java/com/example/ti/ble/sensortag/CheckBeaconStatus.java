@@ -19,6 +19,7 @@ import java.util.List;
 
 public class CheckBeaconStatus extends Activity {
     private List<BleDeviceInfo> mDevices;
+    private static final int REQ_DEVICE_ACT = 1;
     public static final String EXTRA_DEVICE_LIST = "EXTRA_DEVICE_LIST";
     BleDeviceInfo deviceInfo;
     BluetoothDevice device;
@@ -37,9 +38,11 @@ public class CheckBeaconStatus extends Activity {
     //   public MyLocationListener locationListener;
     private String lac;
     private String lng;
-
+    private BluetoothDevice mBluetoothDevice = null;
     double longitude, latitude;
     private String TPID;
+
+    private Intent mDeviceIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,7 @@ public class CheckBeaconStatus extends Activity {
         ch3 = (CheckBox) findViewById(R.id.checkBox3);
         Intent i = getIntent();
         mDevices = (List) i.getParcelableArrayListExtra("list");
+        mBluetoothDevice = i.getParcelableExtra(DeviceActivity.EXTRA_DEVICE);
         Bundle b = getIntent().getExtras();
         //****************************************************************************************
         String[][] arrayReceived=null;
@@ -146,21 +150,31 @@ public class CheckBeaconStatus extends Activity {
 
         myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3]);
 
-        Log.d("CalibrationActivity", "9999999999 My Location :" + myLocation[0] + "   " + myLocation[1]);
+        Log.d("CalibrationActivity", "11111111113333333333333My Location :" + myLocation[0] + "  , " + myLocation[1]);
+        Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[0][0] + "  , " + xLocations[0][1]);
+        Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[1][0] + "  , " + xLocations[1][1]);
+        Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[2][0] + "  , " + xLocations[2][1]);
+
+
+
         if((xLocations[0][0]==myLocation[0]) && (xLocations[0][1]==myLocation[1]))
         {
+            Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[0][0] + "  , " + xLocations[0][1]);
             ch1.setChecked(false);
             ch2.setChecked(false);
             ch3.setChecked(true);
         }
         else if((xLocations[1][0]==myLocation[0]) && (xLocations[1][1]==myLocation[1]))
         {
+            Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[1][0] + "  , " + xLocations[1][1]);
+
             ch1.setChecked(false);
             ch2.setChecked(true);
             ch3.setChecked(false);
         }
         else if((xLocations[2][0]==myLocation[0]) && (xLocations[2][1]==myLocation[1]))
         {
+            Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[2][0] + "  , " + xLocations[2][1]);
             ch1.setChecked(true);
             ch2.setChecked(false);
             ch3.setChecked(false);
@@ -175,7 +189,8 @@ public class CheckBeaconStatus extends Activity {
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
                 StrLocations[n][m] = String.valueOf(xLocations[n][m]);
-        startBeaconStatusActivity();
+   //     startBeaconStatusActivity();
+        startDeviceActivity();
 
     }
 /*
@@ -199,6 +214,11 @@ public class CheckBeaconStatus extends Activity {
         i.putExtras(b);
         i.setClass(CalibrationActivity.this, BeaconStatus.class);
   */      startActivity(i);
+    }
+    private void startDeviceActivity() {
+        mDeviceIntent = new Intent(this, DeviceActivity.class);
+        mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
+        startActivityForResult(mDeviceIntent, REQ_DEVICE_ACT);
     }
 /*
     private final LocationListener locationListener = new LocationListener() {

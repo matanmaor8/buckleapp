@@ -83,6 +83,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 if(!cancel){
                     Log.i("Android", " 111111111111111111111111111111111111111");
                     Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+                    myIntent.putExtra("FROM_ACTIVITY", "B");
                     startActivityForResult(myIntent, 0);
 
                 }

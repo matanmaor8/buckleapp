@@ -243,7 +243,7 @@ public class CalibrationScanView extends Fragment {
                 vg = (ViewGroup) convertView;
                 Log.d("CalibrationScanView","77777777777777777777777777777777777");
             } else {
-                vg = (ViewGroup) mInflater.inflate(R.layout.element_device, null);
+                vg = (ViewGroup) mInflater.inflate(R.layout.element_device_2, null);
                 Log.d("CalibrationScanView","6666666666666666666666666666666666");
             }
             //     serviceList = BluetoothLeService.getInstance().getSupportedGattServices();

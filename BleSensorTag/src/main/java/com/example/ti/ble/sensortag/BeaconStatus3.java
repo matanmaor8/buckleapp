@@ -190,6 +190,7 @@ public class BeaconStatus3 extends Activity {
         Bundle mBundle = new Bundle();
         mBundle.putSerializable("Array",  StrLocations);
         i.putExtras(mBundle);
+        i.putExtra("FROM_ACTIVITY", "A");
   /*      Bundle b= new Bundle();
         b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);
         i.putExtras(b);

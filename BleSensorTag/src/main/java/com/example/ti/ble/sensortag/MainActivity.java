@@ -116,27 +116,38 @@ public class MainActivity extends ViewPagerActivity {
 		mSectionsPagerAdapter.addSection(hw, "Help");
 
 		Locations=new double[3][2];
+
 		Intent i = getIntent();
 		Bundle b = getIntent().getExtras();
 		//****************************************************************************************
-		String[][] arrayReceived=null;
-		Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
-		if(objectArray!=null){
-			arrayReceived = new String[objectArray.length][];
-			for(int j=0;j<objectArray.length;j++){
-				arrayReceived[j]=(String[]) objectArray[j];
+		String previousActivity= i.getStringExtra("FROM_ACTIVITY");
+		if(previousActivity.equals("A"))
+		{
+			String[][] arrayReceived=null;
+			Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
+			if(objectArray!=null){
+				arrayReceived = new String[objectArray.length][];
+				for(int j=0;j<objectArray.length;j++){
+					arrayReceived[j]=(String[]) objectArray[j];
+					Log.d("CalibrationActivity", "6666666666666666666666666666666677777777777777777778888888888888888888888888");
+				}
 			}
+
+
+			//******************************************************************************************
+
+			//   StrLocations = (String[][]) b.getSerializable("Array");
+			for(int n = 0; n < 3; n++)
+				for(int m = 0; m < 2; m++)
+				{
+					Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
+					Log.d("CalibrationActivity", "2222222222222222222222777777777777777777788888888888"+Locations[n][m]);
+				}
+			//////////////////////////////////////////***************************************************************
+
 		}
 
-		//******************************************************************************************
 
-		//   StrLocations = (String[][]) b.getSerializable("Array");
-		for(int n = 0; n < 3; n++)
-			for(int m = 0; m < 2; m++)
-			{
-				Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
-			}
-		//////////////////////////////////////////***************************************************************
 
 		// Register the BroadcastReceiver
 		mFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
@@ -354,6 +365,7 @@ public class MainActivity extends ViewPagerActivity {
 		///      appContext.xDeviceInfoList= xDeviceInfoList;
 		Intent i =  new Intent(this, CheckBeaconStatus.class);
 		i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) xDeviceInfoList);
+		i.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
   		Bundle mBundle = new Bundle();
 		mBundle.putSerializable("Array",  StrLocations);
 		i.putExtras(mBundle);

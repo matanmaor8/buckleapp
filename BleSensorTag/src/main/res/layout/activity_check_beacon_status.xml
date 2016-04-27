@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/imageView2"
-        android:src="@drawable/backseatright"
+        android:src="@drawable/backseat"
         android:background="#3c8dcf"
         style="@android:style/Animation.Activity"
         android:layout_alignParentTop="true" />
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sit please in the marked seat and press &quot;Start&quot; when you are ready"
+        android:text=" please Sit seat and press &quot;Start&quot; when you are ready"
         android:id="@+id/textView3"
         android:textColor="#f40707"
         android:layout_alignParentTop="true"
