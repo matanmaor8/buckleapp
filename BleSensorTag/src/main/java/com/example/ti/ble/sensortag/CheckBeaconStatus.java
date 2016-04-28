@@ -1,9 +1,14 @@
 package com.example.ti.ble.sensortag;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -11,8 +16,10 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.example.ti.ble.common.BleDeviceInfo;
+import com.example.ti.ble.common.BluetoothLeService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +45,14 @@ public class CheckBeaconStatus extends Activity {
     //   public MyLocationListener locationListener;
     private String lac;
     private String lng;
+    private IntentFilter mFilter;
+    private String[] mDeviceFilter = null;
     private BluetoothDevice mBluetoothDevice = null;
+    private static BluetoothManager mBluetoothManager;
+    private BluetoothAdapter mBtAdapter = null;
+    private BluetoothLeService mBluetoothLeService = null;
+    private int mConnIndex = NO_DEVICE;
+    private static final int NO_DEVICE = -1;
     double longitude, latitude;
     private String TPID;
 
@@ -105,6 +119,10 @@ public class CheckBeaconStatus extends Activity {
 
         }
         //      locationListener = new MyLocationListener();
+
+        mFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        mFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
+        mFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
         wifiLocation = new double[3][4];
         xLocations =new double[3][2];
         StrLocations=new String[3][2];
@@ -189,8 +207,11 @@ public class CheckBeaconStatus extends Activity {
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
                 StrLocations[n][m] = String.valueOf(xLocations[n][m]);
-   //     startBeaconStatusActivity();
-        startDeviceActivity();
+        startBeaconStatusActivity();
+
+  //      onDeviceClick();
+
+ //       startDeviceActivity();
 
     }
 /*
@@ -204,7 +225,7 @@ public class CheckBeaconStatus extends Activity {
     private void startBeaconStatusActivity() {
 //        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
         ///      appContext.mDeviceInfoList= mDeviceInfoList;
-        Intent i =  new Intent(this, BeaconStatus2.class);
+        Intent i =  new Intent(this, ConnectionActivity.class);
         i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
         Bundle mBundle = new Bundle();
         mBundle.putSerializable("Array",  StrLocations);
@@ -220,6 +241,115 @@ public class CheckBeaconStatus extends Activity {
         mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
         startActivityForResult(mDeviceIntent, REQ_DEVICE_ACT);
     }
+
+    void onConnect() {
+
+            int connState = mBluetoothManager.getConnectionState(mBluetoothDevice, BluetoothGatt.GATT);
+
+            switch (connState) {
+                case BluetoothGatt.STATE_CONNECTED:
+                    mBluetoothLeService.disconnect(null);
+                    break;
+                case BluetoothGatt.STATE_DISCONNECTED:
+                    boolean ok = mBluetoothLeService.connect(mBluetoothDevice.getAddress());
+                    if (!ok) {
+   //                     setError("Connect failed");
+                    }
+                    break;
+                default:
+     //               setError("Device busy (connecting/disconnecting)");
+                    break;
+            }
+
+    }
+
+    public void onDeviceClick() {
+
+ //       setBusy(true);
+
+        mBluetoothDevice = mDevices.get(getMinValue()).getBluetoothDevice();
+        Log.d("CalibrationActivity", "TEST 99999999999  Bluetooth device:" + mBluetoothDevice);
+        if (mConnIndex == NO_DEVICE) {
+  //          mScanView.setStatus("Connecting");
+            mConnIndex = getMinValue();
+            onConnect();
+        } else {
+  //          mScanView.setStatus("Disconnecting");
+            if (mConnIndex != NO_DEVICE) {
+                mBluetoothLeService.disconnect(mBluetoothDevice.getAddress());
+            }
+        }
+    }
+    private void stopDeviceActivity() {
+        finishActivity(REQ_DEVICE_ACT);
+    }
+
+    // getting the miniumum value
+    public int getMinValue(){
+        int index=0;
+        double minValue = mDevices.get(0).getAccuracy();
+        for(int i=0;i<mDevices.size();i++){
+            if(mDevices.get(i).getAccuracy() < minValue){
+                minValue = mDevices.get(i).getAccuracy();
+                index=i;
+            }
+        }
+        return index;
+    }
+    //*******************************************************************************************************************************
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+                // Bluetooth adapter state change
+                switch (mBtAdapter.getState()) {
+                    case BluetoothAdapter.STATE_ON:
+                        mConnIndex = NO_DEVICE;
+                        //startBluetoothLeService();
+                        break;
+                    case BluetoothAdapter.STATE_OFF:
+                        Toast.makeText(context, R.string.app_closing, Toast.LENGTH_LONG)
+                                .show();
+                        finish();
+                        break;
+                    default:
+                        // Log.w(TAG, "Action STATE CHANGED not processed ");
+                        break;
+                }
+
+           //     updateGuiState();
+            } else if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
+                // GATT connect
+                int status = intent.getIntExtra(BluetoothLeService.EXTRA_STATUS,
+                        BluetoothGatt.GATT_FAILURE);
+                if (status == BluetoothGatt.GATT_SUCCESS) {
+                //    setBusy(false);
+                    startDeviceActivity();
+                    //                startBeaconStatusActivity();
+                    //***************************************************************************************************************
+                } else
+                    Log.d("CalibrationActivity", "333333333333333333333333333333333  accuracy:" + wifiLocation[0][3]);
+                   // setError("Connect failed. Status: " + status);
+            } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                // GATT disconnect
+                int status = intent.getIntExtra(BluetoothLeService.EXTRA_STATUS,
+                        BluetoothGatt.GATT_FAILURE);
+                stopDeviceActivity();
+                if (status == BluetoothGatt.GATT_SUCCESS) {
+                 //   setBusy(false);
+               //     mScanView.setStatus(mBluetoothDevice.getName() + " disconnected", STATUS_DURATION);
+                } else {
+               //     setError("Disconnect Status: " + HCIDefines.hciErrorCodeStrings.get(status));
+                }
+                mConnIndex = NO_DEVICE;
+                mBluetoothLeService.close();
+            } else {
+                // Log.w(TAG,"Unknown action: " + action);
+            }
+
+        }
+    };
 /*
     private final LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {

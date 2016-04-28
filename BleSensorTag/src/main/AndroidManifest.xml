@@ -117,6 +117,8 @@
         </activity>
         <activity android:name=".CheckBeaconStatus" >
         </activity>
+        <activity android:name=".ConnectionActivity" >
+        </activity>
     </application>
 
 </manifest>
