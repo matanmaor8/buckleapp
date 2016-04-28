@@ -354,7 +354,7 @@ public class ConnectionActivity extends ViewPagerActivity {
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
                 StrLocations[n][m] = String.valueOf(Locations[n][m]);
-        startBeaconStatusActivity();
+ //       startBeaconStatusActivity();
         //*******************************************************************************************************************************
         Log.d("CalibrationActivity","999999999999999999999999999999999");
         //    }
