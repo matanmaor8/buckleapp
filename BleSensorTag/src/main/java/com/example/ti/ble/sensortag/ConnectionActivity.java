@@ -118,6 +118,7 @@ public class ConnectionActivity extends ViewPagerActivity {
         Locations=new double[3][2];
 
         Intent i = getIntent();
+        xDeviceInfoList = (List) i.getParcelableArrayListExtra("list");
         Bundle b = getIntent().getExtras();
         //****************************************************************************************
         String previousActivity= i.getStringExtra("FROM_ACTIVITY");
@@ -251,6 +252,7 @@ public class ConnectionActivity extends ViewPagerActivity {
 
         if (!mInitialised) {
             // Broadcast receiver
+            Log.d("CalibrationActivity", "9999999999999TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST");
             mBluetoothLeService = BluetoothLeService.getInstance();
             mBluetoothManager = mBluetoothLeService.getBtManager();
             mBtAdapter = mBluetoothManager.getAdapter();
@@ -273,15 +275,20 @@ public class ConnectionActivity extends ViewPagerActivity {
     }
 
     public void onBtnScan(View view) {
-        if (mScanning) {
+   /*     if (mScanning) {
             stopScan();
         } else {
             startScan();
         }
+        */
+        int pos;
+        pos=getMinValue();
+        onDeviceClick(pos);
+        startDeviceActivity();
     }
 
     void onConnect() {
-        if (mNumDevs > 0) {
+    //    if (mNumDevs > 0) {
 
             int connState = mBluetoothManager.getConnectionState(mBluetoothDevice,
                     BluetoothGatt.GATT);
@@ -300,7 +307,7 @@ public class ConnectionActivity extends ViewPagerActivity {
                     setError("Device busy (connecting/disconnecting)");
                     break;
             }
-        }
+   //     }
     }
 
     private void startScan() {
@@ -393,10 +400,10 @@ public class ConnectionActivity extends ViewPagerActivity {
 
         setBusy(true);
 
-        mBluetoothDevice = xDeviceInfoList.get(getMinValue()).getBluetoothDevice();
+        mBluetoothDevice = xDeviceInfoList.get(pos).getBluetoothDevice();
         if (mConnIndex == NO_DEVICE) {
             mScanView.setStatus("Connecting");
-            mConnIndex = getMinValue();
+            mConnIndex =pos;
             onConnect();
         } else {
             mScanView.setStatus("Disconnecting");

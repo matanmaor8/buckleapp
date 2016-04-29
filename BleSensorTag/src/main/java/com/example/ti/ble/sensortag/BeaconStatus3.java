@@ -24,6 +24,7 @@ public class BeaconStatus3 extends Activity {
     BluetoothDevice device;
     private CheckBox ch1, ch2, ch3;
     private Button btn;
+    private Button Startbtn;
     private TextView txt;
     CalibrationActivity Cactivity;
 
@@ -51,6 +52,7 @@ public class BeaconStatus3 extends Activity {
         ch2 = (CheckBox) findViewById(R.id.checkBox2);
         ch3 = (CheckBox) findViewById(R.id.checkBox3);
         btn = (Button) findViewById(R.id.button2);
+        Startbtn= (Button) findViewById(R.id.button);
         txt=  (TextView) findViewById(R.id.textView4);
         Locations=new double[3][2];
         StrLocations=new String[3][2];
@@ -169,7 +171,7 @@ public class BeaconStatus3 extends Activity {
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
                 StrLocations[n][m] = String.valueOf(Locations[n][m]);
-
+        Startbtn.setVisibility(view.GONE);
         btn.setVisibility(1);
         txt.setVisibility(1);
 

@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=" please Sit seat and press &quot;Start&quot; when you are ready"
+        android:text=" please Sit and press &quot;Start&quot; when you are ready"
         android:id="@+id/textView3"
         android:textColor="#f40707"
         android:layout_alignParentTop="true"

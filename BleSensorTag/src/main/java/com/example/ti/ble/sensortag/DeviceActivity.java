@@ -199,10 +199,10 @@ import java.util.Map;
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-        if (mqttProfile != null) {
-            mqttProfile.disconnect();
+    //    if (mqttProfile != null) {
+    //        mqttProfile.disconnect();
 
-        }
+    //    }
         if (mIsReceiving) {
             unregisterReceiver(mGattUpdateReceiver);
             mIsReceiving = false;
@@ -413,8 +413,8 @@ import java.util.Map;
                                 totalCharacteristics += chars.size();
                             }
                             //Special profile for Cloud service
-                            mqttProfile = new IBMIoTCloudProfile(context, mBluetoothDevice, null, mBtLeService);
-                            mProfiles.add(mqttProfile);
+//                            mqttProfile = new IBMIoTCloudProfile(context, mBluetoothDevice, null, mBtLeService);
+  //                          mProfiles.add(mqttProfile);
                             if (totalCharacteristics == 0) {
                                 //Something bad happened, we have a problem
                                 runOnUiThread(new Runnable() {
@@ -734,8 +734,8 @@ import java.util.Map;
                                 Map<String,String> map = p.getMQTTMap();
                                 if (map != null) {
                                     for (Map.Entry<String, String> e : map.entrySet()) {
-                                        if (mqttProfile != null)
-                                            mqttProfile.addSensorValueToPendingMessage(e);
+                                     //   if (mqttProfile != null)
+                                       //     mqttProfile.addSensorValueToPendingMessage(e);
                                     }
                                 }
                             }

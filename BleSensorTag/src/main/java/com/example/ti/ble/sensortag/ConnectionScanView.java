@@ -51,7 +51,7 @@ public class ConnectionScanView extends Fragment {
         // Log.i(TAG, "onCreateView");
 
         // The last two arguments ensure LayoutParams are inflated properly.
-        View view = inflater.inflate(R.layout.activity_calibration, container, false);
+        View view = inflater.inflate(R.layout.activity_connection, container, false);
 
         mActivity = (ConnectionActivity) getActivity();
         mContext = mActivity.getApplicationContext();
@@ -116,7 +116,7 @@ public class ConnectionScanView extends Fragment {
             if (!mBusy) {
                 stopTimers();
                 mBtnScan.setEnabled(true);	// Enable in case of connection timeout
-                mDeviceAdapter.notifyDataSetChanged(); // Force enabling of all Connect buttons
+//                mDeviceAdapter.notifyDataSetChanged(); // Force enabling of all Connect buttons
             }
             mActivity.showBusyIndicator(f);
         }

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:gravity="center"
-        android:text="Press &quot;scan&quot; in order to start the process:"
+        android:text="Press &quot;connect&quot; in order to connect the senssor and start playing:"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -60,6 +60,6 @@
         android:linksClickable="false"
         android:onClick="onBtnScan"
         android:padding="10dp"
-        android:text="@string/button_scan" />
+        android:text="Connect" />
 
 </LinearLayout>
