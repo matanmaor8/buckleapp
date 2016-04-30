@@ -63,8 +63,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 
-
-	// Fragment for Device View
+// Fragment for Device View
 	public class DeviceView extends Fragment {
 
 	public static DeviceView mInstance = null;
@@ -136,4 +135,5 @@ import android.widget.TableRow;
 			mBusy = f;
 		}
 	}
+
 }
