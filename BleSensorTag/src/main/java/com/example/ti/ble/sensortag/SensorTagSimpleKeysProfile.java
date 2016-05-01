@@ -54,21 +54,21 @@
  **************************************************************************************************/
 package com.example.ti.ble.sensortag;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import com.example.ti.ble.common.BluetoothLeService;
 import com.example.ti.ble.common.GattInfo;
 import com.example.ti.ble.common.GenericBluetoothProfile;
-import com.example.ti.util.Point3D;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class SensorTagSimpleKeysProfile extends GenericBluetoothProfile {
 	public SensorTagSimpleKeysProfile(Context con,BluetoothDevice device,BluetoothGattService service,BluetoothLeService controller) {
@@ -134,6 +134,9 @@ public class SensorTagSimpleKeysProfile extends GenericBluetoothProfile {
 				tmpRow.leftKeyPressStateImage.setImageResource(R.drawable.leftkeyoff_300);
 				tmpRow.rightKeyPressStateImage.setImageResource(R.drawable.rightkeyoff_300);
 				tmpRow.reedStateImage.setImageResource(R.drawable.reedrelayon_300);
+				tmpRow.txt1.setText("Belted");
+				tmpRow.txt2.setText("");
+				Log.d("DeviceActivity", "44444444444444444444444444444444444 " );
 				break;
 			case 0x5:
 				tmpRow.leftKeyPressStateImage.setImageResource(R.drawable.leftkeyon_300);
@@ -154,6 +157,9 @@ public class SensorTagSimpleKeysProfile extends GenericBluetoothProfile {
 				tmpRow.leftKeyPressStateImage.setImageResource(R.drawable.leftkeyoff_300);
 				tmpRow.rightKeyPressStateImage.setImageResource(R.drawable.rightkeyoff_300);
 				tmpRow.reedStateImage.setImageResource(R.drawable.reedrelayoff_300);
+				tmpRow.txt2.setText("Not Belted");
+				tmpRow.txt1.setText("");
+				Log.d("DeviceActivity", "000000000000000000000000000000000000000000 ");
 				break;
 			}
 			tmpRow.lastKeys = value[0];

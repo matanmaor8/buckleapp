@@ -54,26 +54,29 @@
  **************************************************************************************************/
 package com.example.ti.ble.sensortag;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.Context;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.ti.util.GenericCharacteristicTableRow;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 	protected byte lastKeys;
 	protected ImageView leftKeyPressStateImage;
 	protected ImageView rightKeyPressStateImage;
 	protected ImageView reedStateImage;
+	protected TextView txt1;
+	protected TextView txt2;
 	protected updateSparkLinesTimerTask sparkLineUpdateTask;
 	protected Timer sparkLineUpdateTimer;
-	
+
 	public SensorTagSimpleKeysTableRow(Context con) {
 		super(con);
 		this.periodBar.setEnabled(false);
@@ -108,35 +111,48 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 			}
 		};
 		this.reedStateImage.setImageResource(R.drawable.reedrelayoff_300);
-		
-		
-		
+
+		this.txt1 = new TextView(con) {
+			{
+				setId(nextGuiId + 4);
+			}
+		};
+		this.txt1.setText("");
+
+		this.txt2 = new TextView(con) {
+			{
+				setId(nextGuiId + 5);
+			}
+		};
+		this.txt2.setText("");
+
+
 		//Setup layout for all cell elements
 		RelativeLayout.LayoutParams iconItemParams = new RelativeLayout.LayoutParams(
-						210,
-						180) {
-					{
-						addRule(RelativeLayout.RIGHT_OF,
-								icon.getId());
-						addRule(RelativeLayout.BELOW, title.getId());
-					}
-					
-				};
-				leftKeyPressStateImage.setLayoutParams(iconItemParams);
-				leftKeyPressStateImage.setPadding(20, 20, 20, 20);
-		
-				iconItemParams = new RelativeLayout.LayoutParams(
-						160,
-						160) {
-					{
-						addRule(RelativeLayout.RIGHT_OF,
-								leftKeyPressStateImage.getId());
-						addRule(RelativeLayout.BELOW, title.getId());
-					}
-					
-				};
-				rightKeyPressStateImage.setPadding(10, 10, 10, 10);
-				rightKeyPressStateImage.setLayoutParams(iconItemParams);	
+				210,
+				180) {
+			{
+				addRule(RelativeLayout.RIGHT_OF,
+						icon.getId());
+				addRule(RelativeLayout.BELOW, title.getId());
+			}
+
+		};
+		leftKeyPressStateImage.setLayoutParams(iconItemParams);
+		leftKeyPressStateImage.setPadding(20, 20, 20, 20);
+
+		iconItemParams = new RelativeLayout.LayoutParams(
+				160,
+				160) {
+			{
+				addRule(RelativeLayout.RIGHT_OF,
+						leftKeyPressStateImage.getId());
+				addRule(RelativeLayout.BELOW, title.getId());
+			}
+
+		};
+		rightKeyPressStateImage.setPadding(10, 10, 10, 10);
+		rightKeyPressStateImage.setLayoutParams(iconItemParams);
 		iconItemParams = new RelativeLayout.LayoutParams(
 				160,
 				160) {
@@ -145,14 +161,14 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 						rightKeyPressStateImage.getId());
 				addRule(RelativeLayout.BELOW, title.getId());
 			}
-			
+
 		};
 		reedStateImage.setLayoutParams(iconItemParams);
 		reedStateImage.setPadding(10, 10, 10, 10);
-		
-		
+
+
 		//Move sparkLines below the state images
-		
+
 		iconItemParams = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT,
 				RelativeLayout.LayoutParams.MATCH_PARENT) {
@@ -161,22 +177,50 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 						icon.getId());
 				addRule(RelativeLayout.BELOW, reedStateImage.getId());
 			}
-			
+
 		};
-		
+
 		this.sl1.setLayoutParams(iconItemParams);
 		this.sl2.setLayoutParams(iconItemParams);
 		this.sl3.setLayoutParams(iconItemParams);
-		
-		
+
+
+		iconItemParams = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.MATCH_PARENT,
+				RelativeLayout.LayoutParams.MATCH_PARENT) {
+			{
+				addRule(RelativeLayout.RIGHT_OF,
+						icon.getId());
+				addRule(RelativeLayout.BELOW, sl1.getId());
+			}
+
+		};
+		this.txt1.setLayoutParams(iconItemParams);
+
+		iconItemParams = new RelativeLayout.LayoutParams(
+				RelativeLayout.LayoutParams.MATCH_PARENT,
+				RelativeLayout.LayoutParams.MATCH_PARENT) {
+			{
+				addRule(RelativeLayout.RIGHT_OF,
+						icon.getId());
+				addRule(RelativeLayout.BELOW, txt1.getId());
+			}
+
+		};
+		this.txt2.setLayoutParams(iconItemParams);
+
+
 		this.rowLayout.addView(leftKeyPressStateImage);
 		this.rowLayout.addView(rightKeyPressStateImage);
 		this.rowLayout.addView(reedStateImage);
-		
+		this.rowLayout.addView(txt1);
+		this.rowLayout.addView(txt2);
+
+
 		this.sparkLineUpdateTimer = new Timer();
 		this.sparkLineUpdateTask = new updateSparkLinesTimerTask(this);
 		this.sparkLineUpdateTimer.scheduleAtFixedRate(this.sparkLineUpdateTask, 1000, 100);
-		
+
 	}
 	@Override
 	public void onClick(View v) {
@@ -200,7 +244,7 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 			this.reedStateImage.startAnimation(fadeIn);
 		}
 	}
-	
+
 	@Override
 	public void onAnimationEnd(Animation animation) {
 		super.onAnimationEnd(animation);
@@ -208,7 +252,7 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 			this.leftKeyPressStateImage.setVisibility(View.INVISIBLE);
 			this.rightKeyPressStateImage.setVisibility(View.INVISIBLE);
 			this.reedStateImage.setVisibility(View.INVISIBLE);
-			
+
 		}
 		else {
 			this.leftKeyPressStateImage.setVisibility(View.VISIBLE);
@@ -219,46 +263,46 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 	class updateSparkLinesTimerTask extends TimerTask  {
 		SensorTagSimpleKeysTableRow param;
 
-	     public updateSparkLinesTimerTask(SensorTagSimpleKeysTableRow param) {
-	    	 this.param = param;
-	     }
+		public updateSparkLinesTimerTask(SensorTagSimpleKeysTableRow param) {
+			this.param = param;
+		}
 
-	     @Override
-	     public void run() {
-	    	this.param.post(new Runnable() {
-	    		 @Override 
-	    		 public void run() {
-	    	
-	    	         if ((param.lastKeys & 0x1) == 0x1) {
-	    	        	 param.sl1.addValue(1);
-	    	         }
-	    	         else param.sl1.addValue(0);
-	    	         if ((param.lastKeys & 0x2) == 0x2) {
-	    	        	 param.sl2.addValue(1);
-	    	         }
-	    	         else param.sl2.addValue(0);
-	    	         if ((param.lastKeys & 0x4) == 0x4) {
-	    	        	 param.sl3.addValue(1);
-	    	         }
-	    	         else param.sl3.addValue(0);
-	    		 }
-	    	 }); 
-	     }
+		@Override
+		public void run() {
+			this.param.post(new Runnable() {
+				@Override
+				public void run() {
+
+					if ((param.lastKeys & 0x1) == 0x1) {
+						param.sl1.addValue(1);
+					}
+					else param.sl1.addValue(0);
+					if ((param.lastKeys & 0x2) == 0x2) {
+						param.sl2.addValue(1);
+					}
+					else param.sl2.addValue(0);
+					if ((param.lastKeys & 0x4) == 0x4) {
+						param.sl3.addValue(1);
+					}
+					else param.sl3.addValue(0);
+				}
+			});
+		}
 	}
-    @Override
-    public void grayedOut(boolean gray) {
-        super.grayedOut(gray);
-        if (gray) {
-            this.leftKeyPressStateImage.setAlpha(0.4f);
-            this.rightKeyPressStateImage.setAlpha(0.4f);
-            this.reedStateImage.setAlpha(0.4f);
-            this.sl3.setAlpha(0.2f);
-        }
-        else {
-            this.leftKeyPressStateImage.setAlpha(1.0f);
-            this.rightKeyPressStateImage.setAlpha(1.0f);
-            this.reedStateImage.setAlpha(1.0f);
-            this.sl3.setAlpha(1.0f);
-        }
-    }
+	@Override
+	public void grayedOut(boolean gray) {
+		super.grayedOut(gray);
+		if (gray) {
+			this.leftKeyPressStateImage.setAlpha(0.4f);
+			this.rightKeyPressStateImage.setAlpha(0.4f);
+			this.reedStateImage.setAlpha(0.4f);
+			this.sl3.setAlpha(0.2f);
+		}
+		else {
+			this.leftKeyPressStateImage.setAlpha(1.0f);
+			this.rightKeyPressStateImage.setAlpha(1.0f);
+			this.reedStateImage.setAlpha(1.0f);
+			this.sl3.setAlpha(1.0f);
+		}
+	}
 }

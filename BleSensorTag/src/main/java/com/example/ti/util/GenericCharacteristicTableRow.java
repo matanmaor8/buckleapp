@@ -345,7 +345,7 @@ public class GenericCharacteristicTableRow extends TableRow implements View.OnCl
 		rowLayout.addView(this.periodLegend);
 		rowLayout.addView(this.periodBar);
 		rowLayout.addView(this.calibrateButton);
-		
+
 		this.addView(rowLayout);
 	}
 	
