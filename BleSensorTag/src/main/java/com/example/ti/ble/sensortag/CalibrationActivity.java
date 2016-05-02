@@ -76,9 +76,9 @@ public class CalibrationActivity extends ViewPagerActivity {
     public int minor =0;
     public int txPower =-55;
     public String uuid="";
-    public double dist;
     public int SumRssi=0;
     public int counterRssi=0;
+    private int i=0;
     public RangedIBeacon rangedIBeacon;
     private Map<BleDeviceInfo,RangedIBeacon> rangedIBeacons = new HashMap<BleDeviceInfo,RangedIBeacon>();
     public BleDeviceInfo[] DeviceArray =new BleDeviceInfo[3];
@@ -301,7 +301,12 @@ public class CalibrationActivity extends ViewPagerActivity {
         Log.d("CalibrationActivity", "66666666666666666666666666666666  latitude:" +lat);
         Log.d("CalibrationActivity", "66666666666666666666666666666666  longitude:" +lng);
 
+        Log.d("CalibrationActivity", "00000000000000000000000 device1:"+rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi());
+        Log.d("CalibrationActivity", "11111111111111111111111 device2:"+rangedIBeacons.get(DeviceArray[1]).getAvaragedRssi());
+        Log.d("CalibrationActivity", "22222222222222222222222 device3:"+rangedIBeacons.get(DeviceArray[2]).getAvaragedRssi());
         mDeviceInfoList.get(0).setAvaragedRssi(rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi());
+        mDeviceInfoList.get(1).setAvaragedRssi(rangedIBeacons.get(DeviceArray[1]).getAvaragedRssi());
+        mDeviceInfoList.get(2).setAvaragedRssi(rangedIBeacons.get(DeviceArray[2]).getAvaragedRssi());
         //      for (int i = 0; i < mDeviceInfoList.size(); i++) {
             distance[0]= mDeviceInfoList.get(0).getAccuracy();
    //         distance[1]= mDeviceInfoList.get(1).getAccuracy();
@@ -415,7 +420,7 @@ public class CalibrationActivity extends ViewPagerActivity {
         //CustomToast.middleBottom(this, "Turning BT adapter off and on again may fix Android BLE stack problems");
     }
 
-    private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower, double dist) {
+    private BleDeviceInfo createDeviceInfo(BluetoothDevice device, int rssi, int major,int minor, String UUID1, int txPower) {
         BleDeviceInfo deviceInfo = new BleDeviceInfo(device, rssi, major,minor,UUID1,txPower);
 
         return deviceInfo;
@@ -588,7 +593,7 @@ public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.Le
             runOnUiThread(new Runnable() {
                 public void run() {
                     // Filter devices
-                    int i=0;
+
                     if (checkDeviceFilter(device.getName())) {
                         Log.d("MainActivity", "Entra en onLeScan55555555555555555555555555555555555555");
                         byte[] uuidBytes = new byte[16];
@@ -615,7 +620,7 @@ public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.Le
           //              dist=calculateAccuracy(-49,rssi);
           //              dist=calDistToDeg(calFeetToMeter(calcDistance(rssi)));
 
-                        Log.d("MainActivity", " MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid +" distance: "+dist);
+                        Log.d("MainActivity", " MAJOR:" + major + " MINOR: " + minor + " TXPOWER: " + txPower +" and UUID: " + uuid);
     /*
 							String major = String.format("%02x", scanRecord[25]) + String.format("%02x", scanRecord[26]);
         String minor = String.format("%02x", scanRecord[27]) + String.format("%02x", scanRecord[28]);
@@ -634,16 +639,21 @@ public BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.Le
 
                         if (!deviceInfoExists(device.getAddress())) {
                             // New device
-                            BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower,dist);
-                            addDevice(deviceInfo);
+                            Log.d("MainActivity", "88888888888888888888777777777777777777755555555555555: ");
+                            BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower);
+                            DeviceArray[i]=deviceInfo;
+                            Log.d("MainActivity", "88888888888888888888 device address: "+DeviceArray[i].getBluetoothDevice() +"  "+i);
+                            i++;
                             rangedIBeacons.put(deviceInfo, new RangedIBeacon(deviceInfo));
+                            addDevice(deviceInfo);
+
                         } else {
                             // Already in list, update RSSI info
                             BleDeviceInfo deviceInfo = findDeviceInfo(device);
-                            DeviceArray[i++]=deviceInfo;
+
                             rangedIBeacons.get(deviceInfo).addRangeMeasurement((int) deviceInfo.getRssi());
 
-                            Log.d("MainActivity", "555 running avarage rssi: "+rangedIBeacons.get(deviceInfo).getAvaragedRssi() );
+                            Log.d("MainActivity", "555 running avarage rssi: "+rangedIBeacons.get(deviceInfo).getAvaragedRssi()+" 555 "+rangedIBeacons.get(deviceInfo).getBluetoothDevice() );
                             deviceInfo.updateRssi(rssi);
                             mScanView.notifyDataSetChanged();
                         }

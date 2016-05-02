@@ -79,6 +79,7 @@ public class MainActivity extends ViewPagerActivity {
 	public double dist;
 	public int SumRssi=0;
 	public int counterRssi=0;
+	private int i=0;
 	public RangedIBeacon rangedIBeacon;
 	private Map<BleDeviceInfo,RangedIBeacon> rangedIBeacons = new HashMap<BleDeviceInfo,RangedIBeacon>();
 	public BleDeviceInfo[] DeviceArray =new BleDeviceInfo[3];
@@ -339,6 +340,8 @@ public class MainActivity extends ViewPagerActivity {
 		Log.d("CalibrationActivity", "66666666666666666666666666666666  longitude:" + lng);
 
 		xDeviceInfoList.get(0).setAvaragedRssi(rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi());
+		xDeviceInfoList.get(1).setAvaragedRssi(rangedIBeacons.get(DeviceArray[1]).getAvaragedRssi());
+		xDeviceInfoList.get(2).setAvaragedRssi(rangedIBeacons.get(DeviceArray[2]).getAvaragedRssi());
 		//      for (int i = 0; i < xDeviceInfoList.size(); i++) {
 		distance[0]= xDeviceInfoList.get(0).getAccuracy();
 		//         distance[1]= xDeviceInfoList.get(1).getAccuracy();
@@ -646,7 +649,7 @@ public class MainActivity extends ViewPagerActivity {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					// Filter devices
-					int i=0;
+
 					if (checkDeviceFilter(device.getName())) {
 						Log.d("MainActivity", "Entra en onLeScan55555555555555555555555555555555555555");
 						byte[] uuidBytes = new byte[16];
@@ -692,13 +695,17 @@ public class MainActivity extends ViewPagerActivity {
 
 						if (!deviceInfoExists(device.getAddress())) {
 							// New device
+							Log.d("MainActivity", "88888888888888888888777777777777777777755555555555555: ");
 							BleDeviceInfo deviceInfo = createDeviceInfo(device, rssi, major, minor, uuid,txPower,dist);
+							DeviceArray[i]=deviceInfo;
+							Log.d("MainActivity", "88888888888888888888 device address: "+DeviceArray[i].getBluetoothDevice() +"  "+i);
+							i++;
 							addDevice(deviceInfo);
 							rangedIBeacons.put(deviceInfo, new RangedIBeacon(deviceInfo));
 						} else {
 							// Already in list, update RSSI info
 							BleDeviceInfo deviceInfo = findDeviceInfo(device);
-							DeviceArray[i++]=deviceInfo;
+
 							rangedIBeacons.get(deviceInfo).addRangeMeasurement((int) deviceInfo.getRssi());
 
 							Log.d("MainActivity", "555 running avarage rssi: "+rangedIBeacons.get(deviceInfo).getAvaragedRssi() );

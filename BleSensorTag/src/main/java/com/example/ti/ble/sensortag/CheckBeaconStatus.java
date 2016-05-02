@@ -161,12 +161,20 @@ public class CheckBeaconStatus extends Activity {
         wifiLocation[0][1] = longitude;
         wifiLocation[0][2] = mDevices.get(0).getAvaragedRssi();
         wifiLocation[0][3] = mDevices.get(0).getAccuracy();
+        wifiLocation[1][0] = latitude;
+        wifiLocation[1][1] = longitude;
+        wifiLocation[1][2] = mDevices.get(1).getAvaragedRssi();
+        wifiLocation[1][3] = mDevices.get(1).getAccuracy();
+        wifiLocation[2][0] = latitude;
+        wifiLocation[2][1] = longitude;
+        wifiLocation[2][2] = mDevices.get(2).getAvaragedRssi();
+        wifiLocation[2][3] = mDevices.get(2).getAccuracy();
         Log.d("CalibrationActivity", "333333333333333333333333333333333  longitude:" + wifiLocation[0][0]);
         Log.d("CalibrationActivity", "333333333333333333333333333333333  latitute:" + wifiLocation[0][1]);
         Log.d("CalibrationActivity", "333333333333333333333333333333333  avarage RSSI:" + wifiLocation[0][2]);
         Log.d("CalibrationActivity", "333333333333333333333333333333333  accuracy:" + wifiLocation[0][3]);
 
-        myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3]);
+        myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[1][0], wifiLocation[1][1], wifiLocation[1][2], wifiLocation[1][3], wifiLocation[2][0], wifiLocation[2][1], wifiLocation[2][2], wifiLocation[2][3]);
 
         Log.d("CalibrationActivity", "11111111113333333333333My Location :" + myLocation[0] + "  , " + myLocation[1]);
         Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[0][0] + "  , " + xLocations[0][1]);
