@@ -81,6 +81,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mLoginFormView;
     boolean cancel = false;
     private Button btn;
+    public String email;
+    public String password;
     private final String USER_AGENT = "application/json";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,8 +159,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
 
  //       boolean cancel = false;
         cancel=false;
@@ -455,6 +457,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
                 HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
                 con.setRequestMethod("GET");
+                con.setRequestProperty("Email", email);
+                con.setRequestProperty("password", password);
                 con.setRequestProperty("Content-Type", "application/json");
      //           con.setUseCaches(false);
      //           con.setDoInput(true);
