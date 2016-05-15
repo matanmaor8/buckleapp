@@ -107,7 +107,7 @@ public class Trilateration {
         double tmpX, tmpY;
         //ArrayList<Double> myLocation = null;
         double[]  myLocation = new double[3];
-
+        Log.d("Trilateration", "77777rotation X AND Y :" +x + "   " + y + "   " + deg);
         tmpX = x*Math.cos((Math.PI/180)*deg)-y*Math.sin((Math.PI/180)*deg);
         tmpY = x*Math.sin((Math.PI/180)*deg)+y*Math.cos((Math.PI/180)*deg);
 
@@ -116,7 +116,7 @@ public class Trilateration {
         myLocation[0] = tmpX;
         myLocation[1] = tmpY;
         myLocation[2] = dist;
-
+        Log.d("Trilateration", "77777rotation My Location :" + myLocation[0] + "   " + myLocation[1] + "   " + myLocation[2]);
         return myLocation;
     }
 
@@ -135,18 +135,20 @@ public class Trilateration {
         double MyLat, MyLong;
 
         double[] MyLocation = new double[2];
-
+        Log.d("Trilateration", "lat1: " +Lat1  + " long1: " + Long1 + " rssi1: " + rssi1+" distance1: "+distance1);
+        Log.d("Trilateration", "lat2: " +Lat2  + " long2: " + Long2 + " rssi2: " + rssi2+" distance2: "+distance2);
+        Log.d("Trilateration", "lat3: " +Lat3  + " long3: " + Long3 + " rssi3: " + rssi3+" distance3: "+distance3);
 //		 dist1 = calDistToDeg(5);	//calDistToDeg(calcDistance(rssi1));
 //		 dist2 = calDistToDeg(6);	//calDistToDeg(calcDistance(rssi2));
 //		 dist3 = calDistToDeg(7);	//calDistToDeg(calcDistance(rssi3));
 
-//            dist1 = calDistToDeg(distance1);
-//            dist2 = calDistToDeg(distance2);
-//            dist3 = calDistToDeg(distance3);
+            dist1 = calDistToDeg(distance1);
+            dist2 = calDistToDeg(distance2);
+            dist3 = calDistToDeg(distance3);
 //*******************************************************************************************************************************
-        dist1 = calDistToDeg(calFeetToMeter(calcDistance(rssi1)));
-        dist2 = calDistToDeg(calFeetToMeter(calcDistance(rssi2)));
-        dist3 = calDistToDeg(calFeetToMeter(calcDistance(rssi3)));
+ //       dist1 = calDistToDeg(calFeetToMeter(calcDistance(rssi1)));
+//        dist2 = calDistToDeg(calFeetToMeter(calcDistance(rssi2)));
+ //       dist3 = calDistToDeg(calFeetToMeter(calcDistance(rssi3)));
 //**********************************************************************************************************************************
         //test
 //		 dist1 = calDistToDeg(calFeetToMeter(53));
@@ -159,9 +161,11 @@ public class Trilateration {
         tmpLong3 	= Long3 - Long1;
 
         tmpSlide = Math.sqrt(Math.pow(tmpLat2,2)+Math.pow(tmpLong2,2));
+        Log.d("Trilateration", "tmpSlide: " +tmpSlide);
 
         //deg = (180/Math.PI)*Math.acos( ((Math.pow(tmpLat2,2) + Math.pow(tmpSlide,2) - Math.pow(tmpLong2, 2)) / (2*tmpLat2*tmpSlide)) );
-        deg = (180/Math.PI)*Math.acos( Math.abs(tmpLat2)/Math.abs(tmpSlide));
+        deg = (180/Math.PI)*Math.acos(Math.abs(tmpLat2) / Math.abs(tmpSlide));
+        Log.d("Trilateration", "deg: " +deg);
 
         // 1 quadrant
         if( (tmpLat2>0 && tmpLong2>0) ) {
@@ -195,7 +199,7 @@ public class Trilateration {
 
         MyLocation[0] = MyLocation[0] + Lat1;
         MyLocation[1] = MyLocation[1] + Long1;
-        Log.d("CalibrationActivity", "8888888 My Location :" + MyLocation[0] + "   " + MyLocation[1]);
+        Log.d("Trilateration", "8888888 My Location :" + MyLocation[0] + "   " + MyLocation[1]);
         return MyLocation;
     }
 }

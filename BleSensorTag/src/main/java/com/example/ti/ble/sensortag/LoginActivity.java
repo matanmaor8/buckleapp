@@ -8,6 +8,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,8 +27,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.SocketFactory;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 
 /**
@@ -54,6 +81,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mLoginFormView;
     boolean cancel = false;
     private Button btn;
+    private final String USER_AGENT = "application/json";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +96,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                  //  attemptLogin();
                     return true;
                 }
                 return false;
@@ -79,7 +107,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                try {
+                    attemptLogin();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if(!cancel){
                     Log.i("Android", " 111111111111111111111111111111111111111");
                     Intent myIntent = new Intent(view.getContext(), MainActivity.class);
@@ -115,7 +147,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void attemptLogin() throws IOException {
         if (mAuthTask != null) {
             return;
         }
@@ -163,7 +195,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
+        new GetClass().execute();
     }
+
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -321,5 +355,211 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
         }
     }
+
+    private class GetClass extends AsyncTask<String, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(String... params) {
+            CertificateFactory cf;
+            try {
+                cf = CertificateFactory.getInstance("X.509");
+                AssetManager assManager = getApplicationContext().getAssets();
+                InputStream is = null;
+                try {
+                    is = assManager.open("ca.crt");
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                InputStream caInput = new BufferedInputStream(is);
+    //            InputStream caInput = new BufferedInputStream(new FileInputStream("assets/ca.crt"));
+             //  InputStream in = this.mContext.getResources().openRawResource(R.raw.cert);
+
+                Certificate ca;
+                try {
+                    ca = cf.generateCertificate(caInput);
+                    System.out.println("ca=" + ((X509Certificate) ca).getSubjectDN());
+                } finally {
+                    caInput.close();
+                }
+
+// Create a KeyStore containing our trusted CAs
+     /*           String keyStoreType = KeyStore.getDefaultType();
+                KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+                keyStore.load(null, null);
+                keyStore.setCertificateEntry("ca", ca);
+    */
+// Create a TrustManager that trusts the CAs in our KeyStore
+    /*            String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+                TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+                tmf.init(keyStore);
+    */
+
+
+// Create an SSLContext that uses our TrustManager
+    /*            SSLContext context = SSLContext.getInstance("TLS");
+                context.init(null, tmf.getTrustManagers(), null);
+    */
+                String keyStoreType = KeyStore.getDefaultType();
+                KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+                keyStore.load(null, null);
+                keyStore.setCertificateEntry("ca", ca);// my question shows how to get 'ca'
+                TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+// Initialise the TMF as you normally would, for example:
+                tmf.init(keyStore);
+
+                TrustManager[] trustManagers = tmf.getTrustManagers();
+                final X509TrustManager origTrustmanager = (X509TrustManager)trustManagers[0];
+
+                TrustManager[] trustAllCerts = new TrustManager[]{
+                        new X509TrustManager() {
+                            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                                return null;
+                            }
+                            public void checkClientTrusted(
+                                    java.security.cert.X509Certificate[] certs, String authType) {
+                            }
+                            public void checkServerTrusted(
+                                    java.security.cert.X509Certificate[] certs, String authType) {
+                            }
+                        }
+                };
+
+// Install the all-trusting trust manager
+                try {
+                    SSLContext sc = SSLContext.getInstance("SSL");
+                    sc.init(null, trustAllCerts, new java.security.SecureRandom());
+                    HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+                } catch (Exception e) {
+                }
+
+                SSLContext sslcontext = SSLContext.getInstance("TLSv1");
+
+                sslcontext.init(null, null,
+                        null);
+                NoSSLv3SocketFactory NoSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
+    //            SSLSocketFactory NoSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
+                HttpsURLConnection.setDefaultSSLSocketFactory(NoSSLv3Factory);
+      //          l_connection = (HttpsURLConnection) l_url.openConnection();
+      //          l_connection.connect();
+                // Open SSLSocket directly to gmail.com
+                SocketFactory sf = SSLSocketFactory.getDefault();
+                SSLSocket socket = (SSLSocket) sf.createSocket("54.174.88.49", 3000);
+                HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
+                SSLSession s = socket.getSession();
+
+                String url = "https://54.174.88.49:3000/loginApp";
+                URL obj = new URL(url);
+                trustAllHosts();
+
+                HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("Content-Type", "application/json");
+     //           con.setUseCaches(false);
+     //           con.setDoInput(true);
+     //           con.setDoOutput(true);
+                con.setHostnameVerifier(DO_NOT_VERIFY);
+                con.connect();
+                //          con.setSSLSocketFactory(context.getSocketFactory());
+      //          InputStream in = con.getInputStream();
+      //          copyInputStreamToOutputStream(in, System.out);
+      //         String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+                // optional default is GET
+     //           con.setRequestMethod("GET");
+
+
+     //           con.setRequestProperty("User-Agent", "application/json");
+
+      //          con.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
+      //          con.setRequestProperty("Accept-Encoding", "");
+      //          con.setDoOutput(true);
+
+    /*            DataOutputStream dStream = new DataOutputStream(con.getOutputStream());
+                dStream.writeBytes(urlParameters);
+                dStream.flush();
+                dStream.close();
+   */             //     con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+    //            con.setConnectTimeout(5000); //set timeout to 5 seconds
+                int responseCode = con.getResponseCode();
+                System.out.println("\nSending 'GET' request to URL : " + url);
+                System.out.println("Response Code : " + responseCode);
+     /*
+                final StringBuilder output = new StringBuilder("Request URL " + url);
+                output.append(System.getProperty("line.separator") + "Request Parameters " + urlParameters);
+                output.append(System.getProperty("line.separator") + "Response Code " + responseCode);
+*/
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                //print result
+                System.out.println(response.toString());
+
+
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        final HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
+            public boolean verify(String hostname, SSLSession session) {
+                return true;
+            }
+        };
+
+        /**
+         * Trust every server - dont check for any certificate
+         */
+        private void trustAllHosts() {
+            // Create a trust manager that does not validate certificate chains
+            TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                    return new java.security.cert.X509Certificate[] {};
+                }
+
+                public void checkClientTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {
+                }
+
+                public void checkServerTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {
+                }
+            } };
+
+            // Install the all-trusting trust manager
+            try {
+                SSLContext sc = SSLContext.getInstance("TLS");
+                sc.init(null, trustAllCerts, new java.security.SecureRandom());
+                HttpsURLConnection
+                        .setDefaultSSLSocketFactory(sc.getSocketFactory());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
+
 }
 

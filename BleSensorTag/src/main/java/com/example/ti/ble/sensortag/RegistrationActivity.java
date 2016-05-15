@@ -25,8 +25,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 /**
@@ -73,7 +79,11 @@ public class RegistrationActivity extends Activity implements LoaderCallbacks<Cu
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    try {
+                        attemptLogin();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     return true;
                 }
                 return false;
@@ -84,7 +94,11 @@ public class RegistrationActivity extends Activity implements LoaderCallbacks<Cu
         next.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                try {
+                    attemptLogin();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if (flag==1)
                 {
                     Intent myIntent = new Intent(view.getContext(), CalibrationActivity.class);
@@ -108,7 +122,7 @@ public class RegistrationActivity extends Activity implements LoaderCallbacks<Cu
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void attemptLogin() throws IOException {
         if (mAuthTask != null) {
             return;
         }
@@ -170,8 +184,41 @@ public class RegistrationActivity extends Activity implements LoaderCallbacks<Cu
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-
+   //         sendToSever(email,password);
         }
+
+
+    }
+
+    private void sendToSever(String email,String password ) throws IOException {
+
+        URL url = new URL("https://54.174.88.49:3000/CreateAccount");
+
+        HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("username", email);
+        connection.setRequestProperty("password", password);
+        connection.setDoOutput(true);
+/*        DataOutputStream dStream = new DataOutputStream(connection.getOutputStream());
+        dStream.writeBytes(urlParameters);
+        dStream.flush();
+        dStream.close();
+   */     int responseCode = connection.getResponseCode();
+        final StringBuilder output = new StringBuilder("Request URL " + url);
+        output.append(System.getProperty("line.separator") + "Request Parameters " + urlParameters);
+        output.append(System.getProperty("line.separator")  + "Response Code " + responseCode);
+        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line = "";
+        StringBuilder responseOutput = new StringBuilder();
+        while((line = br.readLine()) != null ) {
+            responseOutput.append(line);
+        }
+        br.close();
+
+        output.append(System.getProperty("line.separator") + "Response " + System.getProperty("line.separator") + System.getProperty("line.separator") + responseOutput.toString());
+
+
     }
 
     private boolean isEmailValid(String email) {
