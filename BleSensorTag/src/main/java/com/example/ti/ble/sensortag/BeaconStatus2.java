@@ -28,8 +28,9 @@ public class BeaconStatus2 extends Activity {
     private double[][] wifiLocation;
     //	private double myLatitude, myLongitude;
     private double[] myLocation = new double[2];
-    public double [][]Locations;
-    public String [][]StrLocations;
+ //   public double [][]Locations;
+ //   public String [][]StrLocations;
+    public String []StrLocation;
     double distance[] = new double[3];
     double rssi[] = new double[3];
     location loc = new location();
@@ -45,21 +46,31 @@ public class BeaconStatus2 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beacon_status2);
-        ch1 = (CheckBox) findViewById(R.id.checkBox);
-        ch2 = (CheckBox) findViewById(R.id.checkBox2);
-        ch3 = (CheckBox) findViewById(R.id.checkBox3);
-        Locations=new double[3][2];
-        StrLocations=new String[3][2];
+        ch1 = (CheckBox) findViewById(R.id.checkBox4);
+        ch2 = (CheckBox) findViewById(R.id.checkBox5);
+        ch3 = (CheckBox) findViewById(R.id.checkBox6);
+//        Locations=new double[3][2];
+//        StrLocations=new String[3][2];
+//        StrLocation=new String[3];
         Intent i = getIntent();
         mDevices = (List) i.getParcelableArrayListExtra("list");
         Bundle b = getIntent().getExtras();
       //****************************************************************************************
-        String[][] arrayReceived=null;
+ /*       String[][] arrayReceived=null;
         Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
         if(objectArray!=null){
             arrayReceived = new String[objectArray.length][];
             for(int j=0;j<objectArray.length;j++){
                 arrayReceived[j]=(String[]) objectArray[j];
+            }
+        }*/
+  //      String[][] arrayReceived2=null;
+        Object[] objectArray2 = (Object[]) getIntent().getExtras().getSerializable("LocArray");
+        if(objectArray2!=null){
+            StrLocation = new String[objectArray2.length];
+            for(int j=0;j<objectArray2.length;j++){
+                StrLocation[j]= (String) objectArray2[j];
+                Log.d("CalibrationActivity", "777777788888888999999999999  Locations:" + StrLocation[j]);
             }
         }
 
@@ -69,7 +80,7 @@ public class BeaconStatus2 extends Activity {
         for(int n = 0; n < 3; n++)
             for(int m = 0; m < 2; m++)
         {
-            Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
+//            Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
         }
         //////////////////////////////////////////***************************************************************
 
@@ -95,7 +106,7 @@ public class BeaconStatus2 extends Activity {
         //       List<BleDeviceInfo> deviceList = Cactivity.getDeviceInfoList();
         //       mDevices=Cactivity.mDeviceInfoList;
         if (mDevices.get(0).getAvaragedRssi() >= -90.0) {
-            Log.d("CalibrationActivity", "101010101010101010101010101011010  xLocations:" + Locations[0][0] +"  "+Locations[0][1]);
+ //           Log.d("CalibrationActivity", "101010101010101010101010101011010  xLocations:" + Locations[0][0] +"  "+Locations[0][1]);
             Log.d("CalibrationActivity", "101010101010101010101010101011010  avarage RSSI:" + mDevices.get(0).getAvaragedRssi());
             Log.d("CalibrationActivity", "101010101010101010101010101011010  major:" + mDevices.get(0).getmajor());
             Log.d("CalibrationActivity", "101010101010101010101010101011010  minor:" + mDevices.get(0).getminor());
@@ -112,8 +123,9 @@ public class BeaconStatus2 extends Activity {
         }
         //      locationListener = new MyLocationListener();
         wifiLocation = new double[3][4];
-        Locations=new double[3][2];
-        StrLocations=new String[3][2];
+//        Locations=new double[3][2];
+//        StrLocations=new String[3][2];
+//        StrLocation=new String[3];
 
     }
     public void onStart(View view) {
@@ -141,7 +153,7 @@ public class BeaconStatus2 extends Activity {
         }*/
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
 
@@ -157,14 +169,14 @@ public class BeaconStatus2 extends Activity {
         wifiLocation[2][1] = longitude;
         wifiLocation[2][2] = mDevices.get(2).getAvaragedRssi();
         wifiLocation[2][3] = mDevices.get(2).getAccuracy();
-        Log.d("CalibrationActivity", "333333333333333333333333333333333  longitude:" + wifiLocation[0][0]);
-        Log.d("CalibrationActivity", "333333333333333333333333333333333  latitute:" + wifiLocation[0][1]);
-        Log.d("CalibrationActivity", "333333333333333333333333333333333  avarage RSSI:" + wifiLocation[0][2]);
-        Log.d("CalibrationActivity", "333333333333333333333333333333333  accuracy:" + wifiLocation[0][3]);
+        Log.d("CalibrationActivity", "444444444444444444444444444444444  longitude:" + longitude);
+        Log.d("CalibrationActivity", "444444444444444444444444444444444  latitute:" + latitude);
+        Log.d("CalibrationActivity", "444444444444444444444444444444444  avarage RSSI:" + wifiLocation[0][2]);
+        Log.d("CalibrationActivity", "444444444444444444444444444444444  accuracy:" + wifiLocation[0][3]);
 
         myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[1][0], wifiLocation[1][1], wifiLocation[1][2], wifiLocation[1][3], wifiLocation[2][0], wifiLocation[2][1], wifiLocation[2][2], wifiLocation[2][3]);
-        Locations[1][0]=myLocation[0];
-        Locations[1][1]=myLocation[1];
+//        Locations[1][0]=myLocation[0];
+//        Locations[1][1]=myLocation[1];
         Log.d("CalibrationActivity", "8888888888 My Location :" + myLocation[0] + "   " + myLocation[1]);
         ch1.setChecked(false);
         ch2.setChecked(true);
@@ -173,20 +185,33 @@ public class BeaconStatus2 extends Activity {
         {
             i++;
         }
+        StrLocation[1]=mDevices.get(getMinValue()).getBluetoothDevice().toString();
+        Log.d("CalibrationActivity", "1111111111111999999999999999999  device222:" + StrLocation[1]);
         for (int n = 0; n < 3; n++)
             for (int m = 0; m < 2; m++)
-                StrLocations[n][m] = String.valueOf(Locations[n][m]);
+  //              StrLocations[n][m] = String.valueOf(Locations[n][m]);
         startBeaconStatusActivity();
 
     }
-
+    public int getMinValue(){
+        int index=0;
+        double minValue = mDevices.get(0).getAccuracy();
+        for(int i=0;i<mDevices.size();i++){
+            if(mDevices.get(i).getAccuracy() < minValue){
+                minValue = mDevices.get(i).getAccuracy();
+                index=i;
+            }
+        }
+        return index;
+    }
     private void startBeaconStatusActivity() {
 //        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
         ///      appContext.mDeviceInfoList= mDeviceInfoList;
-        Intent i =  new Intent(this, BeaconStatus3.class);
+        Intent i =  new Intent(this, CalibrationActivity3.class);
         i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
         Bundle mBundle = new Bundle();
-        mBundle.putSerializable("Array",  StrLocations);
+ //       mBundle.putSerializable("Array",  StrLocations);
+        mBundle.putSerializable("LocArray",  StrLocation);
         i.putExtras(mBundle);
   /*      Bundle b= new Bundle();
         b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);

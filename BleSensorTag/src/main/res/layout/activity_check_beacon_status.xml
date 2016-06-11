@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/imageView2"
-        android:src="@drawable/backseat"
+        android:src="@drawable/backseatcapture"
         android:background="#3c8dcf"
         style="@android:style/Animation.Activity"
         android:layout_alignParentTop="true" />
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=" please Sit and press &quot;Start&quot; when you are ready"
+        android:text="please, fasten your seatbelt and press &quot;start&quot; ."
         android:id="@+id/textView3"
         android:textColor="#f40707"
         android:layout_alignParentTop="true"
@@ -29,30 +29,26 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox4"
         android:checked="false"
-        android:layout_marginEnd="47dp"
         android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_toEndOf="@+id/button6" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBox5"
         android:checked="false"
-        android:layout_toEndOf="@+id/button"
-        android:layout_alignBottom="@+id/checkBox"
-        android:layout_alignTop="@+id/checkBox"
-        android:layout_alignStart="@+id/button" />
+        android:layout_alignTop="@+id/checkBox4"
+        android:layout_centerHorizontal="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBox6"
         android:checked="false"
-        android:layout_alignTop="@+id/checkBox2"
-        android:layout_marginStart="57dp" />
-
+        android:layout_alignTop="@+id/checkBox5"
+        android:layout_toStartOf="@+id/button6" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,5 +58,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="68dp"
         android:onClick="onStart" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ready to go"
+        android:id="@+id/button6"
+        android:onClick="onFinish"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 
 </RelativeLayout>

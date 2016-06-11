@@ -119,6 +119,18 @@
         </activity>
         <activity android:name=".ConnectionActivity" >
         </activity>
+        <activity
+            android:name=".GetLocationActivity"
+            android:label="@string/title_activity_get_location" >
+        </activity>
+        <activity
+            android:name=".CalibrationActivity2"
+            android:label="@string/title_activity_calibration2" >
+        </activity>
+        <activity
+            android:name=".CalibrationActivity3"
+            android:label="@string/title_activity_calibration3" >
+        </activity>
     </application>
 
 </manifest>

@@ -123,26 +123,26 @@ public class ConnectionActivity extends ViewPagerActivity {
         //****************************************************************************************
         String previousActivity= i.getStringExtra("FROM_ACTIVITY");
 
-            String[][] arrayReceived=null;
-            Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
-            if(objectArray!=null){
-                arrayReceived = new String[objectArray.length][];
-                for(int j=0;j<objectArray.length;j++){
-                    arrayReceived[j]=(String[]) objectArray[j];
+ //           String[][] arrayReceived=null;
+ //           Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
+ //           if(objectArray!=null){
+ //               arrayReceived = new String[objectArray.length][];
+    //            for(int j=0;j<objectArray.length;j++){
+  //                  arrayReceived[j]=(String[]) objectArray[j];
                     Log.d("CalibrationActivity", "6666666666666666666666666666666677777777777777777778888888888888888888888888");
-                }
-            }
+   //             }
+   //         }
 
 
             //******************************************************************************************
 
             //   StrLocations = (String[][]) b.getSerializable("Array");
-            for(int n = 0; n < 3; n++)
-                for(int m = 0; m < 2; m++)
-                {
-                    Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
-                    Log.d("CalibrationActivity", "2222222222222222222222777777777777777777788888888888"+Locations[n][m]);
-                }
+ //           for(int n = 0; n < 3; n++)
+ //               for(int m = 0; m < 2; m++)
+ //               {
+  //                  Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
+  //                  Log.d("CalibrationActivity", "2222222222222222222222777777777777777777788888888888"+Locations[n][m]);
+ //               }
             //////////////////////////////////////////***************************************************************
 
 
@@ -154,8 +154,8 @@ public class ConnectionActivity extends ViewPagerActivity {
         mFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
         mFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
 
-        Locations=new double[3][2];
-        StrLocations=new String[3][2];
+ //       Locations=new double[3][2];
+ //       StrLocations=new String[3][2];
     }
 
 

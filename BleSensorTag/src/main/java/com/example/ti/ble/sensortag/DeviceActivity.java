@@ -186,10 +186,10 @@ import java.util.Map;
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-    //    if (mqttProfile != null) {
-    //        mqttProfile.disconnect();
+        if (mqttProfile != null) {
+            mqttProfile.disconnect();
 
-    //    }
+        }
         if (mIsReceiving) {
             unregisterReceiver(mGattUpdateReceiver);
             mIsReceiving = false;
@@ -217,6 +217,7 @@ import java.util.Map;
 		inflater.inflate(R.menu.device_activity_actions, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

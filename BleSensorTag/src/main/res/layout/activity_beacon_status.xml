@@ -20,37 +20,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sit please in the marked seat and press &quot;Start&quot; when you are ready"
+        android:text="Press &quot;start&quot;"
         android:id="@+id/textView3"
         android:textColor="#f40707"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="27dp" />
+        android:layout_centerHorizontal="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox4"
         android:checked="false"
-        android:layout_marginEnd="47dp"
         android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_toEndOf="@+id/textView3" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox2"
+        android:id="@+id/checkBox5"
         android:checked="false"
         android:layout_toEndOf="@+id/button"
-        android:layout_alignBottom="@+id/checkBox"
-        android:layout_alignTop="@+id/checkBox"
+        android:layout_alignBottom="@+id/checkBox4"
+        android:layout_alignTop="@+id/checkBox4"
         android:layout_alignStart="@+id/button" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBox6"
         android:checked="false"
-        android:layout_alignTop="@+id/checkBox2"
+        android:layout_alignTop="@+id/checkBox5"
         android:layout_marginStart="57dp" />
 
     <Button

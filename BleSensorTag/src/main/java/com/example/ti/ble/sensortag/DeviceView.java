@@ -131,7 +131,7 @@ import android.widget.TableRow;
 	void setBusy(boolean f) {
 		if (f != mBusy)
 		{
-			mActivity.showBusyIndicator(f);
+		//	mActivity.showBusyIndicator(f);
 			mBusy = f;
 		}
 	}

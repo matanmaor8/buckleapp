@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:gravity="center"
-        android:text="Press &quot;scan&quot; in order to start the calibration process:"
+        android:text="Sit please in the marked seat and press &quot;Scan&quot; when you are ready"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
         android:layout_marginTop="12dp"
         android:contentDescription="@string/image"
         android:gravity="center"
-        android:src="@drawable/buckleup" />
+        android:src="@drawable/backseatright" />
 
     <TextView
         android:id="@+id/status"

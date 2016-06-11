@@ -85,6 +85,7 @@ public class MainActivity extends ViewPagerActivity {
 	public BleDeviceInfo[] DeviceArray =new BleDeviceInfo[3];
 	public double [][]Locations;
 	public String [][]StrLocations;
+	public String []StrLocation;
 	// Housekeeping
 	private static final int NO_DEVICE = -1;
 	private boolean mInitialised = false;
@@ -124,13 +125,21 @@ public class MainActivity extends ViewPagerActivity {
 		String previousActivity= i.getStringExtra("FROM_ACTIVITY");
 		if(previousActivity.equals("A"))
 		{
-			String[][] arrayReceived=null;
+/*			String[][] arrayReceived=null;
 			Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
 			if(objectArray!=null){
 				arrayReceived = new String[objectArray.length][];
 				for(int j=0;j<objectArray.length;j++){
 					arrayReceived[j]=(String[]) objectArray[j];
 					Log.d("CalibrationActivity", "6666666666666666666666666666666677777777777777777778888888888888888888888888");
+				}
+			}
+*/
+			Object[] objectArray2 = (Object[]) getIntent().getExtras().getSerializable("LocArray");
+			if(objectArray2!=null){
+				StrLocation = new String[objectArray2.length];
+				for(int j=0;j<objectArray2.length;j++){
+					StrLocation[j]= (String) objectArray2[j];
 				}
 			}
 
@@ -141,7 +150,7 @@ public class MainActivity extends ViewPagerActivity {
 			for(int n = 0; n < 3; n++)
 				for(int m = 0; m < 2; m++)
 				{
-					Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
+//					Locations[n][m] = Double.parseDouble(arrayReceived[n][m]);
 					Log.d("CalibrationActivity", "2222222222222222222222777777777777777777788888888888"+Locations[n][m]);
 				}
 			//////////////////////////////////////////***************************************************************
@@ -370,7 +379,8 @@ public class MainActivity extends ViewPagerActivity {
 		i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) xDeviceInfoList);
 		i.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
   		Bundle mBundle = new Bundle();
-		mBundle.putSerializable("Array",  StrLocations);
+//		mBundle.putSerializable("Array",  StrLocations);
+		mBundle.putSerializable("LocArray",  StrLocation);
 		i.putExtras(mBundle);
   /*      Bundle b= new Bundle();
         b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);

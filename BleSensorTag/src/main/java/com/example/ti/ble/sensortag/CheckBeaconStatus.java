@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -36,8 +37,9 @@ public class CheckBeaconStatus extends Activity {
     private double[][] wifiLocation;
     //	private double myLatitude, myLongitude;
     private double[] myLocation = new double[2];
-    public double [][] xLocations=new double[3][2];;
-    public String [][]StrLocations;
+//    public double [][] xLocations=new double[3][2];;
+//    public String [][]StrLocations;
+    public String []StrLocation;
     double distance[] = new double[3];
     double rssi[] = new double[3];
     location loc = new location();
@@ -55,26 +57,38 @@ public class CheckBeaconStatus extends Activity {
     private static final int NO_DEVICE = -1;
     double longitude, latitude;
     private String TPID;
+    private Button Startbtn;
+    private Button btn;
 
     private Intent mDeviceIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_beacon_status);
-        ch1 = (CheckBox) findViewById(R.id.checkBox);
-        ch2 = (CheckBox) findViewById(R.id.checkBox2);
-        ch3 = (CheckBox) findViewById(R.id.checkBox3);
+        ch1 = (CheckBox) findViewById(R.id.checkBox4);
+        ch2 = (CheckBox) findViewById(R.id.checkBox5);
+        ch3 = (CheckBox) findViewById(R.id.checkBox6);
+        btn = (Button) findViewById(R.id.button6);
+        Startbtn= (Button) findViewById(R.id.button);
         Intent i = getIntent();
         mDevices = (List) i.getParcelableArrayListExtra("list");
         mBluetoothDevice = i.getParcelableExtra(DeviceActivity.EXTRA_DEVICE);
         Bundle b = getIntent().getExtras();
         //****************************************************************************************
-        String[][] arrayReceived=null;
+ /*       String[][] arrayReceived=null;
         Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
         if(objectArray!=null){
             arrayReceived = new String[objectArray.length][];
             for(int j=0;j<objectArray.length;j++){
                 arrayReceived[j]=(String[]) objectArray[j];
+            }
+        }
+*/
+        Object[] objectArray2 = (Object[]) getIntent().getExtras().getSerializable("LocArray");
+        if(objectArray2!=null){
+            StrLocation = new String[objectArray2.length];
+            for(int j=0;j<objectArray2.length;j++){
+                StrLocation[j]= (String) objectArray2[j];
             }
         }
 
@@ -84,7 +98,7 @@ public class CheckBeaconStatus extends Activity {
         for(int n = 0; n < 3; n++)
             for(int m = 0; m < 2; m++)
             {
-                xLocations[n][m] = Double.parseDouble(arrayReceived[n][m]);
+  //              xLocations[n][m] = Double.parseDouble(arrayReceived[n][m]);
             }
         //////////////////////////////////////////***************************************************************
 
@@ -124,8 +138,8 @@ public class CheckBeaconStatus extends Activity {
         mFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
         mFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
         wifiLocation = new double[3][4];
-        xLocations =new double[3][2];
-        StrLocations=new String[3][2];
+ //       xLocations =new double[3][2];
+ //       StrLocations=new String[3][2];
     }
 
     public void onStart(View view) {
@@ -177,30 +191,33 @@ public class CheckBeaconStatus extends Activity {
         myLocation = Trilateration.MyTrilateration(wifiLocation[0][0], wifiLocation[0][1], wifiLocation[0][2], wifiLocation[0][3], wifiLocation[1][0], wifiLocation[1][1], wifiLocation[1][2], wifiLocation[1][3], wifiLocation[2][0], wifiLocation[2][1], wifiLocation[2][2], wifiLocation[2][3]);
 
         Log.d("CalibrationActivity", "11111111113333333333333My Location :" + myLocation[0] + "  , " + myLocation[1]);
-        Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[0][0] + "  , " + xLocations[0][1]);
-        Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[1][0] + "  , " + xLocations[1][1]);
-        Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[2][0] + "  , " + xLocations[2][1]);
+ //       Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[0][0] + "  , " + xLocations[0][1]);
+ //       Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[1][0] + "  , " + xLocations[1][1]);
+ //       Log.d("CalibrationActivity", "5555My Location :" + myLocation[0] + "  , " + myLocation[1] + "  Locations:" + xLocations[2][0] + "  , " + xLocations[2][1]);
 
 
 
-        if((xLocations[0][0]==myLocation[0]) && (xLocations[0][1]==myLocation[1]))
+//        if((xLocations[0][0]==myLocation[0]) && (xLocations[0][1]==myLocation[1]))
+        if(StrLocation[0].compareTo(mDevices.get(getMinValue()).getBluetoothDevice().toString())==0)
         {
-            Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[0][0] + "  , " + xLocations[0][1]);
+   //         Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[0][0] + "  , " + xLocations[0][1]);
             ch1.setChecked(false);
             ch2.setChecked(false);
             ch3.setChecked(true);
         }
-        else if((xLocations[1][0]==myLocation[0]) && (xLocations[1][1]==myLocation[1]))
+        //else if((xLocations[1][0]==myLocation[0]) && (xLocations[1][1]==myLocation[1]))
+        else if(StrLocation[1].compareTo(mDevices.get(getMinValue()).getBluetoothDevice().toString())==0)
         {
-            Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[1][0] + "  , " + xLocations[1][1]);
+     //       Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[1][0] + "  , " + xLocations[1][1]);
 
             ch1.setChecked(false);
             ch2.setChecked(true);
             ch3.setChecked(false);
         }
-        else if((xLocations[2][0]==myLocation[0]) && (xLocations[2][1]==myLocation[1]))
+        //else if((xLocations[2][0]==myLocation[0]) && (xLocations[2][1]==myLocation[1]))
+        else if(StrLocation[2].compareTo(mDevices.get(getMinValue()).getBluetoothDevice().toString())==0)
         {
-            Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[2][0] + "  , " + xLocations[2][1]);
+       //     Log.d("CalibrationActivity", "11My Location :" + myLocation[0] + "  , " + myLocation[1]+"  Locations:"+ xLocations[2][0] + "  , " + xLocations[2][1]);
             ch1.setChecked(true);
             ch2.setChecked(false);
             ch3.setChecked(false);
@@ -211,15 +228,22 @@ public class CheckBeaconStatus extends Activity {
         {
             i++;
         }
+        Startbtn.setVisibility(view.GONE);
+        btn.setVisibility(1);
+ //      for (int n = 0; n < 3; n++)
+ //           for (int m = 0; m < 2; m++)
+  //              StrLocations[n][m] = String.valueOf(xLocations[n][m]);
 
-        for (int n = 0; n < 3; n++)
-            for (int m = 0; m < 2; m++)
-                StrLocations[n][m] = String.valueOf(xLocations[n][m]);
-        startBeaconStatusActivity();
 
   //      onDeviceClick();
 
  //       startDeviceActivity();
+
+    }
+
+
+    public void onFinish(View view) {
+        startBeaconStatusActivity();
 
     }
 /*
@@ -236,7 +260,7 @@ public class CheckBeaconStatus extends Activity {
         Intent i =  new Intent(this, ConnectionActivity.class);
         i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
         Bundle mBundle = new Bundle();
-        mBundle.putSerializable("Array",  StrLocations);
+  //      mBundle.putSerializable("Array",  StrLocations);
         i.putExtras(mBundle);
   /*      Bundle b= new Bundle();
         b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mDeviceInfoList);

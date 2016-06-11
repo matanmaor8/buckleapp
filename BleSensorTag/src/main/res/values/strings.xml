@@ -119,4 +119,7 @@
     <string name="title_activity_location">Location</string>
     <string name="title_activity_registration">Registration</string>
     <string name="title_activity_beacon_status">BeaconStatus</string>
+    <string name="title_activity_get_location">GetLocationActivity</string>
+    <string name="title_activity_calibration2">calibrationActivity2</string>
+    <string name="title_activity_calibration3">CalibrationActivity3</string>
 </resources>
