@@ -80,7 +80,7 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 	public SensorTagSimpleKeysTableRow(Context con) {
 		super(con);
 		this.periodBar.setEnabled(false);
-		this.periodLegend.setText("Sensor period (\"Notification\")");
+		this.periodLegend.setText("Belt Status");
 		this.sl1.maxVal = 1.0f;
 		this.sl1.setColor(255, 255, 0, 0);
 		this.sl2.maxVal = 1.0f;
@@ -118,6 +118,7 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 			}
 		};
 		this.txt1.setText("");
+		this.txt1.setTextSize(15);
 
 		this.txt2 = new TextView(con) {
 			{

@@ -62,13 +62,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.ti.ble.common.BluetoothLeService;
-import com.example.ti.ble.common.GattInfo;
 import com.example.ti.ble.common.GenericBluetoothProfile;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class SensorTagSimpleKeysProfile extends GenericBluetoothProfile {
 	public SensorTagSimpleKeysProfile(Context con,BluetoothDevice device,BluetoothGattService service,BluetoothLeService controller) {
@@ -83,7 +81,7 @@ public class SensorTagSimpleKeysProfile extends GenericBluetoothProfile {
 			}
 		}
 		this.tRow.setIcon(this.getIconPrefix(), this.dataC.getUuid().toString());
-		this.tRow.title.setText(GattInfo.uuidToName(UUID.fromString(this.dataC.getUuid().toString())));
+		this.tRow.title.setText("Belt Status:");
 		this.tRow.uuidLabel.setText(this.dataC.getUuid().toString());
 		
 		if (!(this.mBTDevice.getName().equals("CC2650 SensorTag"))) {
