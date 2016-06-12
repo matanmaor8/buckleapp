@@ -260,6 +260,7 @@ public class CheckBeaconStatus extends Activity {
         Intent i =  new Intent(this, ConnectionActivity.class);
         i.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) mDevices);
         Bundle mBundle = new Bundle();
+        i.putExtra("FROM_ACTIVITY", "A");
   //      mBundle.putSerializable("Array",  StrLocations);
         i.putExtras(mBundle);
   /*      Bundle b= new Bundle();

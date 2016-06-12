@@ -168,7 +168,31 @@ public class MainActivity extends ViewPagerActivity {
 		StrLocations=new String[3][2];
 	}
 
+	@Override
+	public void onBackPressed() {
+	/*	Log.d("CDA", "onBackPressed Called");
+		Intent setIntent = new Intent(Intent.ACTION_MAIN);
+		setIntent.addCategory(Intent.CATEGORY_HOME);
+		setIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(setIntent);
+*/
+//		finish();
+//		System.exit(0);
+//        super.onBackPressed();
+//		Intent intent = new Intent(ConnectionActivity.this, MainActivity.class);
+//		startActivity(intent);
 
+		//
+		//	finish();
+		//	System.exit(0);
+
+				moveTaskToBack(true);
+
+/*
+		Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+		myIntent.putExtra("FROM_ACTIVITY", "B");
+		startActivityForResult(myIntent, 0);*/
+	}
 
 	@Override
 	public void onDestroy() {
@@ -629,8 +653,8 @@ public class MainActivity extends ViewPagerActivity {
 				stopDeviceActivity();
 				if (status == BluetoothGatt.GATT_SUCCESS) {
 					setBusy(false);
-					mScanView.setStatus(mBluetoothDevice.getName() + " disconnected",
-							STATUS_DURATION);
+	//				mScanView.setStatus(mBluetoothDevice.getName() + " disconnected",
+	//						STATUS_DURATION);
 				} else {
 					setError("Disconnect Status: " + HCIDefines.hciErrorCodeStrings.get(status));
 				}

@@ -451,7 +451,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
                 SSLSession s = socket.getSession();
 
-                String url = "https://54.174.88.49:3000/loginApp";
+                String url = "https://52.73.54.128:3000/loginApp";
                 URL obj = new URL(url);
                 trustAllHosts();
 

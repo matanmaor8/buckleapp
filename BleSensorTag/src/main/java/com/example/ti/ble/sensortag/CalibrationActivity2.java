@@ -573,8 +573,8 @@ public class CalibrationActivity2 extends ViewPagerActivity {
                 stopDeviceActivity();
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     setBusy(false);
-                    mScanView.setStatus(mBluetoothDevice.getName() + " disconnected",
-                            STATUS_DURATION);
+//                    mScanView.setStatus(mBluetoothDevice.getName() + " disconnected",
+//                            STATUS_DURATION);
                 } else {
                     setError("Disconnect Status: " + HCIDefines.hciErrorCodeStrings.get(status));
                 }

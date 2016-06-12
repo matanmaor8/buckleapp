@@ -122,6 +122,10 @@ public class ConnectionActivity extends ViewPagerActivity {
         Bundle b = getIntent().getExtras();
         //****************************************************************************************
         String previousActivity= i.getStringExtra("FROM_ACTIVITY");
+        if(previousActivity.equals("C"))
+        {
+            xDeviceInfoList = (List) i.getParcelableArrayListExtra("list");
+        }
 
  //           String[][] arrayReceived=null;
  //           Object[] objectArray = (Object[]) getIntent().getExtras().getSerializable("Array");
@@ -240,6 +244,37 @@ public class ConnectionActivity extends ViewPagerActivity {
         final Dialog dialog = new AboutDialog(this);
         dialog.show();
     }
+    @Override
+    public void onBackPressed() {
+	/*	Log.d("CDA", "onBackPressed Called");
+		Intent setIntent = new Intent(Intent.ACTION_MAIN);
+		setIntent.addCategory(Intent.CATEGORY_HOME);
+		setIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(setIntent);
+*/
+//		finish();
+//		System.exit(0);
+        super.onBackPressed();
+ //       mBluetoothDevice = xDeviceInfoList.get(getMinValue()).getBluetoothDevice();
+ //       if (mConnIndex != NO_DEVICE) {
+ //           mBluetoothLeService.disconnect(mBluetoothDevice.getAddress());
+ //       }
+//        this.stopDeviceActivity();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("FROM_ACTIVITY", "C");
+        startActivity(intent);
+
+        //
+        //	finish();
+        //	System.exit(0);
+
+        //		moveTaskToBack(true);
+
+/*
+		Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+		myIntent.putExtra("FROM_ACTIVITY", "B");
+		startActivityForResult(myIntent, 0);*/
+    }
 
     void onScanViewReady(View view) {
 
@@ -281,6 +316,19 @@ public class ConnectionActivity extends ViewPagerActivity {
             startScan();
         }
         */
+        Log.d("CalibrationActivity", "2222222222222222222277777777777777777778888888888888888888888888");
+        Intent i = getIntent();
+        String previousActivity= i.getStringExtra("FROM_ACTIVITY");
+        if(previousActivity.equals("C"))
+        {
+            xDeviceInfoList = (List) i.getParcelableArrayListExtra("list");
+            Log.d("DeviceActivity", "202020202020020202020202020202020  Bluetooth device:" + xDeviceInfoList.get(0).getBluetoothDevice());
+            Log.d("DeviceActivity", "202020202020020202020202020202020  Bluetooth device:" + xDeviceInfoList.get(0).getBluetoothDevice());
+            Log.d("DeviceActivity", "202020202020020202020202020202020  Bluetooth device:" + xDeviceInfoList.get(0).getBluetoothDevice());
+        }
+        Log.d("DeviceActivity", "404040404440404040404404040404044  Bluetooth device:" + xDeviceInfoList.get(0).getBluetoothDevice());
+        Log.d("DeviceActivity", "404040404440404040404404040404044  Bluetooth device:" + xDeviceInfoList.get(0).getBluetoothDevice());
+        Log.d("DeviceActivity", "404040404440404040404404040404044  Bluetooth device:" + xDeviceInfoList.get(0).getBluetoothDevice());
         int pos;
         pos=getMinValue();
         onDeviceClick(pos);
@@ -329,42 +377,10 @@ public class ConnectionActivity extends ViewPagerActivity {
     }
 
     private void stopScan() {
-        double dist1,dist2,dist3;
-        double distance[] = new double[3];
-        double rssi[] = new double[3];
         mScanning = false;
         mScanView.updateGui(false);
         scanLeDevice(false);
-        location loc= new location();
-        double lat =  (loc.getLatg());
-        double lng =  (loc.getLang());
-        Trilateration  tri;
 
-        //      dist=calculateAccuracy(-70,SumRssi);
-        Log.d("CalibrationActivity", "66666666666666666666666666666666  latitude:" +lat);
-        Log.d("CalibrationActivity", "66666666666666666666666666666666  longitude:" + lng);
-
-        xDeviceInfoList.get(0).setAvaragedRssi(rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi());
-        //      for (int i = 0; i < xDeviceInfoList.size(); i++) {
-        distance[0]= xDeviceInfoList.get(0).getAccuracy();
-        //         distance[1]= xDeviceInfoList.get(1).getAccuracy();
-        //         distance[2]= xDeviceInfoList.get(2).getAccuracy();
-        rssi[0]= rangedIBeacons.get(DeviceArray[0]).getAvaragedRssi();//addRangeMeasurement((int) deviceInfo.getRssi());
-        //        rssi[0]= xDeviceInfoList.get(0).getAvaragedRssi();
-        //        rssi[1]= xDeviceInfoList.get(1).getRssi();
-        //       rssi[2]= xDeviceInfoList.get(2).getRssi();
-        //      dist2=xDeviceInfoList.get(1).getdistance();
-        //      dist3=xDeviceInfoList.get(2).getdistance();
-
-        Log.d("MainActivity", " distance: " + distance[0] + " RSSI" + rssi[0] + "  deviceRSSI:" + xDeviceInfoList.get(0).getAvaragedRssi());
-//		Trilateration.MyTrilateration(lng, lat, rssi[0], distance[0], lng, lat, rssi[1], distance[1], lng, lat, rssi[2], distance[2]);
-        for (int n = 0; n < 3; n++)
-            for (int m = 0; m < 2; m++)
-                StrLocations[n][m] = String.valueOf(Locations[n][m]);
- //       startBeaconStatusActivity();
-        //*******************************************************************************************************************************
-        Log.d("CalibrationActivity","999999999999999999999999999999999");
-        //    }
     }
     private void startBeaconStatusActivity() {
 //        CalibrationActivity appContext = (CalibrationActivity) getApplicationContext();
@@ -386,6 +402,7 @@ public class ConnectionActivity extends ViewPagerActivity {
     private void startDeviceActivity() {
         mDeviceIntent = new Intent(this, DeviceActivity.class);
         mDeviceIntent.putExtra(DeviceActivity.EXTRA_DEVICE, mBluetoothDevice);
+        mDeviceIntent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) xDeviceInfoList);
         startActivityForResult(mDeviceIntent, REQ_DEVICE_ACT);
     }
 

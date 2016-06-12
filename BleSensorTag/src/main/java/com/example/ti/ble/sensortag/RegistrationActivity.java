@@ -218,7 +218,7 @@ public class RegistrationActivity extends Activity implements LoaderCallbacks<Cu
 
     private void sendToSever(String email,String password ) throws IOException {
 
-        URL url = new URL("https://54.174.88.49:3000/CreateAccount");
+        URL url = new URL("https://52.73.54.128:3000/CreateAccount");
 
         HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
         String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
