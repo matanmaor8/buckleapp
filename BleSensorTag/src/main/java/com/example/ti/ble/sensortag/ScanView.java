@@ -294,7 +294,7 @@ public class ScanView extends Fragment {
       if (convertView != null) {
         vg = (ViewGroup) convertView;
       } else {
-        vg = (ViewGroup) mInflater.inflate(R.layout.element_device, null);
+        vg = (ViewGroup) mInflater.inflate(R.layout.element_device_2, null);
       }
  //     serviceList = BluetoothLeService.getInstance().getSupportedGattServices();
  //     BluetoothGattService s = serviceList.get(counter);

@@ -118,7 +118,6 @@ public class SensorTagSimpleKeysTableRow extends GenericCharacteristicTableRow {
 			}
 		};
 		this.txt1.setText("");
-		this.txt1.setTextSize(15);
 
 		this.txt2 = new TextView(con) {
 			{

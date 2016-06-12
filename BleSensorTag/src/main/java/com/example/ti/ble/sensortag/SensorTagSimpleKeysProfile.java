@@ -134,6 +134,7 @@ public class SensorTagSimpleKeysProfile extends GenericBluetoothProfile {
 				tmpRow.reedStateImage.setImageResource(R.drawable.reedrelayon_300);
 				tmpRow.txt1.setText("Belted");
 				tmpRow.txt2.setText("");
+				tmpRow.txt1.setTextSize(25);
 				Log.d("DeviceActivity", "44444444444444444444444444444444444 " );
 				break;
 			case 0x5:
@@ -157,6 +158,7 @@ public class SensorTagSimpleKeysProfile extends GenericBluetoothProfile {
 				tmpRow.reedStateImage.setImageResource(R.drawable.reedrelayoff_300);
 				tmpRow.txt2.setText("Not Belted");
 				tmpRow.txt1.setText("");
+				tmpRow.txt2.setTextSize(25);
 				Log.d("DeviceActivity", "000000000000000000000000000000000000000000 ");
 				break;
 			}
